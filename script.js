@@ -1,23 +1,58 @@
-const container = document.getElementById("list-makanan");
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('.sidebar a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
 
-makanan.forEach((item, index) => {
-  const card = document.createElement("div");
-  card.classList.add("card");
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
 
-  card.innerHTML = `
-    <img src="${item.gambar}">
-    <h3>${item.nama}</h3>
-    <p>${item.deskripsi}</p>
-  `;
 
-  card.style.opacity = 0;
-  card.style.transform = "translateY(20px)";
+// ===== ACTIVE MENU ON SCROLL =====
+const sections = document.querySelectorAll('.item');
+const navLinks = document.querySelectorAll('.sidebar a');
 
-  container.appendChild(card);
+window.addEventListener('scroll', () => {
+  let current = "";
 
-  setTimeout(() => {
-    card.style.transition = "0.6s";
-    card.style.opacity = 1;
-    card.style.transform = "translateY(0)";
-  }, index * 150);
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+
+    if (pageYOffset >= sectionTop - 150) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+});
+
+
+// ===== FADE-IN ANIMATION =====
+const items = document.querySelectorAll('.item');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+}, {
+  threshold: 0.2
+});
+
+items.forEach(item => {
+  item.style.opacity = 0;
+  item.style.transform = "translateY(40px)";
+  item.style.transition = "0.6s ease";
+
+  observer.observe(item);
 });
