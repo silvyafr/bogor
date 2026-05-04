@@ -1,17 +1,52 @@
-const makanan = [
-  {
-    nama: "Asinan Bogor",
-    deskripsi: "Segar, asam, pedas, khas Bogor.",
-    gambar: "https://source.unsplash.com/400x400/?salad"
-  },
-  {
-    nama: "Toge Goreng",
-    deskripsi: "Tauco gurih dengan cita rasa unik.",
-    gambar: "https://source.unsplash.com/400x400/?noodles"
-  },
-  {
-    nama: "Roti Unyil",
-    deskripsi: "Mini, lucu, dan banyak varian.",
-    gambar: "https://source.unsplash.com/400x400/?bread"
-  }
-];
+const dataKuliner = {
+  makanan: [
+    {
+      id: "asinan",
+      nama: "Asinan Bogor",
+      deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
+      lokasi: "Jl. Suryakencana",
+      harga: "Rp10.000 – Rp20.000",
+      gambar: "https://source.unsplash.com/800x500/?salad",
+      kategori: "viral"
+    },
+    {
+      id: "toge",
+      nama: "Toge Goreng",
+      deskripsi: "Disajikan dengan tauco khas yang gurih.",
+      lokasi: "Bogor Tengah",
+      harga: "Rp15.000",
+      gambar: "https://source.unsplash.com/800x500/?noodles",
+      kategori: "rekomendasi"
+    },
+    {
+      id: "doclang",
+      nama: "Doclang",
+      deskripsi: "Lontong dengan saus kacang khas.",
+      lokasi: "Jl. Raya Bogor",
+      harga: "Rp12.000",
+      gambar: "https://source.unsplash.com/800x500/?indonesian-food",
+      kategori: "rekomendasi"
+    }
+  ],
+
+  minuman: [
+    {
+      id: "pala",
+      nama: "Es Pala Bogor",
+      deskripsi: "Minuman segar khas Bogor.",
+      lokasi: "Pasar Bogor",
+      harga: "Rp8.000",
+      gambar: "https://source.unsplash.com/800x500/?drink",
+      kategori: "viral"
+    },
+    {
+      id: "pletok",
+      nama: "Bir Pletok",
+      deskripsi: "Minuman rempah tradisional.",
+      lokasi: "Sekitar Bogor",
+      harga: "Rp10.000",
+      gambar: "https://source.unsplash.com/800x500/?tea",
+      kategori: "rekomendasi"
+    }
+  ]
+};
