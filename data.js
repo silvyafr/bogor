@@ -1,17 +1,17 @@
 const makanan = [
   {
     nama: "Asinan Bogor",
-    deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
-    gambar: "https://id.pinterest.com/pin/838232549390041002/"
+    deskripsi: "Segar, asam, pedas, khas Bogor.",
+    gambar: "https://source.unsplash.com/400x400/?salad"
   },
   {
     nama: "Toge Goreng",
-    deskripsi: "Toge, mie, dan lontong dengan bumbu tauco khas.",
-    gambar: "https://id.pinterest.com/pin/651544271104576416/"
+    deskripsi: "Tauco gurih dengan cita rasa unik.",
+    gambar: "https://source.unsplash.com/400x400/?noodles"
   },
   {
     nama: "Roti Unyil",
-    deskripsi: "Roti kecil dengan berbagai isian lezat.",
-    gambar: "https://id.pinterest.com/pin/576531189790559068/"
+    deskripsi: "Mini, lucu, dan banyak varian.",
+    gambar: "https://source.unsplash.com/400x400/?bread"
   }
 ];
