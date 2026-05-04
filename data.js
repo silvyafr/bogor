@@ -6,7 +6,7 @@ const dataKuliner = {
       deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
       lokasi: "Jl. Suryakencana",
       harga: "Rp10.000 – Rp20.000",
-      gambar: "https://source.unsplash.com/800x500/?salad",
+      gambar: "https://github.com/user-attachments/assets/e696eccc-a76d-4b03-8405-381671ea10ee",
       kategori: "viral"
     },
     {
