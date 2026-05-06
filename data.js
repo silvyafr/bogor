@@ -6,7 +6,7 @@ const dataKuliner = {
       deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
       lokasi: "Jl. Suryakencana",
       harga: "Rp10.000 – Rp20.000",
-      gambar: "cimol.jpg",
+      gambar: "images/asinan.jpg",
       kategori: "viral"
     },
     {
@@ -15,7 +15,7 @@ const dataKuliner = {
       deskripsi: "Disajikan dengan tauco khas yang gurih.",
       lokasi: "Bogor Tengah",
       harga: "Rp15.000",
-      gambar: "apa.jpg",
+      gambar: "images/toge.jpg",
       kategori: "rekomendasi"
     },
     {
@@ -24,16 +24,16 @@ const dataKuliner = {
       deskripsi: "Lontong dengan saus kacang khas.",
       lokasi: "Jl. Raya Bogor",
       harga: "Rp12.000",
-      gambar: "lapis.jpg",
+      gambar: "images/doclang.jpg",
       kategori: "rekomendasi"
     },
-     {
+    {
       id: "soto",
       nama: "Soto Mie Bogor",
-      deskripsi: "Soto dengan isi mi kuning, risol goreng, kikil, dan daging dengan kuah gurih.",
+      deskripsi: "Soto dengan mie, risol, kikil, dan kuah gurih.",
       lokasi: "Bogor Tengah",
       harga: "Rp25.000",
-      gambar: "apa.jpg",
+      gambar: "images/soto.jpg",
       kategori: "rekomendasi"
     }
   ],
@@ -45,7 +45,7 @@ const dataKuliner = {
       deskripsi: "Minuman segar khas Bogor.",
       lokasi: "Pasar Bogor",
       harga: "Rp8.000",
-      gambar: "apa.jpg",
+      gambar: "images/pala.jpg",
       kategori: "viral"
     },
     {
@@ -54,7 +54,7 @@ const dataKuliner = {
       deskripsi: "Minuman rempah tradisional.",
       lokasi: "Sekitar Bogor",
       harga: "Rp10.000",
-      gambar: "cimol.jpg",
+      gambar: "images/pletok.jpg",
       kategori: "rekomendasi"
     }
   ]
