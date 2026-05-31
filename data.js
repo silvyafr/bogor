@@ -6,7 +6,7 @@ const dataKuliner = {
       deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
       lokasi: "Jl. Suryakencana",
       harga: "Rp10.000 – Rp20.000",
-      gambar: "images/asinan.jpg",
+      gambar: "images/asinan bogor.jpg",
       kategori: "viral"
     },
     {
