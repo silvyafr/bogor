@@ -15,7 +15,7 @@ const dataKuliner = {
       deskripsi: "Disajikan dengan tauco khas yang gurih.",
       lokasi: "Bogor Tengah",
       harga: "Rp15.000",
-      gambar: "toge goreng bogor.jpg",
+      gambar: "images/toge goreng bogor.jpg",
       kategori: "rekomendasi"
     },
     {
@@ -24,7 +24,7 @@ const dataKuliner = {
       deskripsi: "Lontong dengan saus kacang khas.",
       lokasi: "Jl. Raya Bogor",
       harga: "Rp12.000",
-      gambar: "images/doclang.jpg",
+      gambar: "images/doclang bogor.jpg",
       kategori: "rekomendasi"
     },
     {
@@ -33,7 +33,7 @@ const dataKuliner = {
       deskripsi: "Soto dengan mie, risol, kikil, dan kuah gurih.",
       lokasi: "Bogor Tengah",
       harga: "Rp25.000",
-      gambar: "images/soto.jpg",
+      gambar: "images/soto mie bogor.jpg",
       kategori: "rekomendasi"
     }
   ],
@@ -45,7 +45,7 @@ const dataKuliner = {
       deskripsi: "Minuman segar khas Bogor.",
       lokasi: "Pasar Bogor",
       harga: "Rp8.000",
-      gambar: "images/pala.jpg",
+      gambar: "images/es pala bogor.jpg",
       kategori: "viral"
     },
     {
@@ -54,7 +54,7 @@ const dataKuliner = {
       deskripsi: "Minuman rempah tradisional.",
       lokasi: "Sekitar Bogor",
       harga: "Rp10.000",
-      gambar: "images/pletok.jpg",
+      gambar: "images/bir pletok bogor.jpg",
       kategori: "rekomendasi"
     }
   ]
