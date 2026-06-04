@@ -49,12 +49,12 @@ const dataKuliner = {
       kategori: "viral"
     },
     {
-      id: "pletok",
-      nama: "Bir Pletok",
+      id: "kotjok",
+      nama: "Bir Kotjok",
       deskripsi: "Minuman rempah tradisional.",
       lokasi: "Sekitar Bogor",
       harga: "Rp10.000",
-      gambar: "bir pletok bogor.jpg",
+      gambar: "birkotjok.jpeg",
       kategori: "rekomendasi"
     }
   ]
