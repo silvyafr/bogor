@@ -33,7 +33,7 @@ const dataKuliner = {
       deskripsi: "Soto dengan mie, risol, kikil, dan kuah gurih.",
       lokasi: "Bogor Tengah",
       harga: "Rp25.000",
-      gambar: "assets/soto-mie-bogor.jpg",
+      gambar: "assets/sotomiebogor.jpg",
       kategori: "rekomendasi"
     }
   ],
