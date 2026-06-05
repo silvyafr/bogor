@@ -6,7 +6,7 @@ const dataKuliner = {
       deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
       lokasi: "Jl. Suryakencana",
       harga: "Rp10.000 – Rp20.000",
-      gambar: "assets/asinan-bogor.jpg",
+      gambar: "assets/asinanbogor.jpg",
       kategori: "viral"
     },
     {
@@ -24,7 +24,7 @@ const dataKuliner = {
       deskripsi: "Lontong dengan saus kacang khas.",
       lokasi: "Jl. Raya Bogor",
       harga: "Rp12.000",
-      gambar: "assets/doclang-bogor.jpg",
+      gambar: "assets/doclang.jpg",
       kategori: "rekomendasi"
     },
     {
