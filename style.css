@@ -213,13 +213,13 @@ body {
 
 /* ITEM */
 .item {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto 60px;
 }
 
 .item img {
   width: 300px;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 14px;
   margin-bottom: 15px;
