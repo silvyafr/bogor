@@ -213,7 +213,8 @@ body {
 
 /* ITEM */
 .item {
-  margin-bottom: 60px;
+  max-width: 500px;
+  margin: 0 auto 60px;
 }
 
 .item img {
