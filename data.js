@@ -6,7 +6,7 @@ const dataKuliner = {
       deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
       lokasi: "Jl. Suryakencana",
       harga: "Rp10.000 – Rp20.000",
-      gambar: "assets/asinan-bogor.jpeg",
+      gambar: "assets/asinan-bogor.jpg",
       kategori: "viral"
     },
     {
@@ -15,7 +15,7 @@ const dataKuliner = {
       deskripsi: "Disajikan dengan tauco khas yang gurih.",
       lokasi: "Bogor Tengah",
       harga: "Rp15.000",
-      gambar: "assets/toge-goreng-bogor.jpeg",
+      gambar: "assets/toge-goreng-bogor.jpg",
       kategori: "rekomendasi"
     },
     {
@@ -54,7 +54,7 @@ const dataKuliner = {
       deskripsi: "Minuman rempah tradisional.",
       lokasi: "Sekitar Bogor",
       harga: "Rp10.000",
-      gambar: "birkotjok.jpeg",
+      gambar: "birkotjok.jpg",
       kategori: "rekomendasi"
     }
   ]
