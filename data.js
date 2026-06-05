@@ -54,7 +54,7 @@ const dataKuliner = {
       deskripsi: "Minuman rempah tradisional.",
       lokasi: "Sekitar Bogor",
       harga: "Rp10.000",
-      gambar: "assets/birkotjok.jpg",
+      gambar: "assets/birkotjok.jpeg",
       kategori: "rekomendasi"
     }
   ]
