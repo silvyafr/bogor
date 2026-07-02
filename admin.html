@@ -82,15 +82,17 @@ color:white;
 <div class="dashboard">
 
 <div class="top">
+    <h1>Dashboard Admin</h1>
 
-<h1>Dashboard Admin</h1>
+    <div>
+        <button onclick="tambahData()">
+            + Tambah
+        </button>
 
-<button onclick="logout()">
-
-Logout
-
-</button>
-
+        <button onclick="logout()">
+            Logout
+        </button>
+    </div>
 </div>
 
 <table>
@@ -144,9 +146,9 @@ console.log(db);
 if (db) {
 
     let semua = [
-        ...db.makanan,
-        ...db.minuman
-    ];
+    ...db.makanan,
+    ...db.minuman
+];
 
     console.log(semua);
 
@@ -161,8 +163,12 @@ if (db) {
             <td>${item.kategori}</td>
             <td>${item.harga}</td>
             <td>
-                <button>Edit</button>
-                <button>Hapus</button>
+                <button onclick="editData('${item.id}')">
+                Edit
+                </button>
+                <button onclick="hapusData('${item.id}')">
+                Hapus
+                </button>
             </td>
         </tr>
         `;
@@ -177,6 +183,107 @@ if (db) {
 
 }
 
+function hapusData(id){
+
+    if(!confirm("Hapus data ini?")) return;
+
+    db.makanan = db.makanan.filter(item => item.id !== id);
+    db.minuman = db.minuman.filter(item => item.id !== id);
+
+    localStorage.setItem(
+        "dataKuliner",
+        JSON.stringify(db)
+    );
+
+    location.reload();
+}
+
+function editData(id){
+
+    let item = db.makanan.find(x => x.id === id);
+
+    if(!item){
+        item = db.minuman.find(x => x.id === id);
+    }
+
+    if(!item) return;
+
+    let nama = prompt("Nama", item.nama);
+
+    if(nama===null) return;
+
+    let harga = prompt("Harga", item.harga);
+
+    if(harga===null) return;
+
+    let kategori = prompt("Kategori", item.kategori);
+
+    if(kategori===null) return;
+
+    item.nama = nama;
+    item.harga = harga;
+    item.kategori = kategori;
+
+    localStorage.setItem(
+        "dataKuliner",
+        JSON.stringify(db)
+    );
+
+    location.reload();
+
+}
+    
+function tambahData(){
+
+    let nama=prompt("Nama");
+
+    if(!nama)return;
+
+    let harga=prompt("Harga");
+
+    let kategori=prompt("Kategori");
+
+    let jenis = prompt("Jenis (makanan/minuman)");
+
+    if(!jenis) return;
+    
+    jenis = jenis.toLowerCase();
+    
+    if(jenis !== "makanan" && jenis !== "minuman"){
+        alert("Jenis harus makanan atau minuman");
+        return;
+    }
+
+    let dataBaru = {
+        id: Date.now().toString(),
+        nama: nama,
+        harga: harga,
+        kategori: kategori,
+        lokasi: "",
+        deskripsi: "",
+        gambar: "assets/asinanbogor.jpg"
+    };
+
+    if(jenis==="minuman"){
+
+        db.minuman.push(dataBaru);
+
+    }else{
+
+        db.makanan.push(dataBaru);
+
+    }
+
+    localStorage.setItem(
+        "dataKuliner",
+        JSON.stringify(db)
+    );
+
+    location.reload();
+
+}
+
 </script>
+    
 </body>
 </html>
