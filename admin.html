@@ -141,18 +141,39 @@ const db = JSON.parse(localStorage.getItem("dataKuliner"));
 
 console.log(db);
 
-if(db){
+if (db) {
 
-let semua = [
-...db.makanan,
-...db.minuman
-];
+    let semua = [
+        ...db.makanan,
+        ...db.minuman
+    ];
 
-console.log(semua);
+    console.log(semua);
 
-}else{
+    let html = "";
 
-alert("Database kosong");
+    semua.forEach((item, index) => {
+
+        html += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${item.nama}</td>
+            <td>${item.kategori}</td>
+            <td>${item.harga}</td>
+            <td>
+                <button>Edit</button>
+                <button>Hapus</button>
+            </td>
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("tabelData").innerHTML = html;
+
+} else {
+
+    alert("Database kosong");
 
 }
 
