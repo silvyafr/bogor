@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tambah Data</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f4f6f9;
+}
+
+.container{
+max-width:700px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+h2{
+margin-bottom:20px;
+color:#7FB77E;
+}
+
+.form-group{
+margin-bottom:18px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+textarea{
+resize:vertical;
+height:100px;
+}
+
+.button-group{
+display:flex;
+gap:10px;
+margin-top:20px;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.simpan{
+background:#7FB77E;
+color:white;
+}
+
+.kembali{
+background:#999;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Tambah Data Kuliner</h2>
+
+<div class="form-group">
+<label>Nama</label>
+<input type="text" id="nama">
+</div>
+
+<div class="form-group">
+<label>Harga</label>
+<input type="text" id="harga">
+</div>
+
+<div class="form-group">
+<label>Kategori</label>
+<select id="kategori">
+<option value="viral">Viral</option>
+<option value="rekomendasi">Rekomendasi</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Jenis</label>
+<select id="jenis">
+<option value="makanan">Makanan</option>
+<option value="minuman">Minuman</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Lokasi</label>
+<input type="text" id="lokasi">
+</div>
+
+<div class="form-group">
+<label>Deskripsi</label>
+<textarea id="deskripsi"></textarea>
+</div>
+
+<div class="form-group">
+<label>Nama File Gambar</label>
+<input type="text" id="gambar" placeholder="contoh: asinanbogor.jpg">
+</div>
+
+<div class="button-group">
+
+<button
+class="simpan"
+onclick="simpanData()">
+
+Simpan
+
+</button>
+
+<button
+class="kembali"
+onclick="location.href='admin.html'">
+
+Kembali
+
+</button>
+
+</div>
+
+</div>
+
+<script src="data.js"></script>
+
+<script>
+
+if(!sessionStorage.getItem("login")){
+location.href="admin-login.html";
+}
+
+const db=JSON.parse(localStorage.getItem("dataKuliner"));
+
+function simpanData(){
+
+const data={
+
+id:Date.now().toString(),
+
+nama:document.getElementById("nama").value,
+
+harga:document.getElementById("harga").value,
+
+kategori:document.getElementById("kategori").value,
+
+lokasi:document.getElementById("lokasi").value,
+
+deskripsi:document.getElementById("deskripsi").value,
+
+gambar:"assets/"+document.getElementById("gambar").value
+
+};
+
+let jenis=document.getElementById("jenis").value;
+
+if(data.nama==""){
+alert("Nama wajib diisi");
+return;
+}
+
+if(jenis=="makanan"){
+
+db.makanan.push(data);
+
+}else{
+
+db.minuman.push(data);
+
+}
+
+localStorage.setItem(
+"dataKuliner",
+JSON.stringify(db)
+);
+
+alert("Data berhasil ditambahkan");
+
+location.href="admin.html";
+
+}
+
+</script>
+
+</body>
+</html>
