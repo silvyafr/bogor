@@ -59,3 +59,11 @@ const dataKuliner = {
     }
   ]
 };
+
+// Membuat database pertama kali
+if (!localStorage.getItem("dataKuliner")) {
+    localStorage.setItem(
+        "dataKuliner",
+        JSON.stringify(dataKuliner)
+    );
+}
