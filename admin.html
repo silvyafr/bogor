@@ -25,9 +25,9 @@ body{
 }
 
 .container{
-    width:95%;
-    max-width:1300px;
-    margin:30px auto;
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
 }
 
 .cardBox{
@@ -53,12 +53,19 @@ body{
 .toolbar{
     display:flex;
     justify-content:space-between;
-    margin-bottom:20px;
+    align-items:center;
+    margin:25px 0;
+}
+
+.toolbar button{
+    margin-left:15px;
 }
 
 input[type=text]{
-    width:320px;
-    padding:12px;
+    width:350px;
+    max-width:100%;
+    height:45px;
+    padding:0 15px;
     border:1px solid #ddd;
     border-radius:10px;
 }
@@ -78,11 +85,13 @@ button{
 .btnEdit{
     background:#3498db;
     color:white;
+    margin-right:5px;
 }
 
 .btnHapus{
     background:#e74c3c;
     color:white;
+    margin-right:5px;
 }
 
 table{
@@ -104,8 +113,8 @@ th,td{
 }
 
 img.thumb{
-    width:90px;
-    height:70px;
+    width:110px;
+    height:80px;
     object-fit:cover;
     border-radius:10px;
 }
@@ -276,7 +285,8 @@ function tampilData(keyword=""){
     (db.minuman || []).length;
     
     document.getElementById("totalData").innerText =
-    semua.length;
+    (db.makanan || []).length +
+    (db.minuman || []).length;
 
     let html="";
 
