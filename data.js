@@ -102,7 +102,7 @@ const dataKuliner = {
     kategori:"rekomendasi",
     lokasi:"Bogor",
     deskripsi:"kuliner ikonik legendaris.",
-    gambar:"assets/roti unyil.jpg"
+    gambar:"assets/rotiunyil.jpg"
     }
   ]
 };
