@@ -35,16 +35,18 @@ body{
 
 .cardBox{
     display:flex;
-    gap:20px;
+    gap:25px;
     margin-bottom:30px;
 }
 
 .card{
     background:white;
-    flex:1;
+    flex:0 0 250px;
     border-radius:15px;
     padding:25px;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
+    text-align:center;
+    transition:.25s;
 }
 
 .card h2{
@@ -57,7 +59,7 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
+    margin:25px 0;
 }
 
 .toolbar button{
@@ -65,8 +67,7 @@ body{
 }
 
 input[type=text]{
-    width:350px;
-    max-width:100%;
+    width:320px;
     height:45px;
     padding:0 15px;
     border:1px solid #ddd;
@@ -83,18 +84,21 @@ button{
 .btnTambah{
     background:#7FB77E;
     color:white;
+    padding:12px 25px;
 }
 
 .btnEdit{
     background:#3498db;
     color:white;
     margin-right:5px;
+    width:75px;
 }
 
 .btnHapus{
     background:#e74c3c;
     color:white;
     margin-right:5px;
+    width:75px;
 }
 
 table{
@@ -108,17 +112,21 @@ table{
 
 th{
     background:#7FB77E;
-    color:white;
+    color:#fff;
+    font-size:17px;
+    text-align:center;
+    padding:15px;
 }
 
-th,td{
+td{
     padding:15px;
     text-align:left;
     border-bottom:1px solid #eee;
+    vertical-align:middle;
 }
 
 img.thumb{
-    width:110px;
+    width:120px;
     height:80px;
     object-fit:cover;
     border-radius:10px;
@@ -129,10 +137,6 @@ background:#555;
 color:white;
 }
 
-.card{
-    text-align:center;
-}
-
 .card h4{
     margin-top:10px;
     color:#777;
@@ -140,10 +144,6 @@ color:white;
 
 .card h2{
     margin-top:10px;
-}
-
-.card{
-    transition:.25s;
 }
 
 .card:hover{
@@ -313,7 +313,7 @@ function tampilData(keyword=""){
     
     <td>${item.kategori}</td>
     
-    <td>${item.harga}</td>
+    <td>Rp${Number(item.harga || 0).toLocaleString("id-ID")}</td>
     
     <td>
     
