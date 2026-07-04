@@ -159,7 +159,9 @@ if(!sessionStorage.getItem("login")){
 location.href="admin-login.html";
 }
 
-const db=JSON.parse(localStorage.getItem("dataKuliner"));
+const db =
+JSON.parse(localStorage.getItem("dataKuliner")) ||
+JSON.parse(JSON.stringify(dataKuliner));
 
 function simpanData(){
 
