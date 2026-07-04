@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Kuliner</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#f4f6f9;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.container{
+    max-width:1000px;
+    margin:50px auto;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    display:flex;
+    gap:30px;
+}
+
+img{
+    width:420px;
+    height:100%;
+    object-fit:cover;
+}
+
+.content{
+    flex:1;
+    padding:35px;
+}
+
+.badge{
+    display:inline-block;
+    background:#7FB77E;
+    color:white;
+    padding:6px 14px;
+    border-radius:20px;
+    margin-bottom:15px;
+}
+
+h1{
+    margin:0;
+    color:#333;
+}
+
+.harga{
+    color:#27ae60;
+    font-size:28px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.info{
+    margin:15px 0;
+    font-size:16px;
+}
+
+button{
+    margin-top:25px;
+    padding:12px 22px;
+    border:none;
+    background:#7FB77E;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#6aa96a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img id="gambar">
+
+<div class="content">
+
+<span class="badge" id="kategori"></span>
+
+<h1 id="nama"></h1>
+
+<div class="harga" id="harga"></div>
+
+<div class="info">
+<b>📍 Lokasi :</b>
+<span id="lokasi"></span>
+</div>
+
+<div class="info">
+<b>📝 Deskripsi :</b>
+
+<p id="deskripsi"></p>
+
+</div>
+
+<button onclick="history.back()">
+← Kembali
+</button>
+
+</div>
+
+</div>
+
+<script src="data.js"></script>
+
+<script>
+
+const db =
+JSON.parse(localStorage.getItem("dataKuliner")) ||
+dataKuliner;
+
+const id =
+new URLSearchParams(location.search).get("id");
+
+const semua = [
+    ...db.makanan,
+    ...db.minuman
+];
+
+const item =
+semua.find(x => x.id == id);
+
+if(!item){
+
+    alert("Data tidak ditemukan");
+
+    location.href="index.html";
+
+}
+
+document.getElementById("gambar").src = item.gambar;
+document.getElementById("nama").innerText = item.nama;
+
+document.getElementById("harga").innerText =
+String(item.harga).startsWith("Rp")
+? item.harga
+: "Rp" + Number(item.harga).toLocaleString("id-ID");
+
+document.getElementById("kategori").innerText = item.kategori;
+
+document.getElementById("lokasi").innerText = item.lokasi;
+
+document.getElementById("deskripsi").innerText = item.deskripsi;
+
+</script>
+
+</body>
+</html>
