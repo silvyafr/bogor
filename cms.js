@@ -34,9 +34,9 @@ if(!container) return;
 
 container.innerHTML="";
 
-db[jenis].forEach(item=>{
+(db[jenis] || []).forEach(item=>{
 
-container.innerHTML+=buatItem(item);
+container.innerHTML += buatItem(item);
 
 });
 
@@ -47,5 +47,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 tampilKategori("makanan","makananContainer");
 
 tampilKategori("minuman","minumanContainer");
+
+tampilKategori("oleholeh","oleholehContainer");
 
 });
