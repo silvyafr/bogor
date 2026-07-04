@@ -35,7 +35,7 @@ const dataKuliner = {
       harga: "Rp25.000",
       gambar: "assets/sotomiebogor.jpg",
       kategori: "rekomendasi"
-    }
+    },
     {
       id: "cungkring",
       nama: "Cungkring",
@@ -64,6 +64,15 @@ const dataKuliner = {
       lokasi: "Sekitar Bogor",
       harga: "Rp10.000",
       gambar: "assets/bir-pletok-bogor.jpg",
+      kategori: "rekomendasi"
+    },
+    {
+      id: "bajigur",
+      nama: "Bajigur",
+      deskripsi: "Minuman rempah tradisional cita rasa manis dan gurih.",
+      lokasi: "Sekitar Bogor",
+      harga: "Rp15.000",
+      gambar: "assets/bajigur.jfif",
       kategori: "rekomendasi"
     }
   ],
