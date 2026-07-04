@@ -44,6 +44,14 @@ const dataKuliner = {
       harga: "Rp35.000",
       gambar: "assets/cungkring.jpg",
       kategori: "rekomendasi"
+    },
+    {
+      id: "combro",
+      nama: "Combro",
+      deskripsi: " gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian sambal oncom gurih dan pedas.",
+      harga: "Rp5.000",
+      gambar: "assets/combro.jpg",
+      kategori: "rekomendasi"
     }
   ],
 
