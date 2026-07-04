@@ -354,3 +354,22 @@ margin:6px 0;
 .detailBtn:hover{
     background:#6aa96a;
 }
+
+.searchBox{
+    text-align:center;
+    margin:35px 0;
+}
+
+.searchBox input{
+    width:420px;
+    max-width:90%;
+    padding:14px 20px;
+    border:1px solid #ccc;
+    border-radius:30px;
+    font-size:16px;
+    outline:none;
+}
+
+.searchBox input:focus{
+    border-color:#7FB77E;
+}
