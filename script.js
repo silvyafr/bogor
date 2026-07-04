@@ -23,8 +23,22 @@ function renderCard(data, container) {
 
     card.innerHTML = `
       <img src="${item.gambar}">
-      <h3>${item.nama}</h3>
-      <p>${item.deskripsi}</p>
+    
+      <div class="card-body">
+    
+        <span class="badge">
+          ${item.kategori === "viral" ? "🔥 Viral" : "⭐ Rekomendasi"}
+        </span>
+    
+        <h3>${item.nama}</h3>
+    
+        <p>${item.deskripsi}</p>
+    
+        <button class="detailBtn">
+          Lihat Detail
+        </button>
+    
+      </div>
     `;
 
     container.appendChild(card);
