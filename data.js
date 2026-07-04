@@ -36,6 +36,15 @@ const dataKuliner = {
       gambar: "assets/sotomiebogor.jpg",
       kategori: "rekomendasi"
     }
+    {
+      id: "cungkring",
+      nama: "Cungkring",
+      deskripsi: " kuliner berupa potongan kikil dan bagian kepala sapi (seperti cungur atau bibir) yang dimasak empuk, disajikan bersama irisan lontong dan rempeyek atau keripik tempe, lalu disiram saus kacang yang gurih serta kecap manis.",
+      lokasi: "Bogor Tengah",
+      harga: "Rp35.000",
+      gambar: "assets/cungkring.jpg",
+      kategori: "rekomendasi"
+    }
   ],
 
   minuman: [
