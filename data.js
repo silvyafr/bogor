@@ -57,7 +57,7 @@ const dataKuliner = {
       gambar: "assets/bir-pletok-bogor.jpg",
       kategori: "rekomendasi"
     }
-  ]
+  ],
 
   oleholeh:[
     {
