@@ -90,6 +90,15 @@ const dataKuliner = {
       harga: "Rp15.000",
       gambar: "assets/bajigur.jfif",
       kategori: "rekomendasi"
+    },
+    {
+      id: "cendol",
+      nama: "Cendol",
+      deskripsi: "Minuman terbuat dari olahan tepung beras atau tepung hunkwe yang dibentuk menjadi butiran kenyal berwarna hijau, disajikan dengan kuah santan, sirup gula merah, dan es batu,.",
+      lokasi: "Sekitar Bogor",
+      harga: "Rp15.000",
+      gambar: "assets/cendol.jpg",
+      kategori: "rekomendasi"
     }
   ],
 
