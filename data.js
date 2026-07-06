@@ -52,6 +52,14 @@ const dataKuliner = {
       harga: "Rp5.000",
       gambar: "assets/combro.jpg",
       kategori: "rekomendasi"
+    },
+     {
+      id: "misro",
+      nama: "Misro",
+      deskripsi: " gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian Gula Merah Manis Rasanya.",
+      harga: "Rp5.000",
+      gambar: "assets/misro.jpg",
+      kategori: "rekomendasi"
     }
   ],
 
