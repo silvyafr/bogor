@@ -105,7 +105,7 @@ const dataKuliner = {
       deskripsi: "Sate berbahan sumsum sapi dengan tekstur lembut dan cita rasa gurih yang unik.",
       lokasi: "Jl. Siliwangi, Bogor Timur",
       harga: "Rp35.000–Rp60.000",
-      gambar: "assets/",
+      gambar: "assets/sate_sumsum.jpg",
       kategori: "🔥 Viral"
     },
     {
