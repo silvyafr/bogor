@@ -178,22 +178,67 @@ const dataKuliner = {
 
   oleholeh:[
     {
-    id:"lapis",
-    nama:"Lapis Bogor",
-    harga:"Rp35.000",
-    kategori:"rekomendasi",
-    lokasi:"Bogor",
-    deskripsi:"Kue lapis khas Bogor.",
-    gambar:"assets/lapisbogor.jpg"
+      id:"lapis",
+      nama:"Lapis Bogor Sangkuriang",
+      harga:"Rp35.000–Rp60.000",
+      kategori:"🔥 Viral",
+      lokasi:"Jl. Pajajaran, Bogor",
+      deskripsi:"Bolu lapis berbahan dasar talas khas Bogor dengan tekstur lembut dan berbagai pilihan rasa.",
+      gambar:"assets/lapisbogor.jpg"
     },
-     {
-    id:"roti unyil",
-    nama:"Roti Unyil",
-    harga:"Rp25.000",
-    kategori:"rekomendasi",
-    lokasi:"Bogor",
-    deskripsi:"kuliner ikonik legendaris.",
-    gambar:"assets/rotiunyil.jpg"
+    {
+      id:"rotiunyil",
+      nama:"Roti Unyil Venus",
+      harga:"Rp30.000–Rp60.000",
+      kategori:"⭐ Rekomendasi",
+      lokasi:"Jl. Pajajaran, Bogor",
+      deskripsi:"Roti berukuran mini dengan beragam isian manis dan gurih yang menjadi ikon oleh-oleh khas Bogor.",
+      gambar:"assets/rotiunyil.jpg"
+    },
+    {
+      id:"talas",
+      nama:"Talas Bogor",
+      harga:"Rp15.000–Rp40.000",
+      kategori:"⭐ Rekomendasi",
+      lokasi:"Sentra Oleh-Oleh Bogor",
+      deskripsi:"Umbi khas Bogor yang terkenal dengan teksturnya yang lembut dan dapat diolah menjadi berbagai makanan.",
+      gambar:"assets/talas.jpg"
+    },
+    {
+      id:"keripiktalas",
+      nama:"Keripik Talas",
+      harga:"Rp20.000–Rp45.000",
+      kategori:"⭐ Rekomendasi",
+      lokasi:"Bogor",
+      deskripsi:"Keripik renyah berbahan dasar talas dengan aneka varian rasa yang cocok dijadikan buah tangan.",
+      gambar:"assets/keripik_talas.jpg"
+    },
+    {
+      id:"pieapple",
+      nama:"Pie Apple",
+      harga:"Rp35.000–Rp60.000",
+      kategori:"⭐ Rekomendasi",
+      lokasi:"Bogor Tengah",
+      deskripsi:"Pie renyah dengan isian apel manis yang menjadi salah satu oleh-oleh favorit dari Bogor.",
+      gambar:"assets/pieapple.jpg"
+    },
+    {
+      id:"strudel",
+      nama:"Strudel Bogor",
+      harga:"Rp45.000–Rp75.000",
+      kategori:"🔥 Viral",
+      lokasi:"Bogor",
+      deskripsi:"Pastry berlapis dengan berbagai pilihan isian buah yang cocok dijadikan oleh-oleh.",
+      gambar:"assets/strudel.jpg"
+    },
+    {
+      id:"brownies",
+      nama:"Brownies Talas",
+      harga:"Rp35.000–Rp60.000",
+      kategori:"⭐ Rekomendasi",
+      lokasi:"Bogor",
+      deskripsi:"Brownies lembut berbahan talas khas Bogor dengan rasa yang unik dan lezat.",
+      gambar:"assets/brownies_talas.jpg"
     }
   ]
 };
