@@ -4,8 +4,8 @@ const dataKuliner = {
       id: "asinan",
       nama: "Asinan Bogor",
       deskripsi: "Jajanan segar dengan rasa asam, manis, dan pedas.",
-      lokasi: "Jl. Suryakencana",
-      harga: "Rp10.000 – Rp20.000",
+      lokasi: "Jl. Siliwangi / Jl. Suryakencana",
+      harga: "Rp15.000–Rp35.000",
       gambar: "assets/asinanbogor.jpg",
       kategori: "🔥 Viral"
     },
@@ -13,8 +13,8 @@ const dataKuliner = {
       id: "toge",
       nama: "Toge Goreng",
       deskripsi: "Disajikan dengan tauco khas yang gurih.",
-      lokasi: "Bogor Tengah",
-      harga: "Rp15.000",
+      lokasi: "Jl. Pengadilan, Bogor Tengah",
+      harga: "Rp15.000–Rp25.000",
       gambar: "assets/toge-goreng-bogor.jpg",
       kategori: "⭐ Rekomendasi"
     },
@@ -22,16 +22,16 @@ const dataKuliner = {
       id: "doclang",
       nama: "Doclang",
       deskripsi: "Lontong dengan saus kacang khas.",
-      lokasi: "Jl. Raya Bogor",
-      harga: "Rp12.000",
+      lokasi: "Jl. Pasir Kuda, Bogor Barat",
+      harga: "Rp15.000–Rp25.000",
       gambar: "assets/doclang.jpg",
       kategori: "⭐ Rekomendasi"
     },
     {
       id: "soto",
-      nama: "Soto Mie Agih",
+      nama: "Soto Mie Bogor",
       deskripsi: "Soto mie khas Bogor dengan kuah kaldu gurih, daging sapi, risol, mie kuning, bihun, dan taburan seledri yang kaya rasa.",
-      lokasi: "Jl. Suryakencana, Bogor Tengah",
+      lokasi: "Jl. Suryakencana, Bogor Tengah (Soto Mie Agih)",
       harga: "Rp25.000–Rp35.000",
       gambar: "assets/sotomiebogor.jpg",
       kategori: "🔥 Viral"
@@ -39,25 +39,27 @@ const dataKuliner = {
     {
       id: "cungkring",
       nama: "Cungkring",
-      deskripsi: " kuliner berupa potongan kikil dan bagian kepala sapi (seperti cungur atau bibir) yang dimasak empuk, disajikan bersama irisan lontong dan rempeyek atau keripik tempe, lalu disiram saus kacang yang gurih serta kecap manis.",
-      lokasi: "Bogor Tengah",
-      harga: "Rp35.000",
+      deskripsi: "Kuliner berupa potongan kikil dan bagian kepala sapi (seperti cungur atau bibir) yang dimasak empuk, disajikan bersama irisan lontong dan rempeyek atau keripik tempe, lalu disiram saus kacang yang gurih serta kecap manis.",
+      lokasi: "Jl. Suryakencana, Bogor Tengah",
+      harga: "Rp20.000–Rp35.000",
       gambar: "assets/cungkring.jpg",
       kategori: "⭐ Rekomendasi"
     },
     {
       id: "combro",
       nama: "Combro",
-      deskripsi: " gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian sambal oncom gurih dan pedas.",
-      harga: "Rp5.000",
+      deskripsi: "Gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian sambal oncom gurih dan pedas.",
+      lokasi: "Bogor dan sekitarnya",
+      harga: "Rp3.000–Rp8.000",
       gambar: "assets/combro.jpg",
       kategori: "⭐ Rekomendasi"
     },
     {
       id: "misro",
       nama: "Misro",
-      deskripsi: " gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian Gula Merah Manis Rasanya.",
-      harga: "Rp5.000",
+      deskripsi: "Gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian Gula Merah Manis Rasanya.",
+      lokasi: "Bogor dan sekitarnya",
+      harga: "Rp3.000–Rp8.000",
       gambar: "assets/misro.jpg",
       kategori: "⭐ Rekomendasi"
     },
@@ -66,7 +68,7 @@ const dataKuliner = {
       nama: "Laksa Gang Aut",
       deskripsi: "Laksa khas Bogor berkuah santan kuning dengan mie, tauge, oncom, telur rebus, dan daun kemangi yang harum.",
       lokasi: "Gang Aut, Bogor Tengah",
-      harga: "Rp20.000–Rp30.000",
+      harga: "Rp20.000–Rp35.000",
       gambar: "assets/laksa.jpeg",
       kategori: "⭐ Rekomendasi"
     },
@@ -75,7 +77,7 @@ const dataKuliner = {
       nama: "Mie Glosor",
       deskripsi: "Mie kuning khas Bogor dengan tekstur kenyal, biasanya disajikan dengan sambal, gorengan, atau lauk sederhana.",
       lokasi: "Pasar Anyar Bogor",
-      harga: "Rp10.000–Rp18.000",
+      harga: "Rp10.000–Rp20.000",
       gambar: "assets/glosor.jpg",
       kategori: "⭐ Rekomendasi"
     },
@@ -83,28 +85,10 @@ const dataKuliner = {
       id: "kuning",
       nama: "Soto Kuning Bogor",
       deskripsi: "Soto khas Bogor dengan kuah kuning berbumbu rempah, berisi daging sapi, babat, paru, atau kikil sesuai pilihan.",
-      lokasi: "Jl. Suryakencana, Bogor",
+      lokasi: "Jl. Suryakencana, Bogor Tengah",
       harga: "Rp30.000–Rp50.000",
       gambar: "assets/soto_kuning.jpg",
       kategori: "🔥 Viral"
-    },
-    {
-      id: "kocok",
-      nama: "Mie Kocok Bogor",
-      deskripsi: "Mie dengan kuah kaldu sapi yang gurih, disajikan bersama kikil, bakso, dan taburan bawang goreng.",
-      lokasi: "Bogor Tengah",
-      harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
-      kategori: "⭐ Rekomendasi"
-    },
-    {
-      id: "tutug",
-      nama: "Nasi Tutug Oncom",
-      deskripsi: "Nasi hangat yang dicampur oncom berbumbu dan disajikan dengan ayam goreng, tahu, tempe, serta sambal.",
-      lokasi: "Bogor dan sekitarnya",
-      harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
-      kategori: "⭐ Rekomendasi"
     },
     {
       id: "bapatong",
@@ -116,31 +100,40 @@ const dataKuliner = {
       kategori: "⭐ Rekomendasi"
     },
     {
-      id: "bakso",
-      nama: "Mie Ayam Bakso Apollo",
-      deskripsi: "Mie ayam legendaris dengan topping ayam gurih dan bakso yang menjadi favorit warga Bogor.",
-      lokasi: "Jl. Suryakencana, Bogor",
-      harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
-      kategori: "⭐ Rekomendasi"
-    },
-    {
       id: "sate",
-      nama: "Sate Sumsum",
+      nama: "Sate Sumsum Pak Oo",
       deskripsi: "Sate berbahan sumsum sapi dengan tekstur lembut dan cita rasa gurih yang unik.",
-      lokasi: "Bogor Timur",
-      harga: "Rp35.000–Rp50.000",
+      lokasi: "Jl. Siliwangi, Bogor Timur",
+      harga: "Rp35.000–Rp60.000",
       gambar: "assets/",
       kategori: "🔥 Viral"
     },
     {
-      id: "uduk",
-      nama: "Nasi Uduk Bistik",
-      deskripsi: "Perpaduan nasi uduk dengan bistik sapi, kentang, dan saus khas yang banyak dijumpai di Bogor.",
-      lokasi: "Bogor Tengah",
-      harga: "Rp25.000–Rp40.000",
-      gambar: "assets/",
+      id: "makaroni",
+      nama: "Makaroni Panggang",
+      deskripsi: "Pasta panggang dengan saus keju dan daging cincang yang menjadi salah satu kuliner legendaris Bogor.",
+      lokasi: "Jl. Salak, Bogor Tengah",
+      harga: "Rp35.000–Rp65.000",
+      gambar: "assets/makaroni.jpg",
       kategori: "⭐ Rekomendasi"
+    },
+    {
+      id: "bihun",
+      nama: "Bihun Goreng Gang Selot",
+      deskripsi: "Bihun goreng legendaris dengan cita rasa gurih yang telah menjadi favorit warga Bogor selama puluhan tahun.",
+      lokasi: "Gang Selot, Bogor Tengah",
+      harga: "Rp20.000–Rp35.000",
+      gambar: "assets/bihun.jpg",
+      kategori: "⭐ Rekomendasi"
+    },
+    {
+      id: "martabak",
+      nama: "Martabak Air Mancur",
+      deskripsi: "Martabak legendaris Bogor dengan isian melimpah dan kulit yang renyah, cocok sebagai camilan maupun oleh-oleh.",
+      lokasi: "Jl. Ahmad Yani, Bogor Tengah",
+      harga: "Rp55.000–Rp120.000",
+      gambar: "assets/martabak.jpg",
+      kategori: "🔥 Viral"
     }
   ],
 
