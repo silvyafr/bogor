@@ -125,15 +125,6 @@ const dataKuliner = {
       harga: "Rp20.000–Rp35.000",
       gambar: "assets/bihun.jpg",
       kategori: "⭐ Rekomendasi"
-    },
-    {
-      id: "martabak",
-      nama: "Martabak Air Mancur",
-      deskripsi: "Martabak legendaris Bogor dengan isian melimpah dan kulit yang renyah, cocok sebagai camilan maupun oleh-oleh.",
-      lokasi: "Jl. Ahmad Yani, Bogor Tengah",
-      harga: "Rp55.000–Rp120.000",
-      gambar: "assets/martabak.jpg",
-      kategori: "🔥 Viral"
     }
   ],
 
@@ -239,6 +230,15 @@ const dataKuliner = {
       lokasi:"Bogor",
       deskripsi:"Brownies lembut berbahan talas khas Bogor dengan rasa yang unik dan lezat.",
       gambar:"assets/brownies_talas.jpg"
+    },
+    {
+      id: "martabak",
+      nama: "Martabak Air Mancur",
+      deskripsi: "Martabak legendaris Bogor dengan isian melimpah dan kulit yang renyah, cocok sebagai camilan maupun oleh-oleh.",
+      lokasi: "Jl. Ahmad Yani, Bogor Tengah",
+      harga: "Rp55.000–Rp120.000",
+      gambar: "assets/martabak.jpg",
+      kategori: "🔥 Viral"
     }
   ]
 };
