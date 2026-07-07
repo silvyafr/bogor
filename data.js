@@ -96,7 +96,7 @@ const dataKuliner = {
       deskripsi: "Bakso khas Bogor yang dipadukan dengan potongan ketupat dalam kuah kaldu gurih.",
       lokasi: "Bogor Tengah",
       harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
+      gambar: "assets/bapatong.jpg",
       kategori: "⭐ Rekomendasi"
     },
     {
