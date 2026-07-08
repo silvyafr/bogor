@@ -84,5 +84,50 @@ alert("Username atau Password salah!");
 
 </script>
 
+<!-- Load Firebase SDK Modul -->
+<script type="module">
+  import { initializeApp } from "https://gstatic.com";
+  import { getAuth, signInWithEmailAndPassword } from "https://gstatic.com";
+
+  // 1. Tempel isi FirebaseConfig dari Langkah 2 sebelumnya di sini
+  const firebaseConfig = {
+    apiKey: "AIzaSy...",
+    authDomain: "://firebaseapp.com",
+    projectId: "kuliner-bogor",
+    storageBucket: "://appspot.com",
+    messagingSenderId: "1234567890",
+    appId: "1:1234:web:abcd"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // 2. Logika Fungsi Login saat Tombol di Form di-klik
+  const loginForm = document.querySelector('#formLogin'); // Sesuaikan ID form HTML Anda
+  
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Ambil input email dan password dari form HTML Anda
+      const email = document.querySelector('#emailInput').value; // Sesuaikan ID input email
+      const password = document.querySelector('#passwordInput').value; // Sesuaikan ID input password
+
+      // Proses Autentikasi Ke Firebase
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Jika login sukses, arahkan admin ke halaman dashboard admin.html
+          alert("Login Berhasil!");
+          window.location.href = "admin.html"; 
+        })
+        .catch((error) => {
+          // Jika login gagal (salah password/email)
+          alert("Login Gagal: " + error.message);
+        });
+    });
+  }
+</script>
+
 </body>
 </html>
