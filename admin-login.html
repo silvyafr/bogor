@@ -6,124 +6,95 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        .login-box{
-            width:350px;
-            margin:100px auto;
-            background:white;
-            padding:30px;
-            border-radius:15px;
-            box-shadow:0 5px 20px rgba(0,0,0,.15);
+        .login-box {
+            width: 350px;
+            margin: 100px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.15);
         }
 
-        .login-box input{
-            width:100%;
-            padding:10px;
-            margin:10px 0;
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box; /* Agar input tidak melewati batas kotak */
         }
 
-        .login-box button{
-            width:100%;
-            padding:12px;
-            border:none;
-            background:#7FB77E;
-            color:white;
-            cursor:pointer;
-            border-radius:8px;
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #7FB77E;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
         }
 
-        .login-box h2{
-            text-align:center;
-            margin-bottom:20px;
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
         }
     </style>
-
 </head>
 <body>
 
 <div class="login-box">
-
-<h2>Login Admin</h2>
-
-<input
-type="text"
-id="username"
-placeholder="Username">
-
-<input
-type="password"
-id="password"
-placeholder="Password">
-
-<button onclick="login()">
-Login
-</button>
-
+    <h2>Login Admin</h2>
+    
+    <!-- Menggunakan tag form agar mendukung kecocokan standar Firebase -->
+    <form id="formLogin">
+        <!-- Tipe input diubah ke email sesuai aturan Firebase Authentication -->
+        <input type="email" id="emailInput" placeholder="Email Admin" required>
+        <input type="password" id="passwordInput" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
 </div>
 
-<script>
-
-function login(){
-
-const username=document.getElementById("username").value;
-
-const password=document.getElementById("password").value;
-
-if(username=="admin" && password=="admin123"){
-
-sessionStorage.setItem("login","true");
-
-location.href="admin.html";
-
-}else{
-
-alert("Username atau Password salah!");
-
-}
-
-}
-
-</script>
-
-<!-- Load Firebase SDK Modul -->
+<!-- Seluruh skrip logika Firebase disatukan di sini -->
 <script type="module">
+  // Alamat CDN Firebase diperbaiki ke versi lengkap yang valid
   import { initializeApp } from "https://gstatic.com";
   import { getAuth, signInWithEmailAndPassword } from "https://gstatic.com";
 
-  // 1. Tempel isi FirebaseConfig dari Langkah 2 sebelumnya di sini
+  // 1. SILAKAN TEMPELKAN ISI KODE KONSOL FIREBASE ASLI ANDA DI SINI
   const firebaseConfig = {
-    apiKey: "AIzaSy...",
-    authDomain: "://firebaseapp.com",
+    apiKey: "AIzaSyYOUR_ACTUAL_API_KEY", 
+    authDomain: "kuliner-bogor.firebaseapp.com",
     projectId: "kuliner-bogor",
-    storageBucket: "://appspot.com",
-    messagingSenderId: "1234567890",
-    appId: "1:1234:web:abcd"
+    storageBucket: "kuliner-bogor.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
   };
 
-  // Initialize Firebase
+  // Inisialisasi Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  // 2. Logika Fungsi Login saat Tombol di Form di-klik
-  const loginForm = document.querySelector('#formLogin'); // Sesuaikan ID form HTML Anda
+  // 2. Logika Fungsi Login Firebase
+  const loginForm = document.querySelector('#formLogin');
   
   if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Mencegah reload halaman otomatis saat klik submit
       
-      // Ambil input email dan password dari form HTML Anda
-      const email = document.querySelector('#emailInput').value; // Sesuaikan ID input email
-      const password = document.querySelector('#passwordInput').value; // Sesuaikan ID input password
+      const email = document.querySelector('#emailInput').value;
+      const password = document.querySelector('#passwordInput').value;
 
-      // Proses Autentikasi Ke Firebase
+      // Jalankan proses autentikasi ke server Firebase
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Jika login sukses, arahkan admin ke halaman dashboard admin.html
+          // Menyimpan penanda login aktif ke browser
+          sessionStorage.setItem("login", "true");
           alert("Login Berhasil!");
           window.location.href = "admin.html"; 
         })
         .catch((error) => {
-          // Jika login gagal (salah password/email)
-          alert("Login Gagal: " + error.message);
+          // Memberi tahu admin jika kombinasi salah atau koneksi bermasalah
+          alert("Login Gagal: Periksa kembali email dan password Anda.");
+          console.error(error.message);
         });
     });
   }
