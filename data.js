@@ -219,7 +219,7 @@ const dataKuliner = {
       deskripsi: "Martabak legendaris Bogor dengan isian melimpah dan kulit yang renyah, cocok sebagai camilan maupun oleh-oleh.",
       lokasi: "Jl. Ahmad Yani, Bogor Tengah",
       harga: "Rp55.000–Rp120.000",
-      gambar: "assets/martabakairmancur.jpeg",
+      gambar: "assets/martabakairmancur.jpg",
       kategori: "🔥 Viral"
     }
   ]
