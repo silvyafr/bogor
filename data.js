@@ -187,15 +187,6 @@ const dataKuliner = {
       gambar:"assets/rotiunyil.jpg"
     },
     {
-      id:"talas",
-      nama:"Talas Bogor",
-      harga:"Rp15.000–Rp40.000",
-      kategori:"⭐ Rekomendasi",
-      lokasi:"Sentra Oleh-Oleh Bogor",
-      deskripsi:"Umbi khas Bogor yang terkenal dengan teksturnya yang lembut dan dapat diolah menjadi berbagai makanan.",
-      gambar:"assets/talas.jpg"
-    },
-    {
       id:"keripiktalas",
       nama:"Keripik Talas",
       harga:"Rp20.000–Rp45.000",
