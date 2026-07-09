@@ -193,7 +193,7 @@ const dataKuliner = {
       kategori:"⭐ Rekomendasi",
       lokasi:"Bogor",
       deskripsi:"Keripik renyah berbahan dasar talas dengan aneka varian rasa yang cocok dijadikan buah tangan.",
-      gambar:"assets/keripik_talas.jpg"
+      gambar:"assets/keripik_talas.jpeg"
     },
     {
       id:"pieapple",
@@ -202,7 +202,7 @@ const dataKuliner = {
       kategori:"⭐ Rekomendasi",
       lokasi:"Bogor Tengah",
       deskripsi:"Pie renyah dengan isian apel manis yang menjadi salah satu oleh-oleh favorit dari Bogor.",
-      gambar:"assets/pieapple.jpg"
+      gambar:"assets/pieapple.jpeg"
     },
     {
       id:"strudel",
@@ -211,16 +211,7 @@ const dataKuliner = {
       kategori:"🔥 Viral",
       lokasi:"Bogor",
       deskripsi:"Pastry berlapis dengan berbagai pilihan isian buah yang cocok dijadikan oleh-oleh.",
-      gambar:"assets/strudel.jpg"
-    },
-    {
-      id:"brownies",
-      nama:"Brownies Talas",
-      harga:"Rp35.000–Rp60.000",
-      kategori:"⭐ Rekomendasi",
-      lokasi:"Bogor",
-      deskripsi:"Brownies lembut berbahan talas khas Bogor dengan rasa yang unik dan lezat.",
-      gambar:"assets/brownies_talas.jpg"
+      gambar:"assets/strudel.jpeg"
     },
     {
       id: "martabak",
@@ -228,7 +219,7 @@ const dataKuliner = {
       deskripsi: "Martabak legendaris Bogor dengan isian melimpah dan kulit yang renyah, cocok sebagai camilan maupun oleh-oleh.",
       lokasi: "Jl. Ahmad Yani, Bogor Tengah",
       harga: "Rp55.000–Rp120.000",
-      gambar: "assets/martabak.jpg",
+      gambar: "assets/martabakairmancur.jpeg",
       kategori: "🔥 Viral"
     }
   ]
