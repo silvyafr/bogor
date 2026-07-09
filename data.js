@@ -193,7 +193,7 @@ const dataKuliner = {
       kategori:"⭐ Rekomendasi",
       lokasi:"Bogor",
       deskripsi:"Keripik renyah berbahan dasar talas dengan aneka varian rasa yang cocok dijadikan buah tangan.",
-      gambar:"assets/keripik_talas.jpeg"
+      gambar:"assets/keripik_talas.jpg"
     },
     {
       id:"pieapple",
@@ -202,7 +202,7 @@ const dataKuliner = {
       kategori:"⭐ Rekomendasi",
       lokasi:"Bogor Tengah",
       deskripsi:"Pie renyah dengan isian apel manis yang menjadi salah satu oleh-oleh favorit dari Bogor.",
-      gambar:"assets/pieapple.jpeg"
+      gambar:"assets/pieapple.jpg"
     },
     {
       id:"strudel",
@@ -211,7 +211,7 @@ const dataKuliner = {
       kategori:"🔥 Viral",
       lokasi:"Bogor",
       deskripsi:"Pastry berlapis dengan berbagai pilihan isian buah yang cocok dijadikan oleh-oleh.",
-      gambar:"assets/strudel.jpeg"
+      gambar:"assets/strudel.jpg"
     },
     {
       id: "martabak",
