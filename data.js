@@ -69,7 +69,7 @@ const dataKuliner = {
       deskripsi: "Nasi hangat yang dicampur oncom berbumbu dan disajikan dengan ayam goreng, tahu, tempe, serta sambal.",
       lokasi: "Bogor dan sekitarnya",
       harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
+      gambar: "assets/nasitutug.jpg",
       kategori: "⭐ Rekomendasi"
      }
   ],
