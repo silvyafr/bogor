@@ -187,23 +187,3 @@ const dataKuliner = {
     }
   ]
 };
-
-// Membuat database pertama kali
-let dbLocal = JSON.parse(localStorage.getItem("dataKuliner"));
-
-if (!dbLocal) {
-
-    dbLocal = structuredClone(dataKuliner);
-
-} else {
-
-    dbLocal.makanan ??= structuredClone(dataKuliner.makanan);
-    dbLocal.minuman ??= structuredClone(dataKuliner.minuman);
-    dbLocal.oleholeh ??= structuredClone(dataKuliner.oleholeh);
-
-}
-
-localStorage.setItem(
-    "dataKuliner",
-    JSON.stringify(dbLocal)
-);
