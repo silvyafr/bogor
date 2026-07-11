@@ -29,7 +29,7 @@ const dataKuliner = {
     },
     {
       id: "soto",
-      nama: "Soto Mie Agih",
+      nama: "Soto Mie Bogor",
       deskripsi: "Soto mie khas Bogor dengan kuah kaldu gurih, daging sapi, risol, mie kuning, bihun, dan taburan seledri yang kaya rasa.",
       lokasi: "Jl. Suryakencana, Bogor Tengah",
       harga: "Rp25.000–Rp35.000",
@@ -51,7 +51,6 @@ const dataKuliner = {
       deskripsi: " Gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian sambal oncom gurih dan pedas.",
       harga: "Rp5.000",
       gambar: "assets/combro.jpg",
-      kategori: "⭐ Rekomendasi"
     },
     {
       id: "laksa",
@@ -60,7 +59,6 @@ const dataKuliner = {
       lokasi: "Gang Aut, Bogor Tengah",
       harga: "Rp20.000–Rp30.000",
       gambar: "assets/laksa.jpeg",
-      kategori: "⭐ Rekomendasi"
     },
     {
       id: "glosor",
@@ -87,7 +85,6 @@ const dataKuliner = {
       lokasi: "Bogor Tengah",
       harga: "Rp20.000–Rp35.000",
       gambar: "assets/",
-      kategori: "⭐ Rekomendasi"
     },
     {
       id: "tutug",
@@ -105,16 +102,6 @@ const dataKuliner = {
       lokasi: "Bogor Tengah",
       harga: "Rp20.000–Rp35.000",
       gambar: "assets/",
-      kategori: "⭐ Rekomendasi"
-    },
-    {
-      id: "bakso",
-      nama: "Mie Ayam Bakso Apollo",
-      deskripsi: "Mie ayam legendaris dengan topping ayam gurih dan bakso yang menjadi favorit warga Bogor.",
-      lokasi: "Jl. Suryakencana, Bogor",
-      harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
-      kategori: "⭐ Rekomendasi"
     },
     {
       id: "sate",
@@ -123,7 +110,6 @@ const dataKuliner = {
       lokasi: "Bogor Timur",
       harga: "Rp35.000–Rp50.000",
       gambar: "assets/",
-      kategori: "🔥 Viral"
     },
     {
       id: "uduk",
@@ -131,8 +117,7 @@ const dataKuliner = {
       deskripsi: "Perpaduan nasi uduk dengan bistik sapi, kentang, dan saus khas yang banyak dijumpai di Bogor.",
       lokasi: "Bogor Tengah",
       harga: "Rp25.000–Rp40.000",
-      gambar: "assets/",
-      kategori: "⭐ Rekomendasi"
+      gambar: "assets/"
     }
   ],
 
