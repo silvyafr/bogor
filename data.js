@@ -129,7 +129,7 @@ const dataKuliner = {
       lokasi: "Pasar Bogor",
       harga: "Rp8.000",
       gambar: "assets/espalabogor.jpeg",
-      kategori: "🔥 Viral"
+      kategori: "⭐ Rekomendasi"
     },
     {
       id: "kotjok",
