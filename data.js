@@ -114,4 +114,5 @@ const dataKuliner = {
        gambar: "assets/durengoreng.jpeg",
        kategori: "🔥 Viral"
      }
-     ];
+     ]
+};
