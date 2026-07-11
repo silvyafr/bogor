@@ -46,21 +46,6 @@ const dataKuliner = {
       kategori: "⭐ Rekomendasi"
     },
     {
-      id: "combro",
-      nama: "Combro",
-      deskripsi: " Gorengan tradisional khas Sunda, Jawa Barat, yang terbuat dari parutan singkong dengan isian sambal oncom gurih dan pedas.",
-      harga: "Rp5.000",
-      gambar: "assets/combro.jpg",
-    },
-    {
-      id: "laksa",
-      nama: "Laksa Gang Aut",
-      deskripsi: "Laksa khas Bogor berkuah santan kuning dengan mie, tauge, oncom, telur rebus, dan daun kemangi yang harum.",
-      lokasi: "Gang Aut, Bogor Tengah",
-      harga: "Rp20.000–Rp30.000",
-      gambar: "assets/laksa.jpeg",
-    },
-    {
       id: "glosor",
       nama: "Mie Glosor",
       deskripsi: "Mie kuning khas Bogor dengan tekstur kenyal, biasanya disajikan dengan sambal, gorengan, atau lauk sederhana.",
@@ -79,14 +64,6 @@ const dataKuliner = {
       kategori: "🔥 Viral"
     },
     {
-      id: "kocok",
-      nama: "Mie Kocok Bogor",
-      deskripsi: "Mie dengan kuah kaldu sapi yang gurih, disajikan bersama kikil, bakso, dan taburan bawang goreng.",
-      lokasi: "Bogor Tengah",
-      harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
-    },
-    {
       id: "tutug",
       nama: "Nasi Tutug Oncom",
       deskripsi: "Nasi hangat yang dicampur oncom berbumbu dan disajikan dengan ayam goreng, tahu, tempe, serta sambal.",
@@ -94,31 +71,7 @@ const dataKuliner = {
       harga: "Rp20.000–Rp35.000",
       gambar: "assets/",
       kategori: "⭐ Rekomendasi"
-    },
-    {
-      id: "bapatong",
-      nama: "Bapatong",
-      deskripsi: "Bakso khas Bogor yang dipadukan dengan potongan ketupat dalam kuah kaldu gurih.",
-      lokasi: "Bogor Tengah",
-      harga: "Rp20.000–Rp35.000",
-      gambar: "assets/",
-    },
-    {
-      id: "sate",
-      nama: "Sate Sumsum",
-      deskripsi: "Sate berbahan sumsum sapi dengan tekstur lembut dan cita rasa gurih yang unik.",
-      lokasi: "Bogor Timur",
-      harga: "Rp35.000–Rp50.000",
-      gambar: "assets/",
-    },
-    {
-      id: "uduk",
-      nama: "Nasi Uduk Bistik",
-      deskripsi: "Perpaduan nasi uduk dengan bistik sapi, kentang, dan saus khas yang banyak dijumpai di Bogor.",
-      lokasi: "Bogor Tengah",
-      harga: "Rp25.000–Rp40.000",
-      gambar: "assets/"
-    }
+     }
   ],
 
   minuman: [
@@ -147,28 +100,18 @@ const dataKuliner = {
       lokasi: "Sekitar Bogor",
       harga: "Rp15.000",
       gambar: "assets/bajigur.jfif",
-      kategori: "rekomendasi"
+      kategori: "⭐ Rekomendasi"
     }
   ],
 
-  oleholeh:[
-    {
-    id:"lapis",
-    nama:"Lapis Bogor",
-    harga:"Rp35.000",
-    kategori:"rekomendasi",
-    lokasi:"Bogor",
-    deskripsi:"Kue lapis khas Bogor.",
-    gambar:"assets/lapisbogor.jpg"
-    },
+   jajanan: [
      {
-    id:"roti unyil",
-    nama:"Roti Unyil",
-    harga:"Rp25.000",
-    kategori:"rekomendasi",
-    lokasi:"Bogor",
-    deskripsi:"kuliner ikonik legendaris.",
-    gambar:"assets/rotiunyil.jpg"
-    }
-  ]
-};
+       id: "duren goreng",
+       nama: "Duren Goreng Pasundan",
+       deskripsi: "Camilan ini disajikan dengan lumuran saus durian dan taburan keju.",
+       lokasi: "Sekitar Bogor",
+       harga: "Rp18.000",
+       gambar: "assets/durengoreng.jpeg",
+       kategori: "🔥 Viral"
+     }
+     ];
