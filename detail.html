@@ -1,236 +1,39 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Detail Kuliner</title>
-
-<style>
-
-.navbar{
-    position:sticky;
-    top:0;
-    z-index:999;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:18px 70px;
-    background:white;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-.navbar h2{
-    color:#7FB77E;
-    font-size:28px;
-}
-
-.navbar nav{
-    display:flex;
-    gap:25px;
-    align-items:center;
-}
-
-.navbar a{
-    text-decoration:none;
-    color:#444;
-    font-weight:bold;
-    transition:.3s;
-}
-
-.navbar a:hover{
-    color:#7FB77E;
-}
-
-.adminBtn{
-    background:#7FB77E;
-    color:white !important;
-    padding:12px 20px;
-    border-radius:12px;
-    font-weight:bold;
-    box-shadow:0 5px 15px rgba(127,183,126,.25);
-}
-
-.adminBtn:hover{
-    background:#6aa96a;
-    color:white !important;
-}
-
-body{
-    margin:0;
-    background:#f4f6f9;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-.container{
-    max-width:1000px;
-    margin:60px auto;
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-    display:flex;
-    gap:30px;
-}
-
-img{
-    width:420px;
-    height:100%;
-    object-fit:cover;
-}
-
-.content{
-    flex:1;
-    padding:35px;
-}
-
-.badge{
-    display:inline-block;
-    background:#7FB77E;
-    color:white;
-    padding:6px 14px;
-    border-radius:20px;
-    margin-bottom:15px;
-}
-
-h1{
-    margin:0;
-    color:#333;
-}
-
-.harga{
-    color:#27ae60;
-    font-size:28px;
-    font-weight:bold;
-    margin:20px 0;
-}
-
-.info{
-    margin:15px 0;
-    font-size:16px;
-}
-
-button{
-    margin-top:25px;
-    padding:12px 22px;
-    border:none;
-    background:#7FB77E;
-    color:white;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-}
-
-button:hover{
-    background:#6aa96a;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header class="navbar">
-
-<h2>Kuliner Bogor</h2>
-
-<nav>
-
-<a href="index.html">Home</a>
-
-<a href="makanan-khas.html">Makanan</a>
-
-<a href="minuman-khas.html">Minuman</a>
-
-<a href="oleh-oleh.html">Oleh Oleh</a>
-
-<a href="admin-login.html" class="adminBtn">
-Admin Login
-</a>
-
-</nav>
-
-</header>
-
-<div class="container">
-
-<img id="gambar">
-
-<div class="content">
-
-<span class="badge" id="kategori"></span>
-
-<h1 id="nama"></h1>
-
-<div class="harga" id="harga"></div>
-
-<div class="info">
-<b>📍 Lokasi :</b>
-<span id="lokasi"></span>
-</div>
-
-<div class="info">
-<b>📝 Deskripsi :</b>
-
-<p id="deskripsi"></p>
-
-</div>
-
-<button onclick="history.back()">
-← Kembali
-</button>
-
-</div>
-
-</div>
-
 <script src="data.js"></script>
 
 <script>
+const db = dataKuliner;
 
-const db =
-JSON.parse(localStorage.getItem("dataKuliner")) ||
-dataKuliner;
+// Ambil ID dari URL
+const id = new URLSearchParams(window.location.search).get("id");
 
-const id =
-new URLSearchParams(location.search).get("id");
-
+// Gabungkan semua data
 const semua = [
     ...db.makanan,
     ...db.minuman,
-    ...(db.oleholeh || [])
+    ...db.oleholeh
 ];
 
-const item =
-semua.find(x => x.id == id);
+// Cari data berdasarkan ID
+const item = semua.find(x => x.id === id);
 
-if(!item){
+// Jika data tidak ditemukan
+if (!item) {
+    alert("Data tidak ditemukan!");
+    window.location.href = "index.html";
+} else {
 
-    alert("Data tidak ditemukan");
+    // Tampilkan data
+    document.getElementById("gambar").src = item.gambar;
+    document.getElementById("gambar").alt = item.nama;
 
-    location.href="index.html";
+    document.getElementById("nama").textContent = item.nama;
 
+    document.getElementById("harga").textContent = item.harga;
+
+    document.getElementById("kategori").textContent = item.kategori;
+
+    document.getElementById("lokasi").textContent = item.lokasi || "-";
+
+    document.getElementById("deskripsi").textContent = item.deskripsi;
 }
-
-document.getElementById("gambar").src = item.gambar;
-document.getElementById("nama").innerText = item.nama;
-
-document.getElementById("harga").innerText =
-String(item.harga).startsWith("Rp")
-? item.harga
-: "Rp" + Number(item.harga).toLocaleString("id-ID");
-
-document.getElementById("kategori").innerText = item.kategori;
-
-document.getElementById("lokasi").innerText = item.lokasi;
-
-document.getElementById("deskripsi").innerText = item.deskripsi;
-
 </script>
-
-</body>
-</html>
