@@ -1,4 +1,4 @@
-const db = JSON.parse(localStorage.getItem("dataKuliner")) || dataKuliner;
+const db = dataKuliner;
 
 function buatItem(item){
 
