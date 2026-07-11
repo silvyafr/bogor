@@ -39,7 +39,7 @@ const dataKuliner = {
     {
       id: "cungkring",
       nama: "Cungkring",
-      deskripsi: " Kuliner berupa potongan kikil dan bagian kepala sapi (seperti cungur atau bibir) yang dimasak empuk, disajikan bersama irisan lontong dan rempeyek atau keripik tempe, lalu disiram saus kacang yang gurih serta kecap manis.",
+      deskripsi: "kuliner tradisional khas Bogor yang terdiri dari potongan kikil, urat, dan cungur (bibir sapi) yang dimasak bumbu kuning.",
       lokasi: "Bogor Tengah",
       harga: "Rp35.000",
       gambar: "assets/cungkring.jpg",
