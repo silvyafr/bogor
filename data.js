@@ -129,7 +129,7 @@ const dataKuliner = {
       lokasi: "Pasar Bogor",
       harga: "Rp8.000",
       gambar: "assets/espalabogor.jpeg",
-      kategori: "viral"
+      kategori: "🔥 Viral"
     },
     {
       id: "kotjok",
@@ -138,7 +138,7 @@ const dataKuliner = {
       lokasi: "Sekitar Bogor",
       harga: "Rp10.000",
       gambar: "assets/bir-pletok-bogor.jpg",
-      kategori: "rekomendasi"
+      kategori: "🔥 Viral"
     },
     {
       id: "bajigur",
