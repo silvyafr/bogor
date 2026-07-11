@@ -1,7 +1,8 @@
 // Ambil data langsung dari data.js
 const semuaData = [
     ...dataKuliner.makanan,
-    ...dataKuliner.minuman
+    ...dataKuliner.minuman,
+    ...dataKuliner.jajanan
 ];
 
 // Filter kategori
