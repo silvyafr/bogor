@@ -1,38 +1,35 @@
-// Ambil database dari LocalStorage
-const db = JSON.parse(localStorage.getItem("dataKuliner"));
-
-// Gabungkan semua data
+// Ambil data langsung dari data.js
 const semuaData = [
-    ...db.makanan,
-    ...db.minuman
+    ...dataKuliner.makanan,
+    ...dataKuliner.minuman
 ];
 
-// filter kategori
-const viral = semuaData.filter(item => item.kategori === "viral");
-const rekomendasi = semuaData.filter(item => item.kategori === "rekomendasi");
+// Filter kategori
+const viral = semuaData.filter(item => item.kategori === "🔥 Viral");
+const rekomendasi = semuaData.filter(item => item.kategori === "⭐ Rekomendasi");
 
-// container
+// Container
 const viralContainer = document.getElementById("viral-container");
 const rekomendasiContainer = document.getElementById("rekomendasi-container");
 
-// function render card
-function renderCard(data, container){
+// Render Card
+function renderCard(data, container) {
 
     container.innerHTML = "";
 
-    data.forEach(item=>{
+    data.forEach(item => {
 
         const card = document.createElement("div");
 
         card.className = "card";
 
         card.innerHTML = `
-            <img src="${item.gambar}">
+            <img src="${item.gambar}" alt="${item.nama}">
 
             <div class="card-body">
 
                 <span class="badge">
-                    ${item.kategori === "viral" ? "🔥 Viral" : "⭐ Rekomendasi"}
+                    ${item.kategori}
                 </span>
 
                 <h3>${item.nama}</h3>
@@ -40,11 +37,11 @@ function renderCard(data, container){
                 <p>${item.deskripsi}</p>
 
                 <button
-                class="detailBtn"
-                onclick="location.href='detail.html?id=${item.id}'">
-                
-                Lihat Detail
-                
+                    class="detailBtn"
+                    onclick="location.href='detail.html?id=${item.id}'">
+
+                    Lihat Detail
+
                 </button>
 
             </div>
@@ -55,22 +52,24 @@ function renderCard(data, container){
     });
 
 }
-// render
+
+// Render pertama
 renderCard(viral, viralContainer);
 renderCard(rekomendasi, rekomendasiContainer);
 
-function cariKuliner(){
+// Search
+function cariKuliner() {
 
-    const keyword =
-    document.getElementById("search").value.toLowerCase();
+    const keyword = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
 
-    const hasilViral =
-    viral.filter(item =>
+    const hasilViral = viral.filter(item =>
         item.nama.toLowerCase().includes(keyword)
     );
 
-    const hasilRekomendasi =
-    rekomendasi.filter(item =>
+    const hasilRekomendasi = rekomendasi.filter(item =>
         item.nama.toLowerCase().includes(keyword)
     );
 
