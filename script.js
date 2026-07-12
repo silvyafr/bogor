@@ -5,6 +5,20 @@ const semuaData = [
     ...dataKuliner.jajanan
 ];
 
+async function testSupabase(){
+
+    const { data, error } = await supabase
+    .from("kuliner")
+    .select("*");
+
+    console.log(data);
+
+    console.log(error);
+
+}
+
+testSupabase();
+
 // Filter kategori
 const viral = semuaData.filter(item => item.kategori === "🔥 Viral");
 const rekomendasi = semuaData.filter(item => item.kategori === "⭐ Rekomendasi");
