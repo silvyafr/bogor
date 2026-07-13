@@ -7,7 +7,7 @@ const semuaData = [
 
 async function testSupabase(){
 
-    const { data, error } = await supabase
+    const { data, error } = await window.db
     .from("kuliner")
     .select("*");
 
