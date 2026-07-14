@@ -1,27 +1,24 @@
-// Ambil data langsung dari data.js
-const semuaData = [
-    ...dataKuliner.makanan,
-    ...dataKuliner.minuman,
-    ...dataKuliner.jajanan
-];
+let semuaData = [];
 
-async function testSupabase(){
+async function ambilData(){
 
-    const { data, error } = await window.db
+    const { data, error } = await supabase
     .from("kuliner")
     .select("*");
 
     console.log(data);
-
     console.log(error);
 
+    if (error) return;
+
+    semuaData = data;
+
+    const viral = semuaData.filter(item => item.kategori === "🔥 Viral");
+    const rekomendasi = semuaData.filter(item => item.kategori === "⭐ Rekomendasi");
+    
+    renderCard(viral, viralContainer);
+    renderCard(rekomendasi, rekomendasiContainer);
 }
-
-testSupabase();
-
-// Filter kategori
-const viral = semuaData.filter(item => item.kategori === "🔥 Viral");
-const rekomendasi = semuaData.filter(item => item.kategori === "⭐ Rekomendasi");
 
 // Container
 const viralContainer = document.getElementById("viral-container");
@@ -68,10 +65,6 @@ function renderCard(data, container) {
 
 }
 
-// Render pertama
-renderCard(viral, viralContainer);
-renderCard(rekomendasi, rekomendasiContainer);
-
 // Search
 function cariKuliner() {
 
@@ -80,11 +73,13 @@ function cariKuliner() {
         .value
         .toLowerCase();
 
-    const hasilViral = viral.filter(item =>
+    const hasilViral = semuaData.filter(item =>
+        item.kategori === "🔥 Viral" &&
         item.nama.toLowerCase().includes(keyword)
     );
 
-    const hasilRekomendasi = rekomendasi.filter(item =>
+    const hasilRekomendasi = semuaData.filter(item =>
+        item.kategori === "⭐ Rekomendasi" &&
         item.nama.toLowerCase().includes(keyword)
     );
 
@@ -92,3 +87,4 @@ function cariKuliner() {
     renderCard(hasilRekomendasi, rekomendasiContainer);
 
 }
+ambilData();
