@@ -2,7 +2,7 @@ let semuaData = [];
 
 async function ambilData(){
 
-    const { data, error } = await db
+    const { data, error } = await window.supabaseClient
     .from("kuliner")
     .select("*");
 
