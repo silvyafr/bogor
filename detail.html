@@ -1,39 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Kuliner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h2>Detail Kuliner Khas Bogor</h2>
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+</header>
+
+<main class="detail-container">
+
+    <img id="gambar" src="" alt="" class="detail-img">
+
+    <h1 id="nama"></h1>
+
+    <table class="detail-table">
+        <tr>
+            <td><b>Kategori</b></td>
+            <td id="kategori"></td>
+        </tr>
+        <tr>
+            <td><b>Harga</b></td>
+            <td id="harga"></td>
+        </tr>
+        <tr>
+            <td><b>Lokasi</b></td>
+            <td id="lokasi"></td>
+        </tr>
+    </table>
+
+    <h3>Deskripsi</h3>
+
+    <p id="deskripsi"></p>
+
+    <br>
+
+    <a href="index.html" class="btn-detail">← Kembali ke Home</a>
+
+</main>
+
 <script src="data.js"></script>
 
 <script>
 const db = dataKuliner;
 
-// Ambil ID dari URL
+// Ambil id dari URL
 const id = new URLSearchParams(window.location.search).get("id");
 
-// Gabungkan semua data
+// Gabungkan semua kategori
 const semua = [
     ...db.makanan,
     ...db.minuman,
     ...db.oleholeh
 ];
 
-// Cari data berdasarkan ID
+// Cari data
 const item = semua.find(x => x.id === id);
 
-// Jika data tidak ditemukan
 if (!item) {
     alert("Data tidak ditemukan!");
     window.location.href = "index.html";
 } else {
 
-    // Tampilkan data
     document.getElementById("gambar").src = item.gambar;
     document.getElementById("gambar").alt = item.nama;
 
     document.getElementById("nama").textContent = item.nama;
 
-    document.getElementById("harga").textContent = item.harga;
-
     document.getElementById("kategori").textContent = item.kategori;
 
-    document.getElementById("lokasi").textContent = item.lokasi || "-";
+    document.getElementById("harga").textContent = item.harga;
+
+    document.getElementById("lokasi").textContent = item.lokasi;
 
     document.getElementById("deskripsi").textContent = item.deskripsi;
+
 }
 </script>
+
+</body>
+</html>
