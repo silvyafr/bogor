@@ -106,7 +106,7 @@ const dataKuliner = {
 
    jajanan: [
      {
-       id: "duren goreng",
+       id: "duren-goreng",
        nama: "Duren Goreng Pasundan",
        deskripsi: "Camilan ini disajikan dengan lumuran saus durian dan taburan keju.",
        lokasi: "Sekitar Bogor",
