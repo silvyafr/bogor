@@ -11,7 +11,7 @@
 <header class="navbar">
     <h2>Detail Kuliner Khas Bogor</h2>
     <nav>
-        <a href="data.js">Home</a>
+        <a href="index.html">Home</a>
     </nav>
 </header>
 
@@ -46,42 +46,42 @@
 
 </main>
 
-<script src="data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 
 <script>
-const db = dataKuliner;
+async function loadDetail() {
 
-// Ambil id dari URL
-const id = new URLSearchParams(window.location.search).get("id");
+    const id = new URLSearchParams(window.location.search).get("id");
 
-// Gabungkan semua kategori
-const semua = [
-    ...db.makanan,
-    ...db.minuman,
-    ...db.jajanan
-];
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("id", id)
+        .single();
 
-// Cari data
-const item = semua.find(x => x.id === id);
+    if (error || !data) {
+        alert("Data tidak ditemukan!");
+        window.location.href = "index.html";
+        return;
+    }
 
-if (!item) {
-    alert("Data tidak ditemukan!");
-    window.location.href = "index.html";
-} else {
+    document.getElementById("gambar").src = data.gambar;
+    document.getElementById("gambar").alt = data.nama;
 
-    document.getElementById("gambar").src = item.gambar;
-    document.getElementById("gambar").alt = item.nama;
+    document.getElementById("nama").textContent = data.nama;
 
-    document.getElementById("nama").textContent = item.nama;
+    document.getElementById("kategori").textContent = data.kategori;
 
-    document.getElementById("kategori").textContent = item.kategori;
+    document.getElementById("harga").textContent = data.harga;
 
-    document.getElementById("harga").textContent = item.harga;
+    document.getElementById("lokasi").textContent = data.lokasi;
 
-    document.getElementById("lokasi").textContent = item.lokasi;
+    document.getElementById("deskripsi").textContent = data.deskripsi;
+}
 
-    document.getElementById("deskripsi").textContent = item.deskripsi;
-
+loadDetail();
+</script>
 }
 </script>
 
