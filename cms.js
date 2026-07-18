@@ -46,6 +46,8 @@ container.innerHTML="";
 
 data.forEach(item=>{
 
+console.log("DATA DARI SUPABASE");
+console.table(data);
 container.innerHTML += buatItem(item);
 
 });
