@@ -62,6 +62,6 @@ tampilKategori("minuman","minumanContainer");
 
 tampilKategori("jajanan","jajananContainer");
 
-tampilKategori("oleh-oleh","oleh-olehContainer");
+tampilKategori("oleh-oleh","oleholehContainer");
 
 });
