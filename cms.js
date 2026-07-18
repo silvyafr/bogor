@@ -56,4 +56,8 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 tampilKategori("makanan","makananContainer");
 
+tampilKategori("minuman","minumanContainer");
+
+tampilKategori("jajanan","jajananContainer");
+
 });
