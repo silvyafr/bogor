@@ -24,7 +24,29 @@ return `
 
 }
 
-async function tampilKategori(jenis,id){
+async function tampilMinumanViral() {
+
+    const container = document.getElementById("viralContainer");
+
+    if (!container) return;
+
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("jenis", "minuman")
+        .eq("kategori", "🔥 Viral");
+
+    if (error) {
+        console.log(error);
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(item => {
+        container.innerHTML += buatItem(item);
+    });
+}
 
 const container=document.getElementById(id);
 
@@ -60,5 +82,7 @@ tampilKategori("minuman","minumanContainer");
 tampilKategori("jajanan","jajananContainer");
 
 tampilKategori("oleh-oleh","oleholehContainer");
+
+tampilMinumanViral();
 
 });
