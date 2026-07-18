@@ -23,36 +23,37 @@ return `
 `;
 
 }
-async function tampilKategori(jenis, id){
 
-    const container = document.getElementById(id);
+async function tampilKategori(jenis,id){
 
-    if(!container) return;
+const container=document.getElementById(id);
 
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*")
-        .eq("jenis", jenis);
+if(!container) return;
 
-    if(error){
-        console.log(error);
-        return;
-    }
+const { data, error } = await db
+.from("kuliner")
+.select("*")
+.eq("jenis",jenis);
 
-    container.innerHTML = "";
+if(error){
+console.log(error);
+return;
+}
 
-    data.forEach(item=>{
-        container.innerHTML += buatItem(item);
-    });
+console.log(data);
+
+container.innerHTML="";
+
+data.forEach(item=>{
+
+container.innerHTML += buatItem(item);
+
+});
 
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 tampilKategori("makanan","makananContainer");
-
-tampilKategori("minuman","minumanContainer");
-
-tampilKategori("oleholeh","oleholehContainer");
 
 });
