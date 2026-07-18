@@ -1,5 +1,3 @@
-const db = dataKuliner;
-
 function buatItem(item){
 
 return `
@@ -25,20 +23,27 @@ return `
 `;
 
 }
+async function tampilKategori(jenis, id){
 
-function tampilKategori(jenis,id){
+    const container = document.getElementById(id);
 
-const container=document.getElementById(id);
+    if(!container) return;
 
-if(!container) return;
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("jenis", jenis);
 
-container.innerHTML="";
+    if(error){
+        console.log(error);
+        return;
+    }
 
-(db[jenis] || []).forEach(item=>{
+    container.innerHTML = "";
 
-container.innerHTML += buatItem(item);
-
-});
+    data.forEach(item=>{
+        container.innerHTML += buatItem(item);
+    });
 
 }
 
