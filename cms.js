@@ -42,14 +42,11 @@ return;
 
 console.log(data);
 
-container.innerHTML="";
+container.innerHTML = "";
 
-data.forEach(item=>{
-
-console.log("DATA DARI SUPABASE");
-console.table(data);
-container.innerHTML += buatItem(item);
-
+data.forEach(item => {
+    console.log(item);
+    container.innerHTML += buatItem(item);
 });
 
 }
