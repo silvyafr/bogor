@@ -26,7 +26,7 @@ return `
 
 async function tampilMinumanViral() {
 
-    const container = document.getElementById("viralContainer");
+    const container = document.getElementById("minumanviralContainer");
 
     if (!container) return;
 
