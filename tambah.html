@@ -190,16 +190,17 @@ async function simpanData(){
     const { error } = await db
     .from("kuliner")
     .insert([
-        {
-            nama,
-            harga,
-            kategori,
-            jenis,
-            lokasi,
-            deskripsi,
-            gambar
-        }
-    ]);
+    {
+        id: Date.now().toString(),
+        nama,
+        harga,
+        kategori,
+        jenis,
+        lokasi,
+        deskripsi,
+        gambar
+}
+]);
 
     if(error){
         console.log(error);
