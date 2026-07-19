@@ -12,6 +12,9 @@ async function ambilData(){
     if (error) return;
 
     semuaData = data;
+    
+    console.log("Jumlah data:", semuaData.length);
+    console.log(semuaData.map(x => x.kategori));
 
     // TAMBAHKAN BAGIAN INI
     console.log("Semua Data:", semuaData);
@@ -95,7 +98,3 @@ function cariKuliner() {
     renderCard(hasilRekomendasi, rekomendasiContainer);
 
 }
-ambilData();
-
-console.log("Jumlah data:", semuaData.length);
-console.log(semuaData.map(x => x.kategori));
