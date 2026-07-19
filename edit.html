@@ -164,7 +164,8 @@ Kembali
 
 </div>
 
-<script src="data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 
 <script>
 
@@ -174,40 +175,39 @@ location.href="admin-login.html";
 
 }
 
-const db =
-JSON.parse(localStorage.getItem("dataKuliner")) ||
-JSON.parse(JSON.stringify(dataKuliner));
-
 const id=
 new URLSearchParams(location.search).get("id");
 
-let item = db.makanan.find(x => x.id === id);
+const id = new URLSearchParams(location.search).get("id");
 
-let jenis = "makanan";
+let item;
 
-if(!item){
+async function loadData(){
 
-    item = db.minuman.find(x => x.id === id);
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("id", id)
+        .single();
 
-    jenis = "minuman";
+    if(error){
+        alert("Data tidak ditemukan");
+        location.href="admin.html";
+        return;
+    }
+
+    item = data;
+
+    document.getElementById("nama").value = item.nama;
+    document.getElementById("harga").value = item.harga;
+    document.getElementById("kategori").value = item.kategori;
+    document.getElementById("lokasi").value = item.lokasi;
+    document.getElementById("deskripsi").value = item.deskripsi;
+    document.getElementById("gambar").value = item.gambar;
 
 }
 
-if(!item){
-
-    item = (db.oleholeh || []).find(x => x.id === id);
-
-    jenis = "oleholeh";
-
-}
-
-if(!item){
-
-    alert("Data tidak ditemukan");
-
-    location.href="admin.html";
-
-}
+loadData();
 
 document.getElementById("nama").value=item.nama;
 document.getElementById("harga").value =
@@ -219,11 +219,36 @@ document.getElementById("deskripsi").value=item.deskripsi;
 document.getElementById("gambar").value=
 item.gambar.replace("assets/","");
 
-function updateData(){
+async function updateData(){
 
-if(document.getElementById("nama").value.trim()==""){
-    alert("Nama wajib diisi");
-    return;
+    const { error } = await db
+        .from("kuliner")
+        .update({
+
+            nama: document.getElementById("nama").value,
+
+            harga: document.getElementById("harga").value,
+
+            kategori: document.getElementById("kategori").value,
+
+            lokasi: document.getElementById("lokasi").value,
+
+            deskripsi: document.getElementById("deskripsi").value,
+
+            gambar: document.getElementById("gambar").value
+
+        })
+        .eq("id", id);
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    alert("Data berhasil diupdate");
+
+    location.href="admin.html";
+
 }
   
 item.nama=
