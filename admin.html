@@ -3,52 +3,59 @@
 
 <script>
 
-if(!sessionStorage.getItem("login")){
-    location.href="admin-login.html";
+if (!sessionStorage.getItem("login")) {
+    location.href = "admin-login.html";
 }
 
-function logout(){
+function logout() {
     sessionStorage.clear();
-    location.href="admin-login.html";
+    location.href = "admin-login.html";
 }
 
-async function tampilData(keyword=""){
+async function tampilData(keyword = "") {
 
     const { data, error } = await db
-    .from("kuliner")
-    .select("*")
-    .order("nama");
+        .from("kuliner")
+        .select("*")
+        .order("nama", { ascending: true });
 
-    if(error){
+    if (error) {
         console.log(error);
         return;
     }
 
     let semua = data;
 
-    if(keyword!=""){
+    if (keyword !== "") {
         semua = semua.filter(item =>
             item.nama.toLowerCase().includes(keyword.toLowerCase())
         );
     }
 
-    document.getElementById("totalMakanan").innerText =
-        data.filter(item => item.jenis=="makanan").length;
+    // Total Card
+    const totalMakanan = document.getElementById("totalMakanan");
+    const totalMinuman = document.getElementById("totalMinuman");
+    const totalData = document.getElementById("totalData");
 
-    document.getElementById("totalMinuman").innerText =
-        data.filter(item => item.jenis=="minuman").length;
+    if (totalMakanan)
+        totalMakanan.innerText =
+            data.filter(item => item.jenis === "makanan").length;
 
-    document.getElementById("totalData").innerText =
-        data.length;
+    if (totalMinuman)
+        totalMinuman.innerText =
+            data.filter(item => item.jenis === "minuman").length;
 
-    let html="";
+    if (totalData)
+        totalData.innerText = data.length;
 
-    semua.forEach((item,index)=>{
+    // Tabel
+    let html = "";
+
+    semua.forEach((item, index) => {
 
         html += `
         <tr>
-
-            <td>${index+1}</td>
+            <td>${index + 1}</td>
 
             <td>
                 <img
@@ -64,35 +71,32 @@ async function tampilData(keyword=""){
             <td>${item.harga}</td>
 
             <td>
-
                 <button
                     class="btnEdit"
                     onclick="location.href='edit.html?id=${item.id}'">
-
                     Edit
-
                 </button>
 
                 <button
                     class="btnHapus"
                     onclick="hapusData('${item.id}')">
-
                     Hapus
-
                 </button>
-
             </td>
-
         </tr>
         `;
 
     });
 
-    document.getElementById("tabelData").innerHTML = html;
+    const tabel = document.getElementById("tabelData");
+
+    if (tabel) {
+        tabel.innerHTML = html;
+    }
 
 }
 
-function cariData(){
+function cariData() {
 
     tampilData(
         document.getElementById("search").value
@@ -100,23 +104,24 @@ function cariData(){
 
 }
 
-async function hapusData(id){
+async function hapusData(id) {
 
-    const konfirmasi = confirm("Yakin ingin menghapus data?");
+    if (!confirm("Yakin ingin menghapus data?")) return;
 
-    if(!konfirmasi) return;
+    const { data: hasil, error } = await db
+        .from("kuliner")
+        .delete()
+        .eq("id", id)
+        .select();
 
-    const { error } = await db
-    .from("kuliner")
-    .delete()
-    .eq("id", id);
+    console.log("ID:", id);
+    console.log("Hasil:", hasil);
+    console.log("Error:", error);
 
-    if(error){
-
+    if (error) {
         alert("Gagal menghapus data");
         console.log(error);
         return;
-
     }
 
     alert("Data berhasil dihapus");
@@ -125,6 +130,8 @@ async function hapusData(id){
 
 }
 
-tampilData();
+document.addEventListener("DOMContentLoaded", function () {
+    tampilData();
+});
 
 </script>
