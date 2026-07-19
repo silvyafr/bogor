@@ -78,7 +78,7 @@ function cariKuliner() {
     const keyword = document
         .getElementById("search")
         .value
-        .toLowerCase
+        .toLowerCase()
         .trim();
 
     const hasilViral = semuaData.filter(item =>
