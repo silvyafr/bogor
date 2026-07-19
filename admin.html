@@ -264,86 +264,73 @@ function logout(){
     location.href="admin-login.html";
 }
 
-async function tampilData(keyword=""){
+async function tampilData(keyword = "") {
 
-    const { data: semua, error } = await db
-    .from("kuliner")
-    .select("*");
-    
-    if(error){
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*");
+
+    if (error) {
         console.log(error);
         return;
     }
-    
-    if(keyword!=""){
-        semua=semua.filter(item=>
-            (item.nama || "")
-            .toLowerCase()
-            .includes(keyword.toLowerCase())
+
+    let semua = data;
+
+    if (keyword != "") {
+        semua = semua.filter(item =>
+            item.nama.toLowerCase().includes(keyword.toLowerCase())
         );
     }
+
     document.getElementById("totalMakanan").innerText =
-    semua.filter(item=>item.jenis=="makanan").length;
-    
+        data.filter(item => item.jenis === "makanan").length;
+
     document.getElementById("totalMinuman").innerText =
-    semua.filter(item=>item.jenis=="minuman").length;
-    
+        data.filter(item => item.jenis === "minuman").length;
+
     document.getElementById("totalData").innerText =
-    semua.length;
-    
-    let html="";
+        data.length;
 
-    semua.forEach((item,index)=>{
+    let html = "";
 
-    html += `
-    <tr>
-    
-    <td>${index+1}</td>
-    
-    <td>
-    <img
-    class="thumb"
-    src="${item.gambar}"
-    onerror="this.src='assets/no-image.png'">
-    </td>
-    
-    <td>${item.nama}</td>
-    
-    <td>${item.kategori}</td>
-    
-    <td>${
-    String(item.harga).startsWith("Rp")
-    ? item.harga
-    : "Rp" + Number(item.harga || 0).toLocaleString("id-ID")
-    }</td>
-    
-    <td>
-    
-    <button
-    class="btnEdit"
-    onclick="location.href='edit.html?id=${item.id}'">
-    
-    Edit
-    
-    </button>
-    
-    <button
-    class="btnHapus"
-    onclick="hapusData('${item.id}')">
-    
-    Hapus
-    
-    </button>
-    
-    </td>
-    
-    </tr>
-    `;
-});
-    document.getElementById("tabelData").innerHTML=html;
+    semua.forEach((item, index) => {
 
+        html += `
+        <tr>
+            <td>${index + 1}</td>
+
+            <td>
+                <img class="thumb"
+                     src="${item.gambar}"
+                     onerror="this.src='assets/no-image.png'">
+            </td>
+
+            <td>${item.nama}</td>
+
+            <td>${item.kategori}</td>
+
+            <td>${item.harga}</td>
+
+            <td>
+                <button
+                    class="btnEdit"
+                    onclick="location.href='edit.html?id=${item.id}'">
+                    Edit
+                </button>
+
+                <button
+                    class="btnHapus"
+                    onclick="hapusData('${item.id}')">
+                    Hapus
+                </button>
+            </td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("tabelData").innerHTML = html;
 }
-
 function cariData(){
 
     tampilData(
