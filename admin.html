@@ -229,8 +229,9 @@ async function tampilData(keyword = "") {
 
     let semua = data;
 
-    if (keyword !== "") {
+    if (keyword.trim() !== "") {
         semua = semua.filter(item =>
+            item.nama &&
             item.nama.toLowerCase().includes(keyword.toLowerCase())
         );
     }
