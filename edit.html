@@ -100,8 +100,8 @@ color:white;
 <label>Kategori</label>
 
 <select id="kategori">
-<option value="Viral">Viral</option>
-<option value="Rekomendasi">Rekomendasi</option>
+<option value="🔥 Viral">🔥 Viral</option>
+<option value="⭐ Rekomendasi">⭐ Rekomendasi</option>
 </select>
 
 </div>
@@ -129,11 +129,20 @@ color:white;
 </div>
 
 <div class="form-group">
-<label>Nama File Gambar</label>
+
+<label>Upload Gambar</label>
+
 <input
-type="text"
+type="file"
 id="gambar"
-placeholder="contoh: asinanbogor.jpg">
+accept="image/*">
+
+<br><br>
+
+<img
+id="preview"
+style="max-width:220px;border-radius:10px;display:block;">
+
 </div>
 
 <div class="button-group">
@@ -200,42 +209,62 @@ document.getElementById("gambar").value =
 
 }
 
+let gambarLama = "";
+
+function readFileAsBase64(file){
+
+    return new Promise((resolve,reject)=>{
+
+        const reader = new FileReader();
+
+        reader.onload = ()=>resolve(reader.result);
+
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+    
 loadData();
 
 async function updateData(){
 
-const nama = document.getElementById("nama").value;
-const harga = document.getElementById("harga").value;
+const nama = document.getElementById("nama").value.trim();
+const harga = document.getElementById("harga").value.trim();
 const kategori = document.getElementById("kategori").value;
 const jenis = document.getElementById("jenis").value;
-const lokasi = document.getElementById("lokasi").value;
-const deskripsi = document.getElementById("deskripsi").value;
-const gambar = "assets/" + document.getElementById("gambar").value;
+const lokasi = document.getElementById("lokasi").value.trim();
+const deskripsi = document.getElementById("deskripsi").value.trim();
 
-if(nama==""){
-alert("Nama wajib diisi");
-return;
+let gambar = gambarLama;
+
+const file = document.getElementById("gambar").files[0];
+
+if(file){
+    gambar = await readFileAsBase64(file);
 }
 
 const { error } = await db
 .from("kuliner")
 .update({
 
-nama,
-harga,
-kategori,
-jenis,
-lokasi,
-deskripsi,
-gambar
+    nama,
+    harga,
+    kategori,
+    jenis,
+    lokasi,
+    deskripsi,
+    gambar
 
 })
 .eq("id", id);
 
 if(error){
-console.log(error);
-alert(error.message);
-return;
+    console.log(error);
+    alert(error.message);
+    return;
 }
 
 alert("Data berhasil diperbarui");
@@ -243,7 +272,7 @@ alert("Data berhasil diperbarui");
 location.href="admin.html";
 
 }
-
+    
 </script>
 
 </body>
