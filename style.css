@@ -25,6 +25,10 @@ body {
   line-height: 1.6;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 .navbar {
   position: sticky;
   top: 0;
@@ -107,14 +111,10 @@ transform:translateY(-2px);
 }
 
 
-.section h2 {
-  margin-bottom: 25px;
-  font-size: 26px;
-}
-
-.section h2 {
-  margin-bottom: 20px;
-  color: var(--green-main);
+.section h2{
+    font-size:26px;
+    margin-bottom:20px;
+    color:var(--green-main);
 }
 
 /* GRID */
@@ -137,10 +137,14 @@ transform:translateY(-2px);
 }
 
 
-.card:hover {
-  transform: scale(1.03);
+.card{
+    transition:.3s ease;
 }
 
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
 
 .card img {
   width: 100%;
@@ -286,26 +290,9 @@ transform:translateY(-2px);
     flex:1;
 }
 
-.item-info h2{
-    margin:10px 0 15px;
-    color:#2b2b2b;
-}
-
-.item-info p{
-    margin-bottom:12px;
-    color:#555;
-    line-height:1.8;
-}
-
 .source{
     font-size:13px;
     margin-bottom:12px;
-}
-
-
-.source {
-  font-size: 12px !important;
-  margin-bottom: 8px;
 }
 
 /* ABOUT */
@@ -515,6 +502,15 @@ margin:6px 0;
 /* HP kecil */
 @media screen and (max-width: 480px) {
 
+  .card{
+    transition:.3s ease;
+  }
+  
+  .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 18px 35px rgba(0,0,0,.12);
+  }
+  
   .hero h1 {
     font-size: 24px;
   }
@@ -530,3 +526,9 @@ margin:6px 0;
   .card h3 {
     font-size: 18px;
   }
+
+  img{
+    max-width:100%;
+    display:block;
+  }
+}
