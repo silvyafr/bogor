@@ -43,3 +43,5 @@ function simpanKeIndexedDB(data) {
     console.log("Data berhasil disimpan ke IndexedDB");
 
 }
+
+window.simpanKeIndexedDB = simpanKeIndexedDB;
