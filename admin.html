@@ -250,7 +250,8 @@ onclick="location.href='tambah.html'">
 
 </div>
     
-<script src="data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 
 <script>
 
@@ -258,24 +259,22 @@ if(!sessionStorage.getItem("login")){
     location.href="admin-login.html";
 }
 
-const db =
-JSON.parse(localStorage.getItem("dataKuliner"))
-||
-dataKuliner;
-
 function logout(){
     sessionStorage.clear();
     location.href="admin-login.html";
 }
 
-function tampilData(keyword=""){
+async function tampilData(keyword=""){
 
-    let semua=[
-    ...db.makanan,
-    ...db.minuman,
-    ...(db.oleholeh || [])
-    ];
-
+    const { data: semua, error } = await db
+    .from("kuliner")
+    .select("*");
+    
+    if(error){
+        console.log(error);
+        return;
+    }
+    
     if(keyword!=""){
         semua=semua.filter(item=>
             (item.nama || "")
@@ -283,17 +282,15 @@ function tampilData(keyword=""){
             .includes(keyword.toLowerCase())
         );
     }
-
     document.getElementById("totalMakanan").innerText =
-    (db.makanan || []).length;
+    semua.filter(item=>item.jenis=="makanan").length;
     
     document.getElementById("totalMinuman").innerText =
-    (db.minuman || []).length;
+    semua.filter(item=>item.jenis=="minuman").length;
     
     document.getElementById("totalData").innerText =
-    (db.makanan || []).length +
-    (db.minuman || []).length;
-
+    semua.length;
+    
     let html="";
 
     semua.forEach((item,index)=>{
