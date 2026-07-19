@@ -117,6 +117,7 @@ function cariKuliner() {
     renderCard(hasilRekomendasi, rekomendasiContainer);
 
 }
+
 function toggleMenu(){
 
     const menu = document.getElementById("navbarMenu");
@@ -124,5 +125,18 @@ function toggleMenu(){
     menu.classList.toggle("active");
 
 }
+
+document.querySelectorAll("#navbarMenu a").forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        document
+        .getElementById("navbarMenu")
+        .classList
+        .remove("active");
+
+    });
+
+});
 
 ambilData();
