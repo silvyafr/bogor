@@ -4,8 +4,7 @@ async function ambilData(){
 
     const { data, error } = await db
     .from("kuliner")
-    .select("*")
-    .order("nama", { ascending: true });;
+    .select("*");
 
     console.log(data);
     console.log(error);
@@ -14,9 +13,16 @@ async function ambilData(){
 
     semuaData = data;
 
+    // TAMBAHKAN BAGIAN INI
+    console.log("Semua Data:", semuaData);
+
     const viral = semuaData.filter(item => item.kategori === "Viral");
     const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
-    
+
+    console.log("Data Viral:", viral);
+    console.log("Data Rekomendasi:", rekomendasi);
+    // ====================
+
     renderCard(viral, viralContainer);
     renderCard(rekomendasi, rekomendasiContainer);
 }
