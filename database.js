@@ -45,3 +45,17 @@ function simpanKeIndexedDB(data) {
 }
 
 window.simpanKeIndexedDB = simpanKeIndexedDB;
+
+function ambilDariIndexedDB(callback) {
+
+    const transaksi = dbLocal.transaction("kuliner", "readonly");
+    const store = transaksi.objectStore("kuliner");
+
+    const request = store.getAll();
+
+    request.onsuccess = function () {
+        callback(request.result);
+    };
+
+}
+window.ambilDariIndexedDB = ambilDariIndexedDB;
