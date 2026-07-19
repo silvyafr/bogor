@@ -9,8 +9,25 @@ async function ambilData(){
     console.log(data);
     console.log(error);
 
-    if (error) return;
+    if (error) {
 
+    console.log("Offline, mengambil data dari IndexedDB");
+
+    ambilDariIndexedDB(function(dataLokal){
+
+        semuaData = dataLokal;
+
+        const viral = semuaData.filter(item => item.kategori === "Viral");
+        const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
+
+        renderCard(viral, viralContainer);
+        renderCard(rekomendasi, rekomendasiContainer);
+
+    });
+
+    return;
+}
+    
     semuaData = data;
 
     simpanKeIndexedDB(data);
