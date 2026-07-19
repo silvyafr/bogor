@@ -7,10 +7,6 @@
 
 <title>Edit Data</title>
 
-<!--
-<link rel="stylesheet" href="style.css">
--->
-
 <style>
 
 body{
@@ -45,51 +41,39 @@ font-weight:bold;
 input,
 textarea,
 select{
-
 width:100%;
 padding:12px;
 border:1px solid #ccc;
 border-radius:8px;
-
 }
 
 textarea{
-
 height:100px;
 resize:vertical;
-
 }
 
 .button-group{
-
 display:flex;
 gap:10px;
 margin-top:20px;
-
 }
 
 button{
-
 padding:12px 20px;
 border:none;
 border-radius:8px;
 cursor:pointer;
 font-weight:bold;
-
 }
 
 .update{
-
 background:#7FB77E;
 color:white;
-
 }
 
 .kembali{
-
 background:#999;
 color:white;
-
 }
 
 </style>
@@ -104,30 +88,39 @@ color:white;
 
 <div class="form-group">
 <label>Nama</label>
-<input id="nama">
+<input type="text" id="nama">
 </div>
 
 <div class="form-group">
 <label>Harga</label>
-<input id="harga">
+<input type="text" id="harga">
 </div>
 
 <div class="form-group">
 <label>Kategori</label>
 
 <select id="kategori">
+<option value="Viral">Viral</option>
+<option value="Rekomendasi">Rekomendasi</option>
+</select>
 
-<option value="viral">Viral</option>
+</div>
 
-<option value="rekomendasi">Rekomendasi</option>
+<div class="form-group">
+<label>Jenis</label>
 
+<select id="jenis">
+<option value="makanan">Makanan</option>
+<option value="minuman">Minuman</option>
+<option value="jajanan">Jajanan</option>
+<option value="oleh-oleh">Oleh-Oleh</option>
 </select>
 
 </div>
 
 <div class="form-group">
 <label>Lokasi</label>
-<input id="lokasi">
+<input type="text" id="lokasi">
 </div>
 
 <div class="form-group">
@@ -138,6 +131,7 @@ color:white;
 <div class="form-group">
 <label>Nama File Gambar</label>
 <input
+type="text"
 id="gambar"
 placeholder="contoh: asinanbogor.jpg">
 </div>
@@ -170,114 +164,75 @@ Kembali
 <script>
 
 if(!sessionStorage.getItem("login")){
-
 location.href="admin-login.html";
-
 }
-
-const id=
-new URLSearchParams(location.search).get("id");
 
 const id = new URLSearchParams(location.search).get("id");
 
-let item;
-
 async function loadData(){
 
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*")
-        .eq("id", id)
-        .single();
+const { data, error } = await db
+.from("kuliner")
+.select("*")
+.eq("id", id)
+.single();
 
-    if(error){
-        alert("Data tidak ditemukan");
-        location.href="admin.html";
-        return;
-    }
+if(error){
+alert("Data tidak ditemukan");
+location.href="admin.html";
+return;
+}
 
-    item = data;
+document.getElementById("nama").value = data.nama;
+document.getElementById("harga").value = data.harga;
+document.getElementById("kategori").value = data.kategori;
+document.getElementById("jenis").value = data.jenis;
+document.getElementById("lokasi").value = data.lokasi;
+document.getElementById("deskripsi").value = data.deskripsi;
 
-    document.getElementById("nama").value = item.nama;
-    document.getElementById("harga").value = item.harga;
-    document.getElementById("kategori").value = item.kategori;
-    document.getElementById("lokasi").value = item.lokasi;
-    document.getElementById("deskripsi").value = item.deskripsi;
-    document.getElementById("gambar").value = item.gambar;
+// hilangkan assets/
+document.getElementById("gambar").value =
+data.gambar.replace("assets/","");
 
 }
 
 loadData();
 
-document.getElementById("nama").value=item.nama;
-document.getElementById("harga").value =
-String(item.harga).replace(/[^\d]/g,"");
-document.getElementById("kategori").value=item.kategori;
-document.getElementById("lokasi").value=item.lokasi;
-document.getElementById("deskripsi").value=item.deskripsi;
-
-document.getElementById("gambar").value=
-item.gambar.replace("assets/","");
-
 async function updateData(){
 
-    const { error } = await db
-        .from("kuliner")
-        .update({
+const nama = document.getElementById("nama").value;
+const harga = document.getElementById("harga").value;
+const kategori = document.getElementById("kategori").value;
+const jenis = document.getElementById("jenis").value;
+const lokasi = document.getElementById("lokasi").value;
+const deskripsi = document.getElementById("deskripsi").value;
+const gambar = "assets/" + document.getElementById("gambar").value;
 
-            nama: document.getElementById("nama").value,
-
-            harga: document.getElementById("harga").value,
-
-            kategori: document.getElementById("kategori").value,
-
-            lokasi: document.getElementById("lokasi").value,
-
-            deskripsi: document.getElementById("deskripsi").value,
-
-            gambar: document.getElementById("gambar").value
-
-        })
-        .eq("id", id);
-
-    if(error){
-        alert(error.message);
-        return;
-    }
-
-    alert("Data berhasil diupdate");
-
-    location.href="admin.html";
-
+if(nama==""){
+alert("Nama wajib diisi");
+return;
 }
-  
-item.nama=
-document.getElementById("nama").value;
 
-item.harga =
-Number(
-document.getElementById("harga").value.replace(/\D/g,"")
-);
+const { error } = await db
+.from("kuliner")
+.update({
 
-item.kategori=
-document.getElementById("kategori").value;
+nama,
+harga,
+kategori,
+jenis,
+lokasi,
+deskripsi,
+gambar
 
-item.lokasi=
-document.getElementById("lokasi").value;
+})
+.eq("id", id);
 
-item.deskripsi=
-document.getElementById("deskripsi").value;
-
-item.gambar=
-"assets/"+document.getElementById("gambar").value;
-
-localStorage.setItem(
-
-"dataKuliner",
-
-JSON.stringify(db)
-
-);
+if(error){
+console.log(error);
+alert(error.message);
+return;
+}
 
 alert("Data berhasil diperbarui");
 
