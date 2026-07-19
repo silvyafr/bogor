@@ -98,3 +98,5 @@ function cariKuliner() {
     renderCard(hasilRekomendasi, rekomendasiContainer);
 
 }
+
+ambilData();
