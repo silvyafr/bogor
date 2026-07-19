@@ -79,7 +79,7 @@ function cariKuliner() {
         .getElementById("search")
         .value
         .toLowerCase
-        .trim();();
+        .trim();
 
     const hasilViral = semuaData.filter(item =>
         item.kategori === "Viral" &&
@@ -96,3 +96,6 @@ function cariKuliner() {
 
 }
 ambilData();
+
+console.log("Jumlah data:", semuaData.length);
+console.log(semuaData.map(x => x.kategori));
