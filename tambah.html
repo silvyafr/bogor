@@ -111,7 +111,7 @@ color:white;
 <select id="jenis">
 <option value="makanan">Makanan</option>
 <option value="minuman">Minuman</option>
-<option value="oleholeh">Oleh-Oleh</option>
+<option value="oleh-oleh">Oleh-Oleh</option>
 </select>
 </div>
 
@@ -152,7 +152,8 @@ Kembali
 
 </div>
 
-<script src="data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 
 <script>
 
@@ -160,37 +161,46 @@ if(!sessionStorage.getItem("login")){
 location.href="admin-login.html";
 }
 
-const db =
-JSON.parse(localStorage.getItem("dataKuliner")) ||
-JSON.parse(JSON.stringify(dataKuliner));
+async function simpanData(){
 
-function simpanData(){
+const nama = document.getElementById("nama").value;
+const harga = document.getElementById("harga").value;
+const kategori = document.getElementById("kategori").value;
+const jenis = document.getElementById("jenis").value;
+const lokasi = document.getElementById("lokasi").value;
+const deskripsi = document.getElementById("deskripsi").value;
+const gambar = "assets/" + document.getElementById("gambar").value;
 
-const data={
-
-id:Date.now().toString(),
-
-nama:document.getElementById("nama").value,
-
-harga: Number(document.getElementById("harga").value.replace(/\D/g,"")),
-
-kategori:document.getElementById("kategori").value,
-
-lokasi:document.getElementById("lokasi").value,
-
-deskripsi:document.getElementById("deskripsi").value,
-
-gambar:"assets/"+document.getElementById("gambar").value
-
-};
-
-let jenis=document.getElementById("jenis").value;
-
-if(data.nama==""){
-alert("Nama wajib diisi");
-return;
+if(nama==""){
+    alert("Nama wajib diisi");
+    return;
 }
 
+const { error } = await db
+.from("kuliner")
+.insert([
+{
+    nama,
+    harga,
+    kategori,
+    jenis,
+    lokasi,
+    deskripsi,
+    gambar
+}
+]);
+
+if(error){
+    console.log(error);
+    alert("Gagal menyimpan data");
+    return;
+}
+
+alert("Data berhasil ditambahkan");
+
+location.href="admin.html";
+
+}
 if(jenis=="makanan"){
 
 db.makanan.push(data);
