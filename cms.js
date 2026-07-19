@@ -62,7 +62,7 @@ async function tampilMinumanViral(){
         .from("kuliner")
         .select("*")
         .eq("jenis","minuman")
-        .eq("kategori","viral");
+        .eq("kategori","Viral");
 
     if(error){
         console.log(error);
