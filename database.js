@@ -8,9 +8,11 @@ request.onupgradeneeded = function (event) {
 
     dbLocal = event.target.result;
 
-    dbLocal.createObjectStore("kuliner", {
-        keyPath: "id"
-    });
+    if (!dbLocal.objectStoreNames.contains("kuliner")) {
+        dbLocal.createObjectStore("kuliner", {
+            keyPath: "id"
+        });
+    }
 
 };
 
