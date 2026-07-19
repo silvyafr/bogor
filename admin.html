@@ -251,16 +251,26 @@ async function tampilData(keyword = "") {
 
     // Total Card
     const totalMakanan = document.getElementById("totalMakanan");
+    const totalJajanan = document.getElementById("totalJajanan");
     const totalMinuman = document.getElementById("totalMinuman");
+    const totalOleh-oleh = document.getElementById("totalOleh-oleh")
     const totalData = document.getElementById("totalData");
 
     if (totalMakanan)
         totalMakanan.innerText =
             data.filter(item => item.jenis === "makanan").length;
-
+    
+    if (totalJajanan)
+        totalJajanan.innerText =
+            data.filter(item => item.jenis === "jajanan").length;
+    
     if (totalMinuman)
         totalMinuman.innerText =
             data.filter(item => item.jenis === "minuman").length;
+
+    if (totalOleh-oleh)
+        totalOleh-oleh.innerText =
+            data.filter(item => item.jenis === "Oleh-oleh").length;
 
     if (totalData)
         totalData.innerText = data.length;
