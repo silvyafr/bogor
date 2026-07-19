@@ -1,3 +1,5 @@
+console.log("database.js berjalan");
+
 let dbLocal;
 
 const request = indexedDB.open("KulinerBogorDB", 1);
