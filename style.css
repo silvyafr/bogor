@@ -404,3 +404,135 @@ margin:6px 0;
 .searchBox input:focus{
     border-color:#7FB77E;
 }
+
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width: 768px) {
+
+  /* Navbar */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .navbar h2 {
+    font-size: 22px;
+  }
+
+  .navbar nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .navbar a {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .adminBtn {
+    margin-left: 0;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 50px 20px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  /* Search */
+  .searchBox input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Kategori */
+  .kategori {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .kategori-card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  /* Layout halaman makanan/minuman */
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  /* Detail Kuliner */
+  .item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .item img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .item-info h2 {
+    font-size: 24px;
+  }
+
+  /* About */
+  .about {
+    width: 95%;
+    padding: 25px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 25px 15px;
+  }
+
+}
+
+/* HP kecil */
+@media screen and (max-width: 480px) {
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .section h2 {
+    font-size: 22px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .item img {
+    max-width: 100%;
+  }
+
+}
