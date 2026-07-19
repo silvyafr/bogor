@@ -4,7 +4,8 @@ async function ambilData(){
 
     const { data, error } = await db
     .from("kuliner")
-    .select("*");
+    .select("*")
+    .order("nama", { ascending: true });;
 
     console.log(data);
     console.log(error);
@@ -71,15 +72,16 @@ function cariKuliner() {
     const keyword = document
         .getElementById("search")
         .value
-        .toLowerCase();
+        .toLowerCase
+        .trim();();
 
     const hasilViral = semuaData.filter(item =>
-        item.kategori === "🔥 Viral" &&
+        item.kategori === "Viral" &&
         item.nama.toLowerCase().includes(keyword)
     );
 
     const hasilRekomendasi = semuaData.filter(item =>
-        item.kategori === "⭐ Rekomendasi" &&
+        item.kategori === "Rekomendasi" &&
         item.nama.toLowerCase().includes(keyword)
     );
 
