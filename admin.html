@@ -368,45 +368,44 @@ async function tampilData(keyword = "") {
     semua.forEach((item, index) => {
 
         html += `
-        <tr>
-            <td>${index + 1}</td>
-
-            <td>
-                <img
-                    class="thumb"
-                    src="${item.gambar}"
-                    onerror="this.src='assets/no-image.png'">
-            </td>
-
-            <td>${item.nama}</td>
-
-            <td>${item.kategori}</td>
-
-            <td>${item.harga}</td>
-
-           <td>
+            <tr>
+            
+            <td style="width:50px">${index+1}</td>
+                  
+            <td style="width:120px">
+                  <img class="thumb"
+                        src="${item.gambar}"
+                        onerror="this.src='assets/no-image.png'">
+        </td>
+        
+        <td style="width:170px">${item.nama}</td>
+        
+        <td style="width:120px">${item.kategori}</td>
+        
+        <td style="width:150px">${item.harga}</td>
+        
+        <td style="width:320px">
             ${
-            item.deskripsi.length > 70
-            ? item.deskripsi.substring(0,70)+"..."
-            : item.deskripsi
+                item.deskripsi.length > 70
+                ? item.deskripsi.substring(0,70) + "..."
+                : item.deskripsi
             }
-            </td>
-
-                <button
-                    class="btnEdit"
-                    onclick="location.href='edit.html?id=${item.id}'">
-                    Edit
-                </button>
-
-                <button
-                    class="btnHapus"
-                    onclick="hapusData('${item.id}')">
-                    Hapus
-                </button>
-            </td>
+        </td>
+        
+        <td style="width:110px">
+            <button class="btnEdit"
+                onclick="location.href='edit.html?id=${item.id}'">
+                Edit
+            </button>
+        
+            <button class="btnHapus"
+                onclick="hapusData('${item.id}')">
+                Hapus
+            </button>
+        </td>
+        
         </tr>
         `;
-
     });
 
     const tabel = document.getElementById("tabelData");
