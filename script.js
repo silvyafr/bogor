@@ -12,6 +12,8 @@ async function ambilData(){
     if (error) return;
 
     semuaData = data;
+
+    simpanKeIndexedDB(data);
     
     console.log("Jumlah data:", semuaData.length);
     console.log(semuaData.map(x => x.kategori));
