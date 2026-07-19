@@ -171,15 +171,19 @@ const id = new URLSearchParams(location.search).get("id");
 
 async function loadData(){
 
+console.log("ID dari URL =", id);
+
 const { data, error } = await db
 .from("kuliner")
 .select("*")
 .eq("id", id)
 .single();
 
+console.log("DATA =", data);
+console.log("ERROR =", error);
+
 if(error){
 alert("Data tidak ditemukan");
-location.href="admin.html";
 return;
 }
 
@@ -192,7 +196,7 @@ document.getElementById("deskripsi").value = data.deskripsi;
 
 // hilangkan assets/
 document.getElementById("gambar").value =
-data.gambar.replace("assets/","");
+    data.gambar.replace("assets/","");
 
 }
 
