@@ -191,7 +191,7 @@ async function simpanData(){
     .from("kuliner")
     .insert([
     {
-        id: Date.now().toString(),
+        id: crypto.randomUUID(),
         nama,
         harga,
         kategori,
