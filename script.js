@@ -118,25 +118,4 @@ function cariKuliner() {
 
 }
 
-function toggleMenu(){
-
-    const menu = document.getElementById("navbarMenu");
-
-    menu.classList.toggle("active");
-
-}
-
-document.querySelectorAll("#navbarMenu a").forEach(link=>{
-
-    link.addEventListener("click",()=>{
-
-        document
-        .getElementById("navbarMenu")
-        .classList
-        .remove("active");
-
-    });
-
-});
-
 ambilData();
