@@ -1,12 +1,15 @@
-const CACHE_NAME = "kuliner-bogor-v1";
+const CACHE_NAME = "kuliner-bogor-v2";
 
 const urlsToCache = [
   "./",
   "./index.html",
   "./style.css",
   "./script.js",
+  "./database.js",
   "./supabase.js",
   "./manifest.json"
+  "./assets/icon-192.png",
+  "./assets/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
