@@ -13,8 +13,8 @@ async function ambilData(){
 
     semuaData = data;
 
-    const viral = semuaData.filter(item => item.kategori === "🔥 Viral");
-    const rekomendasi = semuaData.filter(item => item.kategori === "⭐ Rekomendasi");
+    const viral = semuaData.filter(item => item.kategori === "viral");
+    const rekomendasi = semuaData.filter(item => item.kategori === "rekomendasi");
     
     renderCard(viral, viralContainer);
     renderCard(rekomendasi, rekomendasiContainer);
