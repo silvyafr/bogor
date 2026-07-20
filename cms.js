@@ -1,5 +1,40 @@
 function buatItem(item){
 
+    async function ambilData(jenis, kategori = null) {
+
+    // Kalau online
+    if (navigator.onLine) {
+
+        let query = db
+            .from("kuliner")
+            .select("*")
+            .eq("jenis", jenis);
+
+        if (kategori) {
+            query = query.eq("kategori", kategori);
+        }
+
+        const { data, error } = await query;
+
+        if (!error) {
+            simpanOffline(data);
+            return data;
+        }
+
+    }
+
+    // Kalau offline
+    let data = await bacaOffline();
+
+    data = data.filter(item => item.jenis === jenis);
+
+    if (kategori) {
+        data = data.filter(item => item.kategori === kategori);
+    }
+
+    return data;
+}
+
     return `
     <section class="item">
 
@@ -26,23 +61,15 @@ function buatItem(item){
 
 
 // UNTUK MAKANAN, MINUMAN, JAJANAN, OLEH-OLEH
-async function tampilKategori(jenis,id){
+async function tampilKategori(jenis, id){
 
     const container = document.getElementById(id);
 
     if(!container) return;
 
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*")
-        .eq("jenis", jenis);
+    const data = await ambilData(jenis);
 
-    if(error){
-        console.log(error);
-        return;
-    }
-
-    container.innerHTML="";
+    container.innerHTML = "";
 
     data.forEach(item=>{
         container.innerHTML += buatItem(item);
@@ -58,27 +85,15 @@ async function tampilMinumanViral(){
 
     if(!container) return;
 
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*")
-        .eq("jenis","minuman")
-        .eq("kategori","Viral");
+    const data = await ambilData("minuman", "Viral");
 
-    if(error){
-        console.log(error);
-        return;
-    }
-
-    console.table(data);
-
-    container.innerHTML="";
+    container.innerHTML = "";
 
     data.forEach(item=>{
         container.innerHTML += buatItem(item);
     });
 
 }
-
 
 document.addEventListener("DOMContentLoaded",()=>{
 
