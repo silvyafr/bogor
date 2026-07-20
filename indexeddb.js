@@ -1,7 +1,5 @@
-// Nama database
 let dbOffline;
 
-// Buka / buat database
 const request = indexedDB.open("BogorDB", 1);
 
 request.onupgradeneeded = function (event) {
@@ -22,7 +20,7 @@ request.onsuccess = function (event) {
 
     dbOffline = event.target.result;
 
-    console.log("IndexedDB berhasil dibuka");
+    console.log("IndexedDB siap.");
 
 };
 
@@ -32,14 +30,12 @@ request.onerror = function () {
 
 };
 
-// Simpan semua data ke IndexedDB
+// Simpan data (tidak menghapus data lama)
 function simpanOffline(data) {
 
     const transaksi = dbOffline.transaction("kuliner", "readwrite");
 
     const store = transaksi.objectStore("kuliner");
-
-    store.clear();
 
     data.forEach(item => {
         store.put(item);
@@ -47,7 +43,7 @@ function simpanOffline(data) {
 
 }
 
-// Ambil semua data dari IndexedDB
+// Ambil semua data
 function bacaOffline() {
 
     return new Promise((resolve, reject) => {
