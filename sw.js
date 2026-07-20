@@ -1,4 +1,4 @@
-cconst CACHE_NAME = "bogor-pwa-v3";
+const CACHE_NAME = "bogor-pwa-v3";
 
 const urlsToCache = [
 
