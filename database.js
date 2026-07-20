@@ -30,32 +30,59 @@ request.onerror = function () {
 
 };
 
-function simpanKeIndexedDB(data) {
+// ======================
+// SIMPAN DATA
+// ======================
 
-    const transaksi = dbLocal.transaction("kuliner", "readwrite");
+function simpanKeIndexedDB(data){
+
+    if(!dbLocal) return;
+
+    const transaksi = dbLocal.transaction("kuliner","readwrite");
 
     const store = transaksi.objectStore("kuliner");
 
-    data.forEach(item => {
+    // hapus data lama supaya tidak dobel
+    store.clear();
+
+    data.forEach(item=>{
         store.put(item);
     });
 
-    console.log("Data berhasil disimpan ke IndexedDB");
+    transaksi.oncomplete = function(){
+        console.log("Data berhasil disimpan ke IndexedDB");
+    };
 
 }
 
 window.simpanKeIndexedDB = simpanKeIndexedDB;
 
-function ambilDariIndexedDB(callback) {
 
-    const transaksi = dbLocal.transaction("kuliner", "readonly");
+// ======================
+// AMBIL DATA
+// ======================
+
+function ambilDariIndexedDB(callback){
+
+    if(!dbLocal){
+        callback([]);
+        return;
+    }
+
+    const transaksi = dbLocal.transaction("kuliner","readonly");
+
     const store = transaksi.objectStore("kuliner");
 
-    const request = store.getAll();
+    const req = store.getAll();
 
-    request.onsuccess = function () {
-        callback(request.result);
+    req.onsuccess = function(){
+        callback(req.result);
+    };
+
+    req.onerror = function(){
+        callback([]);
     };
 
 }
+
 window.ambilDariIndexedDB = ambilDariIndexedDB;
