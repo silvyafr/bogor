@@ -52,16 +52,16 @@ body{
 
 .toolbar{
     display:flex;
-    justify-content:space-between;
     align-items:center;
     gap:15px;
     margin:20px 0;
 }
 
 .toolbar input{
-    flex:1;
+    width:100%;
+    max-width:700px;
     height:45px;
-    padding:0 25px;
+    padding:0 20px;
     border:1px solid #ddd;
     border-radius:10px;
     font-size:15px;
@@ -75,9 +75,10 @@ button{
     font-weight:bold;
 }
 
-.btnTambah{
+btnTambah{
     background:#7FB77E;
     color:white;
+    white-space:nowrap;
 }
 
 .btnEdit{
