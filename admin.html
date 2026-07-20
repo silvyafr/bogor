@@ -80,6 +80,7 @@ button{
     background:#7FB77E;
     color:white;
     white-space:nowrap;
+    flex-shrink:0;
 }
 
 .btnEdit{
@@ -132,7 +133,7 @@ td{
     border-radius:10px;
 }
 
-@media(max-width:768px){
+@media (max-width:768px){
 
 .header{
     flex-direction:column;
@@ -169,38 +170,18 @@ td{
 .btnTambah{
     width:100%;
 }
-    
+
 .btnEdit,
 .btnHapus{
-    width:100%;
-}
     width:100%;
     margin-bottom:6px;
 }
 
-    .header{
-        flex-direction:column;
-        text-align:center;
-        gap:15px;
-        padding:25px 15px;
-    }
+.container{
+    width:95%;
+}
 
-    .toolbar{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .toolbar input{
-        width:100%;
-    }
-
-    .toolbar button{
-        width:100%;
-    }
-
-    .container{
-        width:95%;
-    }
+}
 
     .cardBox{
         grid-template-columns:repeat(2,1fr);
