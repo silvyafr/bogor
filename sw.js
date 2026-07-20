@@ -1,4 +1,4 @@
-const CACHE_NAME = "bogor-pwa-v2";
+cconst CACHE_NAME = "bogor-pwa-v3";
 
 const urlsToCache = [
 
@@ -16,8 +16,9 @@ const urlsToCache = [
     "edit.html",
 
     "style.css",
+    "script.js",
     "cms.js",
-    "indexeddb.js",
+    "database.js",
     "supabase.js",
 
     "manifest.json",
