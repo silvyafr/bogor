@@ -1,8 +1,9 @@
-function buatItem(item){
+// =========================
+// Ambil Data (Online / Offline)
+// =========================
+async function ambilData(jenis, kategori = null) {
 
-    async function ambilData(jenis, kategori = null) {
-
-    // Kalau online
+    // ONLINE
     if (navigator.onLine) {
 
         let query = db
@@ -17,23 +18,36 @@ function buatItem(item){
         const { data, error } = await query;
 
         if (!error) {
-            simpanOffline(data);
+            simpanKeIndexedDB(data);
             return data;
         }
 
     }
 
-    // Kalau offline
-    let data = await bacaOffline();
+    // OFFLINE
+    return new Promise(resolve => {
 
-    data = data.filter(item => item.jenis === jenis);
+        ambilDariIndexedDB(function(data){
 
-    if (kategori) {
-        data = data.filter(item => item.kategori === kategori);
-    }
+            let hasil = data.filter(item => item.jenis === jenis);
 
-    return data;
+            if(kategori){
+                hasil = hasil.filter(item => item.kategori === kategori);
+            }
+
+            resolve(hasil);
+
+        });
+
+    });
+
 }
+
+
+// =========================
+// Membuat Card
+// =========================
+function buatItem(item){
 
     return `
     <section class="item">
@@ -60,8 +74,10 @@ function buatItem(item){
 }
 
 
-// UNTUK MAKANAN, MINUMAN, JAJANAN, OLEH-OLEH
-async function tampilKategori(jenis, id){
+// =========================
+// Halaman Kategori
+// =========================
+async function tampilKategori(jenis,id){
 
     const container = document.getElementById(id);
 
@@ -69,7 +85,7 @@ async function tampilKategori(jenis, id){
 
     const data = await ambilData(jenis);
 
-    container.innerHTML = "";
+    container.innerHTML="";
 
     data.forEach(item=>{
         container.innerHTML += buatItem(item);
@@ -78,16 +94,18 @@ async function tampilKategori(jenis, id){
 }
 
 
-// KHUSUS MINUMAN VIRAL
+// =========================
+// Minuman Viral
+// =========================
 async function tampilMinumanViral(){
 
     const container = document.getElementById("minumanviralContainer");
 
     if(!container) return;
 
-    const data = await ambilData("minuman", "Viral");
+    const data = await ambilData("minuman","Viral");
 
-    container.innerHTML = "";
+    container.innerHTML="";
 
     data.forEach(item=>{
         container.innerHTML += buatItem(item);
@@ -95,6 +113,10 @@ async function tampilMinumanViral(){
 
 }
 
+
+// =========================
+// Jalankan
+// =========================
 document.addEventListener("DOMContentLoaded",()=>{
 
     tampilKategori("makanan","makananContainer");
