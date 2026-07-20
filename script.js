@@ -2,51 +2,56 @@ let semuaData = [];
 
 async function ambilData(){
 
-    const { data, error } = await db
+    if(!navigator.onLine){
+
+        console.log("Mode Offline");
+
+        ambilDariIndexedDB(function(data){
+
+            semuaData = data;
+
+            const viral = semuaData.filter(item=>item.kategori==="Viral");
+            const rekomendasi = semuaData.filter(item=>item.kategori==="Rekomendasi");
+
+            renderCard(viral,viralContainer);
+            renderCard(rekomendasi,rekomendasiContainer);
+
+        });
+
+        return;
+    }
+
+    const {data,error}=await db
     .from("kuliner")
     .select("*");
 
-    console.log(data);
-    console.log(error);
+    if(error){
 
-    if (error) {
+        ambilDariIndexedDB(function(data){
 
-    console.log("Offline, mengambil data dari IndexedDB");
+            semuaData=data;
 
-    ambilDariIndexedDB(function(dataLokal){
+            const viral=semuaData.filter(item=>item.kategori==="Viral");
+            const rekomendasi=semuaData.filter(item=>item.kategori==="Rekomendasi");
 
-        semuaData = dataLokal;
+            renderCard(viral,viralContainer);
+            renderCard(rekomendasi,rekomendasiContainer);
 
-        const viral = semuaData.filter(item => item.kategori === "Viral");
-        const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
+        });
 
-        renderCard(viral, viralContainer);
-        renderCard(rekomendasi, rekomendasiContainer);
+        return;
+    }
 
-    });
-
-    return;
-}
-    
-    semuaData = data;
+    semuaData=data;
 
     simpanKeIndexedDB(data);
-    
-    console.log("Jumlah data:", semuaData.length);
-    console.log(semuaData.map(x => x.kategori));
 
-    // TAMBAHKAN BAGIAN INI
-    console.log("Semua Data:", semuaData);
+    const viral=semuaData.filter(item=>item.kategori==="Viral");
+    const rekomendasi=semuaData.filter(item=>item.kategori==="Rekomendasi");
 
-    const viral = semuaData.filter(item => item.kategori === "Viral");
-    const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
+    renderCard(viral,viralContainer);
+    renderCard(rekomendasi,rekomendasiContainer);
 
-    console.log("Data Viral:", viral);
-    console.log("Data Rekomendasi:", rekomendasi);
-    // ====================
-
-    renderCard(viral, viralContainer);
-    renderCard(rekomendasi, rekomendasiContainer);
 }
 
 // Container
@@ -118,4 +123,4 @@ function cariKuliner() {
 
 }
 
-ambilData();
+window.ambilData = ambilData;
