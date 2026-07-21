@@ -124,3 +124,4 @@ function cariKuliner() {
 }
 
 window.ambilData = ambilData;
+ambilData();
