@@ -97,32 +97,35 @@ self.addEventListener("fetch", event => {
 
         caches.match(event.request)
 
-            .then(response => {
+        .then(response => {
 
-                return response || fetch(event.request)
+            if(response){
+                return response;
+            }
 
-                    .then(networkResponse => {
+            return fetch(event.request)
+            .then(networkResponse=>{
 
-                        if (
-                            event.request.method === "GET" &&
-                            networkResponse.status === 200
-                        ) {
+                if(
+                    event.request.method==="GET" &&
+                    networkResponse.status===200
+                ){
 
-                            const clone = networkResponse.clone();
+                    const clone=networkResponse.clone();
 
-                            caches.open(CACHE_NAME)
-                                .then(cache => cache.put(event.request, clone));
+                    caches.open(CACHE_NAME)
+                    .then(cache=>cache.put(event.request,clone));
 
-                        }
+                }
 
-                        return networkResponse;
+                return networkResponse;
 
-                    })
+            });
 
-                    .catch(() => caches.match("index.html"));
-
-            })
+        })
 
     );
+
+});
 
 });
