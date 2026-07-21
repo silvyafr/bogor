@@ -20,13 +20,33 @@ const urlsToCache = [
     "./assets/icon-192.png",
     "./assets/icon-512.png",
     
-    "./assets/abongulung.jpeg",
     "./assets/asinanbogor.jpg",
     "./assets/bajigur.jfif",
     "./assets/bandrek.jpg",
     "./assets/belahdoeren.jpg",
     "./assets/bir-pletok-bogor.jpg",
-    
+    "./assets/birkotjok.jpeg",
+    "./assets/combro.jpg",
+    "./assets/cungkring.jpg",
+    "./assets/dodolpala.jpg",
+    "./assets/durengoreng.jpeg",
+    "./assets/eslidahbuaya.jfif",
+    "./assets/espalabogor.jpeg",
+    "./assets/glosor.jpg",
+    "./assets/keripiktalas.jfif",
+    "./assets/laksa.jpeg",
+    "./assets/lapisbogor.jpg",
+    "./assets/manisanpala.jfif",
+    "./assets/martabakairmancur.jpg",
+    "./assets/nasitutug.jpg",
+    "./assets/pietalas.jfif",
+    "./assets/pisangaroma.jfif",
+    "./assets/rotiunyil.jpg",
+    "./assets/soto_kuning.jpg",
+    "./assets/sotomiebogor.jpg",
+    "./assets/talasbogor.jpg",
+    "./assets/toge-goreng-bogor.jpg",
+    "./assets/ulenbakar.jfif"
 
 ];
 
