@@ -96,42 +96,6 @@ self.addEventListener("fetch", event => {
     event.respondWith(
 
         caches.match(event.request)
-
-        .then(response => {
-
-            if(response){
-                return response;
-            }
-
-            return fetch(event.request)
-            .then(networkResponse=>{
-
-                if(
-                    event.request.method==="GET" &&
-                    networkResponse.status===200
-                ){
-
-                    const clone=networkResponse.clone();
-
-                    caches.open(CACHE_NAME)
-                    .then(cache=>cache.put(event.request,clone));
-
-                }
-
-                return networkResponse;
-
-            });
-
-        })
-
-    );
-
-});
-self.addEventListener("fetch", event => {
-
-    event.respondWith(
-
-        caches.match(event.request)
         .then(response => {
 
             // kalau ada di cache langsung tampilkan
