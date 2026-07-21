@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     tampilKategori("jajanan","jajananContainer");
 
-    tampilKategori("oleh-ole","oleholehContainer");
+    tampilKategori("oleh-oleh","oleholehContainer");
 
     tampilMinumanViral();
 
