@@ -24,10 +24,10 @@ request.onsuccess = function (event) {
 
     console.log("IndexedDB siap");
 
-    // kalau fungsi ambilData sudah ada langsung jalankan
-    if (window.ambilData) {
-        window.ambilData();
-    }
+    request.onsuccess = function (event) {
+    dbLocal = event.target.result;
+    console.log("IndexedDB siap");
+    };
 
 };
 
