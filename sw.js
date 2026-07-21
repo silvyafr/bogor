@@ -47,7 +47,6 @@ const urlsToCache = [
     "./assets/talasbogor.jpg",
     "./assets/toge-goreng-bogor.jpg",
     "./assets/ulenbakar.jfif"
-
 ];
 
 // Install
