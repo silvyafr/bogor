@@ -1,52 +1,3 @@
-// =========================
-// Ambil Data (Online / Offline)
-// =========================
-async function ambilData(jenis, kategori = null) {
-
-    // ONLINE
-    if (navigator.onLine) {
-
-        let query = db
-            .from("kuliner")
-            .select("*")
-            .eq("jenis", jenis);
-
-        if (kategori) {
-            query = query.eq("kategori", kategori);
-        }
-
-        const { data, error } = await query;
-
-        if (!error) {
-            simpanKeIndexedDB(data);
-            return data;
-        }
-
-    }
-
-    // OFFLINE
-    return new Promise(resolve => {
-
-        ambilDariIndexedDB(function(data){
-
-            let hasil = data.filter(item => item.jenis === jenis);
-
-            if(kategori){
-                hasil = hasil.filter(item => item.kategori === kategori);
-            }
-
-            resolve(hasil);
-
-        });
-
-    });
-
-}
-
-
-// =========================
-// Membuat Card
-// =========================
 function buatItem(item){
 
     return `
@@ -74,16 +25,22 @@ function buatItem(item){
 }
 
 
-// =========================
-// Halaman Kategori
-// =========================
+// UNTUK MAKANAN, MINUMAN, JAJANAN, OLEH-OLEH
 async function tampilKategori(jenis,id){
 
     const container = document.getElementById(id);
 
     if(!container) return;
 
-    const data = await ambilData(jenis);
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("jenis", jenis);
+
+    if(error){
+        console.log(error);
+        return;
+    }
 
     container.innerHTML="";
 
@@ -94,16 +51,25 @@ async function tampilKategori(jenis,id){
 }
 
 
-// =========================
-// Minuman Viral
-// =========================
+// KHUSUS MINUMAN VIRAL
 async function tampilMinumanViral(){
 
     const container = document.getElementById("minumanviralContainer");
 
     if(!container) return;
 
-    const data = await ambilData("minuman","Viral");
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("jenis","minuman")
+        .eq("kategori","Viral");
+
+    if(error){
+        console.log(error);
+        return;
+    }
+
+    console.table(data);
 
     container.innerHTML="";
 
@@ -114,9 +80,6 @@ async function tampilMinumanViral(){
 }
 
 
-// =========================
-// Jalankan
-// =========================
 document.addEventListener("DOMContentLoaded",()=>{
 
     tampilKategori("makanan","makananContainer");
