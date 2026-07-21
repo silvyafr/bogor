@@ -9,47 +9,53 @@ request.onupgradeneeded = function (event) {
     dbLocal = event.target.result;
 
     if (!dbLocal.objectStoreNames.contains("kuliner")) {
-
         dbLocal.createObjectStore("kuliner", {
             keyPath: "id"
         });
-
     }
 
 };
 
 request.onsuccess = function (event) {
+
     dbLocal = event.target.result;
-    console.log("IndexedDB siap");
+
+    console.log("IndexedDB berhasil dibuat");
+
 };
 
 request.onerror = function () {
-    console.log("IndexedDB gagal");
+
+    console.log("IndexedDB gagal dibuat");
+
 };
 
-function simpanKeIndexedDB(data){
+function simpanKeIndexedDB(data) {
 
-    const tx = dbLocal.transaction("kuliner","readwrite");
-    const store = tx.objectStore("kuliner");
+    const transaksi = dbLocal.transaction("kuliner", "readwrite");
 
-    data.forEach(item=>{
+    const store = transaksi.objectStore("kuliner");
+
+    data.forEach(item => {
         store.put(item);
     });
 
-}
-
-function ambilDariIndexedDB(callback){
-
-    const tx = dbLocal.transaction("kuliner","readonly");
-    const store = tx.objectStore("kuliner");
-
-    const req = store.getAll();
-
-    req.onsuccess = function(){
-        callback(req.result);
-    };
+    console.log("Data berhasil disimpan ke IndexedDB");
 
 }
 
 window.simpanKeIndexedDB = simpanKeIndexedDB;
+
+function ambilDariIndexedDB(callback) {
+
+    const transaksi = dbLocal.transaction("kuliner", "readonly");
+    const store = transaksi.objectStore("kuliner");
+
+    const request = store.getAll();
+
+    request.onsuccess = function () {
+        callback(request.result);
+    };
+
+}
 window.ambilDariIndexedDB = ambilDariIndexedDB;
