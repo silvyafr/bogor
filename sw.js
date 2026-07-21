@@ -2,29 +2,31 @@ const CACHE_NAME = "bogor-pwa-v3";
 
 const urlsToCache = [
 
-    "/",
-    "index.html",
-
-    "makanan-khas.html",
-    "minuman-khas.html",
-    "minuman-viral.html",
-    "oleh-oleh.html",
-
-    "admin.html",
-    "admin-login.html",
-    "tambah.html",
-    "edit.html",
-
-    "style.css",
-    "script.js",
-    "cms.js",
-    "database.js",
-    "supabase.js",
-
-    "manifest.json",
-
-    "assets/icon-192.png",
-    "assets/icon-512.png"
+    "./",
+    "./index.html",
+    "./makanan-khas.html",
+    "./minuman-khas.html",
+    "./oleh-oleh.html",
+    "./detail.html",
+    "./admin-login.html",
+    
+    "./style.css",
+    "./script.js",
+    "./database.js",
+    "./supabase.js",
+    
+    "./manifest.json",
+    
+    "./assets/icon-192.png",
+    "./assets/icon-512.png",
+    
+    "./assets/abongulung.jpeg",
+    "./assets/asinanbogor.jpg",
+    "./assets/bajigur.jfif",
+    "./assets/bandrek.jpg",
+    "./assets/belahdoeren.jpg",
+    "./assets/bir-pletok-bogor.jpg",
+    
 
 ];
 
