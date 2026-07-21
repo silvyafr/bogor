@@ -14,6 +14,8 @@ const urlsToCache = [
     "./script.js",
     "./database.js",
     "./supabase.js",
+
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
     
     "./manifest.json",
     
