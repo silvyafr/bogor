@@ -1,9 +1,11 @@
-const SUPABASE_URL = "https://sdgpibwpqrhvkopxozmd.supabase.co";
-const SUPABASE_KEY = "sb_publishable_QJ13_u75jazZa6LGCaaAZA_85TjtQ16";
+if (window.supabase) {
+    const SUPABASE_URL = "https://sdgpibwpqrhvkopxozmd.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_QJ13_u75jazZa6LGCaaAZA_85TjtQ16";
+    
+    const db = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-window.db = db;
+    window.db = db;
+}
