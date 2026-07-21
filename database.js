@@ -19,16 +19,8 @@ request.onupgradeneeded = function (event) {
 };
 
 request.onsuccess = function (event) {
-
-    dbLocal = event.target.result;
-
-    console.log("IndexedDB siap");
-
-    request.onsuccess = function (event) {
     dbLocal = event.target.result;
     console.log("IndexedDB siap");
-    };
-
 };
 
 request.onerror = function () {
