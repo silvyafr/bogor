@@ -127,3 +127,51 @@ self.addEventListener("fetch", event => {
     );
 
 });
+self.addEventListener("fetch", event => {
+
+    event.respondWith(
+
+        caches.match(event.request)
+        .then(response => {
+
+            // kalau ada di cache langsung tampilkan
+            if (response) {
+                return response;
+            }
+
+            // kalau online ambil dari internet
+            return fetch(event.request)
+            .then(networkResponse => {
+
+                if (
+                    event.request.method === "GET" &&
+                    networkResponse.status === 200
+                ) {
+
+                    const clone = networkResponse.clone();
+
+                    caches.open(CACHE_NAME)
+                    .then(cache => {
+                        cache.put(event.request, clone);
+                    });
+
+                }
+
+                return networkResponse;
+
+            })
+
+            // <<< INI YANG PENTING
+            .catch(() => {
+
+                if (event.request.mode === "navigate") {
+                    return caches.match("./index.html");
+                }
+
+            });
+
+        })
+
+    );
+
+});
