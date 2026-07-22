@@ -4,76 +4,90 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Data Kuliner</title>
 
-<title>Edit Data</title>
+<!-- Link Manifest PWA -->
+<link rel="manifest" href="./manifest.json">
 
 <style>
 
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f4f6f9;
+    font-family:'Montserrat', Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:0;
 }
 
 .container{
-max-width:700px;
-margin:40px auto;
-background:white;
-padding:30px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 h2{
-margin-bottom:20px;
-color:#7FB77E;
+    margin-bottom:20px;
+    color:#7FB77E;
 }
 
 .form-group{
-margin-bottom:18px;
+    margin-bottom:18px;
 }
 
 label{
-display:block;
-margin-bottom:8px;
-font-weight:bold;
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
 }
 
 input,
 textarea,
 select{
-width:100%;
-padding:12px;
-border:1px solid #ccc;
-border-radius:8px;
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
 }
 
 textarea{
-height:100px;
-resize:vertical;
+    height:100px;
+    resize:vertical;
 }
 
 .button-group{
-display:flex;
-gap:10px;
-margin-top:20px;
+    display:flex;
+    gap:10px;
+    margin-top:20px;
 }
 
 button{
-padding:12px 20px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
 }
 
 .update{
-background:#7FB77E;
-color:white;
+    background:#7FB77E;
+    color:white;
+}
+
+.update:hover{
+    background:#6ca26b;
 }
 
 .kembali{
-background:#999;
-color:white;
+    background:#999;
+    color:white;
+}
+
+.kembali:hover{
+    background:#777;
 }
 
 </style>
@@ -87,83 +101,54 @@ color:white;
 <h2>Edit Data Kuliner</h2>
 
 <div class="form-group">
-<label>Nama</label>
-<input type="text" id="nama">
+    <label>Nama</label>
+    <input type="text" id="nama" placeholder="Masukkan nama kuliner">
 </div>
 
 <div class="form-group">
-<label>Harga</label>
-<input type="text" id="harga">
+    <label>Harga</label>
+    <input type="text" id="harga" placeholder="Contoh: Rp 15.000">
 </div>
 
 <div class="form-group">
-<label>Kategori</label>
-
-<select id="kategori">
-    <option value="">-- Tidak Ada Kategori --</option>
-    <option value="Viral">Viral</option>
-    <option value="Rekomendasi">Rekomendasi</option>
-</select>
-
+    <label>Kategori</label>
+    <select id="kategori">
+        <option value="">-- Tidak Ada Kategori --</option>
+        <option value="Viral">Viral</option>
+        <option value="Rekomendasi">Rekomendasi</option>
+    </select>
 </div>
 
 <div class="form-group">
-<label>Jenis</label>
-
-<select id="jenis">
-<option value="makanan">Makanan</option>
-<option value="minuman">Minuman</option>
-<option value="jajanan">Jajanan</option>
-<option value="oleh-oleh">Oleh-Oleh</option>
-</select>
-
+    <label>Jenis</label>
+    <select id="jenis">
+        <option value="makanan">Makanan</option>
+        <option value="minuman">Minuman</option>
+        <option value="jajanan">Jajanan</option>
+        <option value="oleh-oleh">Oleh-Oleh</option>
+    </select>
 </div>
 
 <div class="form-group">
-<label>Lokasi</label>
-<input type="text" id="lokasi">
+    <label>Lokasi</label>
+    <input type="text" id="lokasi" placeholder="Masukkan lokasi/alamat">
 </div>
 
 <div class="form-group">
-<label>Deskripsi</label>
-<textarea id="deskripsi"></textarea>
+    <label>Deskripsi</label>
+    <textarea id="deskripsi" placeholder="Masukkan deskripsi kuliner"></textarea>
 </div>
 
 <div class="form-group">
-
-<label>Upload Gambar</label>
-
-<input
-type="file"
-id="gambar"
-accept="image/*">
-
-<br><br>
-
-<img
-id="preview"
-style="max-width:220px;border-radius:10px;display:block;">
-
+    <label>Upload Gambar (Biarkan kosong jika tidak ingin diubah)</label>
+    <input type="file" id="gambar" accept="image/*">
+    <br><br>
+    <img id="preview" src="assets/no-image.png" style="max-width:220px; border-radius:10px; display:block;" onerror="this.onerror=null; this.src='assets/no-image.png';">
 </div>
 
 <div class="button-group">
-
-<button
-class="update"
-onclick="updateData()">
-
-Update
-
-</button>
-
-<button
-class="kembali"
-onclick="location.href='admin.html'">
-
-Kembali
-
-</button>
-
+    <button class="update" id="btnUpdate" onclick="updateData()">Update</button>
+    <button class="kembali" onclick="location.href='admin.html'">Kembali</button>
 </div>
 
 </div>
@@ -173,122 +158,136 @@ Kembali
 
 <script>
 
+// Cek status login session
 if(!sessionStorage.getItem("login")){
-location.href="admin-login.html";
+    location.href="admin-login.html";
 }
 
 const id = new URLSearchParams(location.search).get("id");
 
-async function loadData(){
-
-console.log("ID dari URL =", id);
-
-const { data, error } = await db
-.from("kuliner")
-.select("*")
-.eq("id", id)
-.single();
-
-console.log("DATA =", data);
-console.log("ERROR =", error);
-
-if(error){
-alert("Data tidak ditemukan");
-return;
-}
-
-document.getElementById("nama").value = data.nama;
-document.getElementById("harga").value = data.harga;
-document.getElementById("kategori").value = data.kategori;
-document.getElementById("jenis").value = data.jenis;
-document.getElementById("lokasi").value = data.lokasi;
-document.getElementById("deskripsi").value = data.deskripsi;
-
-// simpan gambar lama
-gambarLama = data.gambar;
-
-// tampilkan preview
-document.getElementById("preview").src = data.gambar;
-
+if(!id){
+    alert("ID data tidak ditemukan!");
+    location.href="admin.html";
 }
 
 let gambarLama = "";
 
-document.getElementById("gambar").addEventListener("change", function(){
+// Load Data Kuliner
+async function loadData(){
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("id", id)
+        .single();
 
-    const file = this.files[0];
-
-    if(file){
-
-        document.getElementById("preview").src =
-            URL.createObjectURL(file);
-
+    if(error || !data){
+        alert("Gagal memuat data dari database!");
+        console.error(error);
+        location.href="admin.html";
+        return;
     }
 
+    document.getElementById("nama").value = data.nama || "";
+    document.getElementById("harga").value = data.harga || "";
+    document.getElementById("kategori").value = data.kategori || "";
+    document.getElementById("jenis").value = data.jenis || "makanan";
+    document.getElementById("lokasi").value = data.lokasi || "";
+    document.getElementById("deskripsi").value = data.deskripsi || "";
+
+    // Simpan data gambar lama
+    gambarLama = data.gambar || "";
+
+    // Tampilkan preview gambar
+    if(data.gambar){
+        document.getElementById("preview").src = data.gambar;
+    }
+}
+
+// Handler Preview Gambar Baru saat Diupload
+document.getElementById("gambar").addEventListener("change", function(){
+    const file = this.files[0];
+    if(file){
+        document.getElementById("preview").src = URL.createObjectURL(file);
+    }
 });
 
+// Helper Convert File ke Base64
 function readFileAsBase64(file){
-
-    return new Promise((resolve,reject)=>{
-
+    return new Promise((resolve, reject) => {
         const reader = new FileReader();
-
-        reader.onload = ()=>resolve(reader.result);
-
+        reader.onload = () => resolve(reader.result);
         reader.onerror = reject;
-
         reader.readAsDataURL(file);
-
     });
-
 }
+
+// Function Update Data
+async function updateData(){
+    const btnUpdate = document.getElementById("btnUpdate");
     
+    const nama = document.getElementById("nama").value.trim();
+    const harga = document.getElementById("harga").value.trim();
+    const kategori = document.getElementById("kategori").value;
+    const jenis = document.getElementById("jenis").value;
+    const lokasi = document.getElementById("lokasi").value.trim();
+    const deskripsi = document.getElementById("deskripsi").value.trim();
+
+    if(!nama){
+        alert("Nama kuliner tidak boleh kosong!");
+        return;
+    }
+
+    btnUpdate.disabled = true;
+    btnUpdate.innerText = "Memproses...";
+
+    try {
+        let gambar = gambarLama;
+        const file = document.getElementById("gambar").files[0];
+
+        if(file){
+            gambar = await readFileAsBase64(file);
+        }
+
+        const { error } = await db
+            .from("kuliner")
+            .update({
+                nama,
+                harga,
+                kategori,
+                jenis,
+                lokasi,
+                deskripsi,
+                gambar
+            })
+            .eq("id", id);
+
+        if(error){
+            throw error;
+        }
+
+        alert("Data berhasil diperbarui!");
+        location.href="admin.html";
+
+    } catch (err) {
+        console.error("Gagal update data:", err);
+        alert("Gagal memperbarui data: " + err.message);
+        btnUpdate.disabled = false;
+        btnUpdate.innerText = "Update";
+    }
+}
+
+// Jalankan Load Data
 loadData();
 
-async function updateData(){
-
-const nama = document.getElementById("nama").value.trim();
-const harga = document.getElementById("harga").value.trim();
-const kategori = document.getElementById("kategori").value;
-const jenis = document.getElementById("jenis").value;
-const lokasi = document.getElementById("lokasi").value.trim();
-const deskripsi = document.getElementById("deskripsi").value.trim();
-
-let gambar = gambarLama;
-
-const file = document.getElementById("gambar").files[0];
-
-if(file){
-    gambar = await readFileAsBase64(file);
+// Registrasi Service Worker PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((reg) => console.log('Service Worker berhasil terdaftar:', reg.scope))
+            .catch((err) => console.error('Pendaftaran Service Worker gagal:', err));
+    });
 }
 
-const { error } = await db
-.from("kuliner")
-.update({
-
-    nama,
-    harga,
-    kategori,
-    jenis,
-    lokasi,
-    deskripsi,
-    gambar
-
-})
-.eq("id", id);
-
-if(error){
-    console.log(error);
-    alert(error.message);
-    return;
-}
-
-alert("Data berhasil diperbarui");
-
-location.href="admin.html";
-
-}
-    
 </script>
 
 </body>
