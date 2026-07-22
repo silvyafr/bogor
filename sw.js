@@ -116,10 +116,13 @@ self.addEventListener("fetch", event => {
                 return response;
             }
 
-            // kalau online ambil dari internet
+
+            // ambil dari internet
             return fetch(event.request)
             .then(networkResponse => {
 
+
+                // simpan request GET ke cache
                 if (
                     event.request.method === "GET" &&
                     networkResponse.status === 200
@@ -129,28 +132,36 @@ self.addEventListener("fetch", event => {
 
                     caches.open(CACHE_NAME)
                     .then(cache => {
+
                         cache.put(event.request, clone);
+
                     });
 
                 }
+
 
                 return networkResponse;
 
             })
 
-       
+
             .catch(() => {
 
+                // kalau buka halaman saat offline
                 if (event.request.mode === "navigate") {
+
                     return caches.match("./index.html");
+
                 }
-                
+
+
                 return new Response("", {
-                    status: 404,
-                    statusText: "Offline"
+                    status:404,
+                    statusText:"Offline"
                 });
 
             });
+
 
         })
 
