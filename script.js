@@ -2,51 +2,54 @@ let semuaData = [];
 
 async function ambilData(){
 
+    // ==========================
+    // OFFLINE
+    // ==========================
+    if (!navigator.onLine){
+
+        console.log("Mode Offline");
+
+        ambilDariIndexedDB(function(dataLokal){
+
+            semuaData = dataLokal || [];
+
+            console.log("Data Offline:", semuaData);
+
+            const viral = semuaData.filter(item => item.kategori === "Viral");
+            const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
+
+            renderCard(viral, viralContainer);
+            renderCard(rekomendasi, rekomendasiContainer);
+
+        });
+
+        return;
+    }
+
+    // ==========================
+    // ONLINE
+    // ==========================
     const { data, error } = await db
-    .from("kuliner")
-    .select("*");
+        .from("kuliner")
+        .select("*");
 
-    console.log(data);
-    console.log(error);
+    if(error){
+        console.log(error);
+        return;
+    }
 
-    if (error) {
+    semuaData = data || [];
 
-    console.log("Offline, mengambil data dari IndexedDB");
+    simpanKeIndexedDB(semuaData);
 
-    ambilDariIndexedDB(function(dataLokal){
-
-        semuaData = dataLokal;
-
-        const viral = semuaData.filter(item => item.kategori === "Viral");
-        const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
-
-        renderCard(viral, viralContainer);
-        renderCard(rekomendasi, rekomendasiContainer);
-
-    });
-
-    return;
-}
-    
-    semuaData = data;
-
-    simpanKeIndexedDB(data);
-    
     console.log("Jumlah data:", semuaData.length);
-    console.log(semuaData.map(x => x.kategori));
-
-    // TAMBAHKAN BAGIAN INI
-    console.log("Semua Data:", semuaData);
 
     const viral = semuaData.filter(item => item.kategori === "Viral");
     const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
 
-    console.log("Data Viral:", viral);
-    console.log("Data Rekomendasi:", rekomendasi);
-    // ====================
-
     renderCard(viral, viralContainer);
     renderCard(rekomendasi, rekomendasiContainer);
+
 }
 
 // Container
