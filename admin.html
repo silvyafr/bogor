@@ -83,15 +83,25 @@ button{
     flex-shrink:0;
 }
 
+.btnEdit,
+.btnHapus{
+    width:110px;
+    height:44px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    display:block;
+    margin:0 auto 8px;
+}
+
 .btnEdit{
     background:#3498db;
-    color:white;
-    margin-bottom:5px;
 }
 
 .btnHapus{
     background:#e74c3c;
-    color:white;
 }
 
 .btnLogout{
@@ -133,6 +143,34 @@ td{
     border-radius:10px;
 }
 
+.headerButton{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.btnUser{
+    background:#ffffff;
+    color:#7FB77E;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btnUser:hover{
+    background:#f1f1f1;
+}
+
+.btnLogout{
+    background:#555;
+    color:white;
+    padding:12px 20px;
+    border-radius:8px;
+}
+
 @media (max-width:768px){
 
 .header{
@@ -156,15 +194,13 @@ td{
     font-size:24px;
 }
 
-@media (max-width:768px){
+.toolbar{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
 
-    .toolbar{
-        display:flex;
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .toolbar input,
+.toolbar input,
     .btnTambah{
         width:100%;
         box-sizing:border-box;
@@ -182,12 +218,26 @@ td{
     width:95%;
 }
 
-}
-
-    .cardBox{
+.cardBox{
         grid-template-columns:repeat(2,1fr);
     }
 
+.headerButton{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .btnUser:hover{
+        background:#f1f1f1;
+    }
+    
+    .btnLogout{
+        background:#555;
+        color:white;
+        padding:12px 20px;
+        border-radius:8px;
+    }
 }
 
 </style>
@@ -198,14 +248,24 @@ td{
 
 <div class="header">
 
-<div>
-<h1>Dashboard Admin</h1>
-<p>Kelola seluruh data kuliner khas Bogor</p>
-</div>
+    <div>
+        <h1>Dashboard Admin</h1>
+        <p>Kelola seluruh data kuliner khas Bogor</p>
+    </div>
 
-<button class="btnLogout" onclick="logout()">
-Logout
-</button>
+    <div class="headerButton">
+
+        <button class="btnUser"
+            onclick="window.open('index.html','_blank')">
+            Dashboard User
+        </button>
+
+        <button class="btnLogout"
+            onclick="logout()">
+            Logout
+        </button>
+
+    </div>
 
 </div>
 
