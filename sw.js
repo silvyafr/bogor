@@ -1,4 +1,4 @@
-const CACHE_NAME = "bogor-pwa-v3";
+const CACHE_NAME="bogor-pwa-v4";
 
 const urlsToCache = [
 
@@ -125,12 +125,17 @@ self.addEventListener("fetch", event => {
 
             })
 
-            // <<< INI YANG PENTING
+       
             .catch(() => {
 
                 if (event.request.mode === "navigate") {
                     return caches.match("./index.html");
                 }
+                
+                return new Response("", {
+                    status: 404,
+                    statusText: "Offline"
+                });
 
             });
 
