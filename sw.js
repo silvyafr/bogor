@@ -1,29 +1,36 @@
-const CACHE_NAME="bogor-pwa-v5";
+const CACHE_NAME="bogor-pwa-v6";
 
 const urlsToCache = [
-    "./",
-    "./index.html",
-    "./makanan-khas.html",
-    "./minuman-khas.html",
-    "./oleh-oleh.html",
-    "./detail.html",
-    "./admin-login.html",
+  "./",
+  "./index.html",
 
-    "./style.css",
-    "./script.js",
-    "./database.js",
-    "./supabase.js",
+  "./admin-login.html",
+  "./admin.html",
+  "./detail.html",
+  "./edit.html",
+  "./tambah.html",
 
-    "./manifest.json",
+  "./makanan-khas.html",
+  "./minuman-khas.html",
+  "./jajanan-tradisional.html",
+  "./minuman-viral.html",
+  "./oleh-oleh.html",
+
+  "./style.css",
+
+  "./script.js",
+  "./database.js",
+  "./supabase.js",
+
+  "./manifest.json",
+
+  "./assets/icon-192.png",
+  "./assets/icon-512.png"
 
     // FONT
     "./assets/fonts/Montserrat-Regular.ttf",
     "./assets/fonts/Montserrat-Light.ttf",
     "./assets/fonts/Montserrat-SemiBold.ttf",
-
-    // ICON
-    "./assets/icon-192.png",
-    "./assets/icon-512.png",
 
     // GAMBAR
     "./assets/asinanbogor.jpg",
