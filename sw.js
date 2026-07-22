@@ -1,7 +1,6 @@
-const CACHE_NAME="bogor-pwa-v4";
+const CACHE_NAME="bogor-pwa-v5";
 
 const urlsToCache = [
-
     "./",
     "./index.html",
     "./makanan-khas.html",
@@ -9,17 +8,24 @@ const urlsToCache = [
     "./oleh-oleh.html",
     "./detail.html",
     "./admin-login.html",
-    
+
     "./style.css",
     "./script.js",
     "./database.js",
     "./supabase.js",
-    
+
     "./manifest.json",
-    
+
+    // FONT
+    "./assets/fonts/Montserrat-Regular.ttf",
+    "./assets/fonts/Montserrat-Light.ttf",
+    "./assets/fonts/Montserrat-SemiBold.ttf",
+
+    // ICON
     "./assets/icon-192.png",
     "./assets/icon-512.png",
-    
+
+    // GAMBAR
     "./assets/asinanbogor.jpg",
     "./assets/bajigur.jfif",
     "./assets/bandrek.jpg",
