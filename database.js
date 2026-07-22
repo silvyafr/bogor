@@ -51,14 +51,33 @@ window.simpanKeIndexedDB = simpanKeIndexedDB;
 
 function ambilDariIndexedDB(callback) {
 
+    if (!dbLocal) {
+        console.log("Database belum siap");
+        callback([]);
+        return;
+    }
+
     const transaksi = dbLocal.transaction("kuliner", "readonly");
     const store = transaksi.objectStore("kuliner");
 
     const request = store.getAll();
 
     request.onsuccess = function () {
-        callback(request.result);
+
+        console.log("Isi IndexedDB:", request.result);
+
+        callback(request.result || []);
+
+    };
+
+    request.onerror = function () {
+
+        console.log("Gagal membaca IndexedDB");
+
+        callback([]);
+
     };
 
 }
+
 window.ambilDariIndexedDB = ambilDariIndexedDB;
