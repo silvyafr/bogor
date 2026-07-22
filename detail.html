@@ -1,10 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Kuliner</title>
+    
+    <!-- Link Manifest PWA -->
+    <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,28 +20,28 @@
 
 <main class="detail-container">
 
-    <img id="gambar" src="" alt="" class="detail-img">
+    <img id="gambar" src="assets/no-image.png" alt="Loading gambar..." class="detail-img" loading="lazy" onerror="this.onerror=null; this.src='assets/no-image.png';">
 
-    <h1 id="nama"></h1>
+    <h1 id="nama">Memuat...</h1>
 
     <table class="detail-table">
         <tr>
             <td><b>Kategori</b></td>
-            <td id="kategori"></td>
+            <td id="kategori">-</td>
         </tr>
         <tr>
             <td><b>Harga</b></td>
-            <td id="harga"></td>
+            <td id="harga">-</td>
         </tr>
         <tr>
             <td><b>Lokasi</b></td>
-            <td id="lokasi"></td>
+            <td id="lokasi">-</td>
         </tr>
     </table>
 
     <h3>Deskripsi</h3>
 
-    <p id="deskripsi"></p>
+    <p id="deskripsi">Memuat deskripsi...</p>
 
     <br>
 
@@ -52,37 +54,54 @@
 
 <script>
 async function loadDetail() {
-
+    // Ambil parameter ID dari URL
     const id = new URLSearchParams(window.location.search).get("id");
 
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*")
-        .eq("id", id)
-        .single();
-
-    if (error || !data) {
-        alert("Data tidak ditemukan!");
+    if (!id) {
+        alert("ID Kuliner tidak valid!");
         window.location.href = "index.html";
         return;
     }
 
-    document.getElementById("gambar").src = data.gambar;
-    document.getElementById("gambar").alt = data.nama;
+    try {
+        const { data, error } = await db
+            .from("kuliner")
+            .select("*")
+            .eq("id", id)
+            .single();
 
-    document.getElementById("nama").textContent = data.nama;
+        if (error || !data) {
+            console.error("Error mengambil data detail:", error);
+            alert("Data tidak ditemukan atau jaringan offline!");
+            window.location.href = "index.html";
+            return;
+        }
 
-    document.getElementById("kategori").textContent = data.kategori;
+        // Tampilkan Data ke HTML
+        const imgElement = document.getElementById("gambar");
+        imgElement.src = data.gambar || "assets/no-image.png";
+        imgElement.alt = data.nama || "Detail Kuliner";
 
-    document.getElementById("harga").textContent = data.harga;
+        document.getElementById("nama").textContent = data.nama || "-";
+        document.getElementById("kategori").textContent = data.kategori || "-";
+        document.getElementById("harga").textContent = data.harga || "-";
+        document.getElementById("lokasi").textContent = data.lokasi || "-";
+        document.getElementById("deskripsi").textContent = data.deskripsi || "Tidak ada deskripsi.";
 
-    document.getElementById("lokasi").textContent = data.lokasi;
-
-    document.getElementById("deskripsi").textContent = data.deskripsi;
+    } catch (err) {
+        console.error("Gagal memuat detail:", err);
+    }
 }
 
-loadDetail();
-</script>
+document.addEventListener("DOMContentLoaded", loadDetail);
+
+// Pendaftaran Service Worker untuk PWA Offline
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((reg) => console.log('Service Worker berhasil terdaftar:', reg.scope))
+            .catch((err) => console.error('Pendaftaran Service Worker gagal:', err));
+    });
 }
 </script>
 
