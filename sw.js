@@ -1,177 +1,117 @@
-const CACHE_NAME="bogor-pwa-v6";
+const CACHE_NAME = "bogor-pwa-v7"; // Naikkan versi cache
 
-const urlsToCache = [
+// Cukup cache aset-aset KRUSIAL saja di awal agar instalasi CEPAT dan TIDAK GAGAL
+const STATIC_ASSETS = [
   "./",
   "./index.html",
-
   "./admin-login.html",
   "./admin.html",
   "./detail.html",
   "./edit.html",
   "./tambah.html",
-
   "./makanan-khas.html",
   "./minuman-khas.html",
   "./jajanan-tradisional.html",
   "./minuman-viral.html",
   "./oleh-oleh.html",
-
   "./style.css",
-
   "./script.js",
   "./database.js",
   "./supabase.js",
-
   "./manifest.json",
-
   "./assets/icon-192.png",
-  "./assets/icon-512.png"
-
-    // FONT
-    "./assets/fonts/Montserrat-Regular.ttf",
-    "./assets/fonts/Montserrat-Light.ttf",
-    "./assets/fonts/Montserrat-SemiBold.ttf",
-
-    // GAMBAR
-    "./assets/asinanbogor.jpg",
-    "./assets/bajigur.jfif",
-    "./assets/bandrek.jpg",
-    "./assets/belahdoeren.jpg",
-    "./assets/bir-pletok-bogor.jpg",
-    "./assets/birkotjok.jpeg",
-    "./assets/combro.jpg",
-    "./assets/cungkring.jpg",
-    "./assets/dodolpala.jpg",
-    "./assets/durengoreng.jpeg",
-    "./assets/eslidahbuaya.jfif",
-    "./assets/espalabogor.jpeg",
-    "./assets/glosor.jpg",
-    "./assets/keripiktalas.jfif",
-    "./assets/laksa.jpeg",
-    "./assets/lapisbogor.jpg",
-    "./assets/manisanpala.jfif",
-    "./assets/martabakairmancur.jpg",
-    "./assets/nasitutug.jpg",
-    "./assets/pietalas.jfif",
-    "./assets/pisangaroma.jfif",
-    "./assets/rotiunyil.jpg",
-    "./assets/soto_kuning.jpg",
-    "./assets/sotomiebogor.jpg",
-    "./assets/talasbogor.jpg",
-    "./assets/toge-goreng-bogor.jpg",
-    "./assets/ulenbakar.jfif"
+  "./assets/icon-512.png",
+  "./assets/fonts/Montserrat-Regular.ttf",
+  "./assets/fonts/Montserrat-Light.ttf",
+  "./assets/fonts/Montserrat-SemiBold.ttf"
 ];
 
-// Install
-self.addEventListener("install", event => {
-
-    event.waitUntil(
-
-        caches.open(CACHE_NAME)
-        .then(cache => {
-
-            return cache.addAll(urlsToCache);
-
-        })
-        .catch(err => {
-            console.log("CACHE ERROR:", err);
-        })
-
-    );
-
-    self.skipWaiting();
-
+// 1. Install Event
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        console.log("[SW] Caching static assets...");
+        return cache.addAll(STATIC_ASSETS);
+      })
+      .catch((err) => {
+        console.error("[SW] Pre-cache failed:", err);
+      })
+  );
+  self.skipWaiting();
 });
 
-// Activate
-self.addEventListener("activate", event => {
-
-    event.waitUntil(
-
-        caches.keys().then(keys =>
-
-            Promise.all(
-
-                keys.map(key => {
-
-                    if (key !== CACHE_NAME) {
-                        return caches.delete(key);
-                    }
-
-                })
-
-            )
-
-        )
-
-    );
-
-    self.clients.claim();
-
+// 2. Activate Event (Pembersihan Cache Lama)
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            console.log("[SW] Deleting old cache:", key);
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
 });
 
-// Fetch
-self.addEventListener("fetch", event => {
+// 3. Fetch Event
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+  const url = new URL(req.url);
 
-    event.respondWith(
+  // ABAIKAN request non-HTTP/HTTPS (seperti chrome-extension://)
+  // dan ABAIKAN request ke API Supabase agar data database selalu fresh
+  if (
+    !req.url.startsWith("http") ||
+    url.hostname.includes("supabase.co") ||
+    req.method !== "GET"
+  ) {
+    return;
+  }
 
-        caches.match(event.request)
-        .then(response => {
+  event.respondWith(
+    caches.match(req).then((cachedResponse) => {
+      // Jika ada di cache, gunakan dari cache
+      if (cachedResponse) {
+        return cachedResponse;
+      }
 
-            // kalau ada di cache langsung tampilkan
-            if (response) {
-                return response;
-            }
+      // Jika tidak ada di cache, ambil dari jaringan
+      return fetch(req)
+        .then((networkResponse) => {
+          // Validasi respon sebelum disimpan ke cache
+          if (
+            !networkResponse ||
+            networkResponse.status !== 200 ||
+            networkResponse.type !== "basic"
+          ) {
+            return networkResponse;
+          }
 
+          // Simpan secara dinamis (seperti gambar-gambar yang baru dibuka)
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(req, responseToCache);
+          });
 
-            // ambil dari internet
-            return fetch(event.request)
-            .then(networkResponse => {
-
-
-                // simpan request GET ke cache
-                if (
-                    event.request.method === "GET" &&
-                    networkResponse.status === 200
-                ) {
-
-                    const clone = networkResponse.clone();
-
-                    caches.open(CACHE_NAME)
-                    .then(cache => {
-
-                        cache.put(event.request, clone);
-
-                    });
-
-                }
-
-
-                return networkResponse;
-
-            })
-
-
-            .catch(() => {
-
-                // kalau buka halaman saat offline
-                if (event.request.mode === "navigate") {
-
-                    return caches.match("./index.html");
-
-                }
-
-
-                return new Response("", {
-                    status:404,
-                    statusText:"Offline"
-                });
-
-            });
-
-
+          return networkResponse;
         })
+        .catch(() => {
+          // Fallback saat offline dan membuka halaman navigasi
+          if (req.mode === "navigate") {
+            return caches.match("./index.html");
+          }
 
-    );
-
+          return new Response("Offline", {
+            status: 503,
+            statusText: "Service Unavailable",
+          });
+        });
+    })
+  );
 });
