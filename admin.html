@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard Admin</title>
 
+<!-- Link Manifest PWA -->
+<link rel="manifest" href="./manifest.json">
+
 <style>
 
 body{
     margin:0;
     background:#f5f7fb;
-    font-family:'Montserrat',sans-serif;
+    font-family:'Montserrat', sans-serif;
 }
 
 .header{
@@ -326,11 +329,14 @@ onclick="location.href='tambah.html'">
 
 </div>
 
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 
 <script>
 
+// Cek Login Session
 if (!sessionStorage.getItem("login")) {
     location.href = "admin-login.html";
 }
@@ -348,11 +354,11 @@ async function tampilData(keyword = "") {
         .order("nama", { ascending: true });
 
     if (error) {
-        console.log(error);
+        console.error("Gagal mengambil data:", error);
         return;
     }
 
-    let semua = data;
+    let semua = data || [];
 
     if (keyword.trim() !== "") {
         semua = semua.filter(item =>
@@ -361,7 +367,7 @@ async function tampilData(keyword = "") {
         );
     }
 
-    // Total Card
+    // Update Total Card Dashboard
     const totalMakanan = document.getElementById("totalMakanan");
     const totalJajanan = document.getElementById("totalJajanan");
     const totalMinuman = document.getElementById("totalMinuman");
@@ -369,72 +375,56 @@ async function tampilData(keyword = "") {
     const totalData = document.getElementById("totalData");
         
     if (totalMakanan)
-        totalMakanan.innerText =
-            data.filter(item => item.jenis === "makanan").length;
+        totalMakanan.innerText = data.filter(item => item.jenis === "makanan").length;
     
     if (totalJajanan)
-        totalJajanan.innerText =
-            data.filter(item => item.jenis === "jajanan").length;
+        totalJajanan.innerText = data.filter(item => item.jenis === "jajanan").length;
     
     if (totalMinuman)
-        totalMinuman.innerText =
-            data.filter(item => item.jenis === "minuman").length;
+        totalMinuman.innerText = data.filter(item => item.jenis === "minuman").length;
     
     if (totalOlehOleh)
-        totalOlehOleh.innerText =
-            data.filter(item => item.jenis === "oleh-oleh").length;
+        totalOlehOleh.innerText = data.filter(item => item.jenis === "oleh-oleh").length;
     
     if (totalData)
         totalData.innerText = data.length;
 
-    // Tabel
+    // Render Tabel
     let html = "";
 
-    semua.forEach((item, index) => {
+    if (semua.length === 0) {
+        html = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#888;">Data tidak ditemukan.</td></tr>`;
+    } else {
+        semua.forEach((item, index) => {
+            const deskripsiTeks = item.deskripsi || "";
+            const deskripsiPotong = deskripsiTeks.length > 70 
+                ? deskripsiTeks.substring(0, 70) + "..." 
+                : deskripsiTeks;
 
-        html += `
-            <tr>
-            
-            <td style="width:50px">${index+1}</td>
-                  
-            <td style="width:120px">
-                  <img class="thumb"
-                        src="${item.gambar}"
-                        onerror="this.src='assets/no-image.png'">
-        </td>
-        
-        <td style="width:170px">${item.nama}</td>
-        
-        <td style="width:120px">${item.kategori}</td>
-        
-        <td style="width:150px">${item.harga}</td>
-        
-        <td style="width:320px">
-            ${
-                item.deskripsi.length > 70
-                ? item.deskripsi.substring(0,70) + "..."
-                : item.deskripsi
-            }
-        </td>
-        
-        <td style="width:110px">
-            <button class="btnEdit"
-                onclick="location.href='edit.html?id=${item.id}'">
-                Edit
-            </button>
-        
-            <button class="btnHapus"
-                onclick="hapusData('${item.id}')">
-                Hapus
-            </button>
-        </td>
-        
-        </tr>
-        `;
-    });
+            html += `
+                <tr>
+                    <td style="width:50px">${index + 1}</td>
+                    <td style="width:120px">
+                        <img class="thumb"
+                            src="${item.gambar || 'assets/no-image.png'}"
+                            alt="${item.nama || 'gambar'}"
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='assets/no-image.png';">
+                    </td>
+                    <td style="width:170px">${item.nama || '-'}</td>
+                    <td style="width:120px">${item.kategori || '-'}</td>
+                    <td style="width:150px">${item.harga || '-'}</td>
+                    <td style="width:320px">${deskripsiPotong}</td>
+                    <td style="width:110px">
+                        <button class="btnEdit" onclick="location.href='edit.html?id=${item.id}'">Edit</button>
+                        <button class="btnHapus" onclick="hapusData('${item.id}')">Hapus</button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
 
     const tabel = document.getElementById("tabelData");
-
     if (tabel) {
         tabel.innerHTML = html;
     }
@@ -442,35 +432,27 @@ async function tampilData(keyword = "") {
 }
 
 function cariData() {
-
     tampilData(
         document.getElementById("search").value
     );
-
 }
 
 async function hapusData(id) {
 
-    if (!confirm("Yakin ingin menghapus data?")) return;
+    if (!confirm("Yakin ingin menghapus data ini?")) return;
 
-    const { data: hasil, error } = await db
+    const { error } = await db
         .from("kuliner")
         .delete()
-        .eq("id", id)
-        .select();
-
-    console.log("ID:", id);
-    console.log("Hasil:", hasil);
-    console.log("Error:", error);
+        .eq("id", id);
 
     if (error) {
-        alert("Gagal menghapus data");
-        console.log(error);
+        alert("Gagal menghapus data!");
+        console.error("Error Hapus:", error);
         return;
     }
 
-    alert("Data berhasil dihapus");
-
+    alert("Data berhasil dihapus!");
     tampilData();
 
 }
@@ -478,6 +460,15 @@ async function hapusData(id) {
 document.addEventListener("DOMContentLoaded", function () {
     tampilData();
 });
+
+// Registrasi Service Worker PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((reg) => console.log('Service Worker berhasil terdaftar:', reg.scope))
+            .catch((err) => console.error('Pendaftaran Service Worker gagal:', err));
+    });
+}
 
 </script>
     
