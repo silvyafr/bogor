@@ -1,9 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Minuman Khas Bogor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minuman Khas Bogor - Bogor Bites</title>
+
+  <!-- Meta PWA & Tema -->
+  <meta name="theme-color" content="#7FB77E">
+  <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,35 +18,46 @@
     <a href="index.html">Home</a>
     <a href="makanan-khas.html">Makanan</a>
     <a href="minuman-khas.html">Minuman</a>
-    <a href="oleh-oleh.html">Oleh Oleh</a>
-    <a href="admin-login.html" class="adminBtn">
-      Admin Login
-    </a>
+    <a href="oleh-oleh.html">Oleh-Oleh</a>
+    <a href="admin-login.html" class="adminBtn">Admin Login</a>
   </nav>
 </header>
 
 <div class="layout">
 
-<aside class="sidebar">
-  <h3>Kategori</h3>
-  <ul>
-    <li><a href="minuman-khas.html">🧋 Minuman Khas</a></li>
-    <li><a href="minuman-viral.html">🧋 Minuman Viral</a></li>
-  </ul>
-</aside>
+  <aside class="sidebar">
+    <h3>Kategori</h3>
+    <ul>
+      <li><a href="minuman-khas.html" class="active">🧋 Minuman Khas</a></li>
+      <li><a href="minuman-viral.html">🧋 Minuman Viral</a></li>
+    </ul>
+  </aside>
 
-<main class="content">
+  <main class="content">
+    <h1>🧋 Minuman Khas Bogor</h1>
 
-<h1>🧋 Minuman Khas Bogor</h1>
+    <div id="minumanContainer" class="container">
+      <p style="color: #777;">Memuat data minuman...</p>
+    </div>
+  </main>
 
-<div id="minumanContainer"></div>
-  
-</main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<!-- DEPENDENCIES & SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 <script src="cms.js"></script>
-  
+
+<!-- SERVICE WORKER REGISTRATION -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then((reg) => console.log("Service Worker berhasil didaftarkan:", reg.scope))
+      .catch((err) => console.error("Service Worker gagal didaftarkan:", err));
+  });
+}
+</script>
+
 </body>
 </html>
