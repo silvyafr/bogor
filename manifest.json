@@ -1,19 +1,14 @@
 {
-  "name": "Kuliner Bogor",
-  "short_name": "KulBog",
-  "start_url": "index.html",
+  "name": "Bogor Bites",
+  "short_name": "BogorBites",
+  "start_url": "/admin.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#7FB77E",
   "icons": [
     {
-      "src": "assets/icon-192.png",
+      "src": "/assets/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/icon-512.png",
-      "sizes": "512x512",
       "type": "image/png"
     }
   ]
