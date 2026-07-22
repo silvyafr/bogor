@@ -30,13 +30,16 @@ request.onerror = function () {
 
 };
 
-function simpanKeIndexedDB(data) {
+function simpanKeIndexedDB(data){
 
-    const transaksi = dbLocal.transaction("kuliner", "readwrite");
+    if(!data || data.length === 0){
+        return;
+    }
 
-    const store = transaksi.objectStore("kuliner");
+    const tx = dbLocal.transaction("kuliner","readwrite");
+    const store = tx.objectStore("kuliner");
 
-    data.forEach(item => {
+    data.forEach(item=>{
         store.put(item);
     });
 
