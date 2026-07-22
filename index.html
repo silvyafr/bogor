@@ -1,12 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuliner Bogor</title>
+  <title>Kuliner Bogor - Rekomendasi Jajanan Khas Kota Hujan</title>
+
+  <!-- Meta PWA & Tema -->
+  <meta name="theme-color" content="#7FB77E">
+  <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -16,10 +18,8 @@
     <a href="index.html">Home</a>
     <a href="makanan-khas.html">Makanan</a>
     <a href="minuman-khas.html">Minuman</a>
-    <a href="oleh-oleh.html">Oleh Oleh</a>
-    <a href="admin-login.html" class="adminBtn">
-      Admin Login
-    </a>
+    <a href="oleh-oleh.html">Oleh-Oleh</a>
+    <a href="admin-login.html" class="adminBtn">Admin Login</a>
   </nav>
 </header>
 
@@ -33,24 +33,29 @@
   </div>
 </section>
 
+<!-- SEARCH BOX -->
 <div class="searchBox">
-    <input
-        type="text"
-        id="search"
-        placeholder="Cari kuliner..."
-        onkeyup="cariKuliner()">
+  <input
+    type="text"
+    id="search"
+    placeholder="Cari kuliner..."
+    onkeyup="cariKuliner()">
 </div>
 
 <!-- 🔥 VIRAL -->
 <section class="section" id="viral">
   <h2>🔥 Lagi Viral</h2>
-  <div class="container" id="viral-container"></div>
+  <div class="container" id="viral-container">
+    <!-- Diisi secara dinamis oleh script.js -->
+  </div>
 </section>
 
 <!-- ⭐ REKOMENDASI -->
 <section class="section">
   <h2>⭐ Rekomendasi Pilihan</h2>
-  <div class="container" id="rekomendasi-container"></div>
+  <div class="container" id="rekomendasi-container">
+    <!-- Diisi secara dinamis oleh script.js -->
+  </div>
 </section>
 
 <!-- 🍜 KATEGORI -->
@@ -65,7 +70,7 @@
     <p>Lihat semua minuman khas Bogor</p>
   </div>
 
-    <div class="kategori-card" onclick="location.href='oleh-oleh.html'">
+  <div class="kategori-card" onclick="location.href='oleh-oleh.html'">
     <h3>🎁 Oleh-Oleh</h3>
     <p>Lihat semua oleh-oleh khas Bogor</p>
   </div>
@@ -75,35 +80,31 @@
 <section class="section about">
   <h2>Tentang Website</h2>
   <p>
-    Website ini dibuat untuk membantu kamu menemukan berbagai makanan, minuman dan oleh-oleh khas Bogor terbaik,
+    Website ini dibuat untuk membantu kamu menemukan berbagai makanan, minuman, dan oleh-oleh khas Bogor terbaik,
     mulai dari yang viral hingga yang wajib dicoba saat berkunjung ke kota hujan.
   </p>
 </section>
 
 <footer>
-
-<h3>Kuliner Khas Bogor</h3>
-
-<p>
-Website rekomendasi kuliner khas Bogor.
-</p>
-
-<p>
-© 2026 Kuliner Khas Bogor
-</p>
-
+  <h3>Kuliner Khas Bogor</h3>
+  <p>Website rekomendasi kuliner khas Bogor.</p>
+  <p>© 2026 Kuliner Khas Bogor</p>
 </footer>
 
+<!-- DEPENDENCIES & SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 <script src="database.js"></script>
 <script src="script.js"></script>
 
+<!-- SERVICE WORKER REGISTRATION -->
 <script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js")
-    .then(() => console.log("Service Worker berhasil didaftarkan"))
-    .catch(err => console.log("Service Worker gagal:", err));
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then((reg) => console.log("Service Worker berhasil didaftarkan dengan scope:", reg.scope))
+      .catch((err) => console.error("Service Worker gagal didaftarkan:", err));
+  });
 }
 </script>
 
