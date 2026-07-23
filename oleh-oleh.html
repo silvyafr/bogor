@@ -2,12 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oleh-Oleh Khas Bogor - Bogor Bites</title>
-
-  <!-- Meta PWA & Tema -->
-  <meta name="theme-color" content="#7FB77E">
-  <link rel="manifest" href="./manifest.json">
+  <title>Oleh-Oleh</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,36 +13,24 @@
     <a href="index.html">Home</a>
     <a href="makanan-khas.html">Makanan</a>
     <a href="minuman-khas.html">Minuman</a>
-    <a href="oleh-oleh.html" class="active">Oleh-Oleh</a>
-    <a href="admin-login.html" class="adminBtn">Admin Login</a>
+    <a href="oleh-oleh.html">Oleh Oleh</a>
+    <a href="admin-login.html" class="adminBtn">
+      Admin Login
+    </a>
   </nav>
 </header>
 
 <main class="content">
 
-  <h1>🎁 Oleh-Oleh Khas Bogor</h1>
-  
-    <div id="oleholehContainer" class="list-container">
-    <p style="color: #777;">Memuat data oleh-oleh...</p>
-  </div>
+<h1>🎁 Oleh-Oleh Khas Bogor</h1>
+
+<div id="oleholehContainer"></div>
 
 </main>
 
-<!-- DEPENDENCIES & SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="supabase.js"></script>
 <script src="cms.js"></script>
-
-<!-- SERVICE WORKER REGISTRATION -->
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js")
-      .then((reg) => console.log("Service Worker berhasil didaftarkan:", reg.scope))
-      .catch((err) => console.error("Service Worker gagal didaftarkan:", err));
-  });
-}
-</script>
-
+  
 </body>
 </html>
