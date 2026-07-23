@@ -1,124 +1,103 @@
 let semuaData = [];
 
-async function ambilData(){
-
-    // ==========================
-    // OFFLINE
-    // ==========================
-    if (!navigator.onLine){
-
-        console.log("Mode Offline");
-
-        ambilDariIndexedDB(function(dataLokal){
-
-            semuaData = dataLokal || [];
-
-            console.log("Data Offline:", semuaData);
-
-            const viral = semuaData.filter(item => item.kategori === "Viral");
-            const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
-
-            renderCard(viral, viralContainer);
-            renderCard(rekomendasi, rekomendasiContainer);
-
-        });
-
-        return;
-    }
-
-    // ==========================
-    // ONLINE
-    // ==========================
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*");
-
-    if(error){
-        console.log(error);
-        return;
-    }
-
-    semuaData = data || [];
-
-    simpanKeIndexedDB(semuaData);
-
-    console.log("Jumlah data:", semuaData.length);
-
-    const viral = semuaData.filter(item => item.kategori === "Viral");
-    const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
-
-    renderCard(viral, viralContainer);
-    renderCard(rekomendasi, rekomendasiContainer);
-
-}
-
-// Container
+// Container Element
 const viralContainer = document.getElementById("viral-container");
 const rekomendasiContainer = document.getElementById("rekomendasi-container");
 
+async function ambilData() {
+  try {
+    // 1. UTAMAKAN KONEKSI ONLINE (Supabase)
+    const { data, error } = await db.from("kuliner").select("*");
+
+    if (error) throw error; // Jika Supabase error, lempar ke block catch
+
+    semuaData = data || [];
+    console.log("Mode Online: Data berhasil diambil dari Supabase (" + semuaData.length + " item)");
+
+    // Simpan data terbaru ke IndexedDB untuk cadangan offline
+    simpanKeIndexedDB(semuaData);
+
+    // Tampilkan ke layar
+    tampilkanData(semuaData);
+
+  } catch (err) {
+    // 2. FALLBACK KETIKA OFFLINE / SUPABASE GAGAL
+    console.log("Gagal terhubung ke network/Supabase. Beralih ke Mode Offline (IndexedDB)...", err);
+
+    ambilDariIndexedDB(function(dataLokal) {
+      semuaData = dataLokal || [];
+      console.log("Data Offline dari IndexedDB:", semuaData);
+
+      if (semuaData.length > 0) {
+        tampilkanData(semuaData);
+      } else {
+        console.warn("IndexedDB masih kosong, tidak ada data untuk ditampilkan.");
+      }
+    });
+  }
+}
+
+// Fungsi Helper untuk memisahkan kategori dan render
+function tampilkanData(listData) {
+  // Gunakan toLowerCase() agar aman dari perbedaan huruf kapital
+  const viral = listData.filter(item => item.kategori && item.kategori.toLowerCase() === "viral");
+  const rekomendasi = listData.filter(item => item.kategori && item.kategori.toLowerCase() === "rekomendasi");
+
+  renderCard(viral, viralContainer);
+  renderCard(rekomendasi, rekomendasiContainer);
+}
+
 // Render Card
 function renderCard(data, container) {
+  if (!container) return; // Mencegah error jika ID container tidak ditemukan di HTML
+  
+  container.innerHTML = "";
 
-    container.innerHTML = "";
+  if (data.length === 0) {
+    container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #777;">Tidak ada data kuliner.</p>`;
+    return;
+  }
 
-    data.forEach(item => {
+  data.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
 
-        const card = document.createElement("div");
+    // Gambar cadangan sederhana jika URL gambar offline gagal di-load
+    const defaultImg = "https://via.placeholder.com/300x200?text=Gambar+Offline";
 
-        card.className = "card";
+    card.innerHTML = `
+      <img src="${item.gambar || defaultImg}" alt="${item.nama}" onerror="this.onerror=null;this.src='${defaultImg}';">
+      <div class="card-body">
+        <span class="badge">${item.kategori}</span>
+        <h3>${item.nama}</h3>
+        <p>${item.deskripsi}</p>
+        <button class="detailBtn" onclick="location.href='detail.html?id=${item.id}'">
+          Lihat Detail
+        </button>
+      </div>
+    `;
 
-        card.innerHTML = `
-            <img src="${item.gambar}" alt="${item.nama}">
-
-            <div class="card-body">
-
-                <span class="badge">
-                    ${item.kategori}
-                </span>
-
-                <h3>${item.nama}</h3>
-
-                <p>${item.deskripsi}</p>
-
-                <button
-                    class="detailBtn"
-                    onclick="location.href='detail.html?id=${item.id}'">
-
-                    Lihat Detail
-
-                </button>
-
-            </div>
-        `;
-
-        container.appendChild(card);
-
-    });
-
+    container.appendChild(card);
+  });
 }
 
 // Search
 function cariKuliner() {
+  const keyword = document.getElementById("search")?.value.toLowerCase().trim() || "";
 
-    const keyword = document
-        .getElementById("search")
-        .value
-        .toLowerCase()
-        .trim();
+  const hasilViral = semuaData.filter(item =>
+    item.kategori && item.kategori.toLowerCase() === "viral" &&
+    item.nama.toLowerCase().includes(keyword)
+  );
 
-    const hasilViral = semuaData.filter(item =>
-        item.kategori === "Viral" &&
-        item.nama.toLowerCase().includes(keyword)
-    );
+  const hasilRekomendasi = semuaData.filter(item =>
+    item.kategori && item.kategori.toLowerCase() === "rekomendasi" &&
+    item.nama.toLowerCase().includes(keyword)
+  );
 
-    const hasilRekomendasi = semuaData.filter(item =>
-        item.kategori === "Rekomendasi" &&
-        item.nama.toLowerCase().includes(keyword)
-    );
-
-    renderCard(hasilViral, viralContainer);
-    renderCard(hasilRekomendasi, rekomendasiContainer);
-
+  renderCard(hasilViral, viralContainer);
+  renderCard(hasilRekomendasi, rekomendasiContainer);
 }
 
+// Jalankan saat script dimuat
 ambilData();
