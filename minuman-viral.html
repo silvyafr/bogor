@@ -2,12 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minuman Viral Bogor - Bogor Bites</title>
-
-  <!-- Meta PWA & Tema -->
-  <meta name="theme-color" content="#7FB77E">
-  <link rel="manifest" href="./manifest.json">
+  <title>Minuman Viral</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,46 +13,35 @@
     <a href="index.html">Home</a>
     <a href="makanan-khas.html">Makanan</a>
     <a href="minuman-khas.html">Minuman</a>
-    <a href="oleh-oleh.html">Oleh-Oleh</a>
-    <a href="admin-login.html" class="adminBtn">Admin Login</a>
+    <a href="oleh-oleh.html">Oleh Oleh</a>
+    <a href="admin-login.html" class="adminBtn">
+      Admin Login
+    </a>
   </nav>
 </header>
 
 <div class="layout">
 
-  <aside class="sidebar">
-    <h3>Kategori</h3>
-    <ul>
-      <li><a href="minuman-khas.html">🧋 Minuman Khas</a></li>
-      <li><a href="minuman-viral.html" class="active">🔥 Minuman Viral</a></li>
-    </ul>
-  </aside>
+<aside class="sidebar">
+  <h3>Kategori</h3>
+  <ul>
+    <li><a href="minuman-khas.html">🧋 Minuman Khas</a></li>
+    <li><a href="minuman-viral.html">🧋 Minuman Viral</a></li>
+  </ul>
+</aside>
 
-  <main class="content">
-    <h1>🔥 Minuman Viral Bogor</h1>
+<main class="content">
 
-    <div id="minumanviralContainer" class="container">
-      <p style="color: #777;">Memuat data minuman viral...</p>
-    </div>
-  </main>
+<h1>🔥 Minuman Viral Bogor</h1>
 
+<div id="minumanviralContainer"></div>
+
+</main>
 </div>
 
-<!-- DEPENDENCIES & SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 <script src="cms.js"></script>
-
-<!-- SERVICE WORKER REGISTRATION -->
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js")
-      .then((reg) => console.log("Service Worker berhasil didaftarkan:", reg.scope))
-      .catch((err) => console.error("Service Worker gagal didaftarkan:", err));
-  });
-}
-</script>
-
+  
 </body>
 </html>
