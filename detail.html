@@ -3,83 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Kuliner - Kuliner Bogor</title>
+    <title>Detail Kuliner</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-    <header>
-        <h1>Detail Kuliner</h1>
-    </header>
+<header class="navbar">
+    <h2>Detail Kuliner Khas Bogor</h2>
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+</header>
 
-    <main>
-        <div id="detailContainer" class="container"></div>
-    </main>
+<main class="detail-container">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase.js"></script>
-    <script src="database.js"></script>
+    <img id="gambar" src="" alt="" class="detail-img">
 
-    <script>
-        async function muatDetail() {
-            const container = document.getElementById("detailContainer");
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
+    <h1 id="nama"></h1>
 
-            if (!id) {
-                container.innerHTML = "<p>ID tidak ditemukan.</p>";
-                return;
-            }
+    <table class="detail-table">
+        <tr>
+            <td><b>Kategori</b></td>
+            <td id="kategori"></td>
+        </tr>
+        <tr>
+            <td><b>Harga</b></td>
+            <td id="harga"></td>
+        </tr>
+        <tr>
+            <td><b>Lokasi</b></td>
+            <td id="lokasi"></td>
+        </tr>
+    </table>
 
-            // 1. Coba ambil dari Supabase jika Online
-            if (navigator.onLine) {
-                try {
-                    const { data, error } = await db.from("kuliner").select("*").eq("id", id).single();
-                    if (error) throw error;
-                    renderDetail(data);
-                    return;
-                } catch (e) {
-                    console.log("Gagal mengambil data online, mencoba dari cache IndexedDB...");
-                }
-            }
+    <h3>Deskripsi</h3>
 
-            // 2. Fallback Offline dari IndexedDB (Tanpa mengubah susunan HTML/CSS)
-            ambilDariIndexedDB((dataLokal) => {
-                const item = dataLokal.find(i => String(i.id) === String(id));
-                if (item) {
-                    renderDetail(item);
-                } else {
-                    container.innerHTML = "<p>Data tidak ditemukan secara offline.</p>";
-                }
-            });
-        }
+    <p id="deskripsi"></p>
 
-        // Render menggunakan kelas dasar tanpa pembungkus ekstra agar tidak merusak layout menyamping
-        function renderDetail(item) {
-            const container = document.getElementById("detailContainer");
-            const gambarSrc = item.gambar || 'assets/no-image.png';
+    <br>
 
-            container.innerHTML = `
-                <img src="${gambarSrc}" alt="${item.nama}" onerror="this.onerror=null; this.src='assets/no-image.png';">
-                <div class="card-body">
-                    <h2>${item.nama}</h2>
-                    <p>${item.deskripsi}</p>
-                    <p><b>💸 Harga :</b> ${item.harga}</p>
-                    <p><b>📍 Lokasi :</b> ${item.lokasi}</p>
-                    <p><b>🏷️ Kategori :</b> ${item.kategori}</p>
-                    <br>
-                    <button class="detailBtn" onclick="history.back()">← Kembali</button>
-                </div>
-            `;
-        }
+    <a href="index.html" class="btn-detail">← Kembali ke Home</a>
 
-        document.addEventListener("DOMContentLoaded", muatDetail);
+</main>
 
-        // Register PWA Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+<script>
+async function loadDetail() {
+
+    const id = new URLSearchParams(window.location.search).get("id");
+
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error || !data) {
+        alert("Data tidak ditemukan!");
+        window.location.href = "index.html";
+        return;
+    }
+
+    document.getElementById("gambar").src = data.gambar;
+    document.getElementById("gambar").alt = data.nama;
+
+    document.getElementById("nama").textContent = data.nama;
+
+    document.getElementById("kategori").textContent = data.kategori;
+
+    document.getElementById("harga").textContent = data.harga;
+
+    document.getElementById("lokasi").textContent = data.lokasi;
+
+    document.getElementById("deskripsi").textContent = data.deskripsi;
+}
+
+loadDetail();
+</script>
+}
+</script>
+
 </body>
 </html>
