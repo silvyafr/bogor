@@ -480,6 +480,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js")
+    .then(() => console.log("Service Worker berhasil didaftarkan"))
+    .catch(err => console.log("Service Worker gagal:", err));
+}
+</script>
     
 </body>
 </html>
