@@ -1,140 +1,124 @@
 let semuaData = [];
 
-// Elemen Container Dashboard
-const viralContainer = document.getElementById("viral-container");
-const rekomendasiContainer = document.getElementById("rekomendasi-container");
+async function ambilData(){
 
-// 1. Ambil Data (Online First -> Fallback Offline)
-async function ambilData() {
-    // Mode Offline Langsung
-    if (!navigator.onLine) {
-        console.log("Status: Offline. Mengambil dari IndexedDB...");
-        muatDataOffline();
+    // ==========================
+    // OFFLINE
+    // ==========================
+    if (!navigator.onLine){
+
+        console.log("Mode Offline");
+
+        ambilDariIndexedDB(function(dataLokal){
+
+            semuaData = dataLokal || [];
+
+            console.log("Data Offline:", semuaData);
+
+            const viral = semuaData.filter(item => item.kategori === "Viral");
+            const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
+
+            renderCard(viral, viralContainer);
+            renderCard(rekomendasi, rekomendasiContainer);
+
+        });
+
         return;
     }
 
-    // Mode Online (Supabase)
-    try {
-        const { data, error } = await db
-            .from("kuliner")
-            .select("*");
+    // ==========================
+    // ONLINE
+    // ==========================
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*");
 
-        if (error) throw error;
-
-        semuaData = data || [];
-
-        // Simpan data terbaru ke IndexedDB untuk cadangan offline
-        if (typeof simpanKeIndexedDB === "function") {
-            simpanKeIndexedDB(semuaData);
-        }
-
-        console.log("Data Online dimuat. Total:", semuaData.length);
-        pisahkanDanRender(semuaData);
-
-    } catch (err) {
-        console.warn("Gagal memuat dari Supabase (masalah jaringan). Dialihkan ke Offline Mode...", err);
-        muatDataOffline();
+    if(error){
+        console.log(error);
+        return;
     }
-}
 
-// Helper: Ambil dari IndexedDB
-function muatDataOffline() {
-    if (typeof ambilDariIndexedDB === "function") {
-        ambilDariIndexedDB(function (dataLokal) {
-            semuaData = dataLokal || [];
-            console.log("Data Offline dimuat. Total:", semuaData.length);
-            pisahkanDanRender(semuaData);
-        });
-    } else {
-        console.error("Fungsi ambilDariIndexedDB tidak ditemukan di database.js");
-    }
-}
+    semuaData = data || [];
 
-// Helper: Pisahkan Kategori & Render
-function pisahkanDanRender(dataList) {
-    const viral = dataList.filter(item => item.kategori === "Viral");
-    const rekomendasi = dataList.filter(item => item.kategori === "Rekomendasi");
+    simpanKeIndexedDB(semuaData);
+
+    console.log("Jumlah data:", semuaData.length);
+
+    const viral = semuaData.filter(item => item.kategori === "Viral");
+    const rekomendasi = semuaData.filter(item => item.kategori === "Rekomendasi");
 
     renderCard(viral, viralContainer);
     renderCard(rekomendasi, rekomendasiContainer);
+
 }
 
-// 2. Render Card ke HTML (Menggunakan Struktur HTML Asli Kamu)
+// Container
+const viralContainer = document.getElementById("viral-container");
+const rekomendasiContainer = document.getElementById("rekomendasi-container");
+
+// Render Card
 function renderCard(data, container) {
-    if (!container) return;
 
     container.innerHTML = "";
 
-    if (!data || data.length === 0) {
-        container.innerHTML = `<p style="color: #777; width: 100%; text-align: center; padding: 20px 0;">Tidak ada data ditemukan.</p>`;
-        return;
-    }
-
     data.forEach(item => {
+
         const card = document.createElement("div");
+
         card.className = "card";
 
-        const gambarSrc = item.gambar || "assets/no-image.png";
-        const nama = item.nama || "Tanpa Nama";
-        const deskripsi = item.deskripsi || "";
-        const kategori = item.kategori || "";
-
-        // Struktur HTML tetap sama persis seperti kodingan awalmu
         card.innerHTML = `
-            <img 
-                src="${gambarSrc}" 
-                alt="${nama}" 
-                onerror="this.onerror=null; this.src='assets/no-image.png';"
-            >
+            <img src="${item.gambar}" alt="${item.nama}">
 
             <div class="card-body">
-                <span class="badge">${kategori}</span>
-                <h3>${nama}</h3>
-                <p>${deskripsi}</p>
+
+                <span class="badge">
+                    ${item.kategori}
+                </span>
+
+                <h3>${item.nama}</h3>
+
+                <p>${item.deskripsi}</p>
+
                 <button
                     class="detailBtn"
                     onclick="location.href='detail.html?id=${item.id}'">
+
                     Lihat Detail
+
                 </button>
+
             </div>
         `;
 
         container.appendChild(card);
+
     });
+
 }
 
-// 3. Fitur Cari Kuliner
+// Search
 function cariKuliner() {
-    const searchInput = document.getElementById("search");
-    if (!searchInput) return;
 
-    const keyword = searchInput.value.toLowerCase().trim();
+    const keyword = document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
 
     const hasilViral = semuaData.filter(item =>
         item.kategori === "Viral" &&
-        (item.nama || "").toLowerCase().includes(keyword)
+        item.nama.toLowerCase().includes(keyword)
     );
 
     const hasilRekomendasi = semuaData.filter(item =>
         item.kategori === "Rekomendasi" &&
-        (item.nama || "").toLowerCase().includes(keyword)
+        item.nama.toLowerCase().includes(keyword)
     );
 
     renderCard(hasilViral, viralContainer);
     renderCard(hasilRekomendasi, rekomendasiContainer);
+
 }
 
-// Inisialisasi awal saat dokumen siap
-document.addEventListener("DOMContentLoaded", () => {
-    ambilData();
-
-    // Event listener pencarian otomatis saat mengetik
-    const searchInput = document.getElementById("search");
-    if (searchInput) {
-        searchInput.addEventListener("keyup", cariKuliner);
-    }
-});
-
-// Otomatis deteksi perubahan jaringan HP/Browser
-window.addEventListener("online", ambilData);
-window.addEventListener("offline", muatDataOffline);
+ambilData();
