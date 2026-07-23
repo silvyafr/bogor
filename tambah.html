@@ -1,262 +1,242 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tambah Data Kuliner - Bogor Bites</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tambah Data</title>
 
-  <!-- Meta PWA & Tema -->
-  <meta name="theme-color" content="#7FB77E">
-  <link rel="manifest" href="./manifest.json">
+<style>
 
-  <style>
-    body {
-      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-      background: #f4f6f9;
-      margin: 0;
-      padding: 0;
-    }
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+}
 
-    .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,.08);
-    }
+.container{
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
 
-    h2 {
-      margin-bottom: 20px;
-      color: #7FB77E;
-    }
+h2{
+    margin-bottom:20px;
+    color:#7FB77E;
+}
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+.form-group{
+    margin-bottom:18px;
+}
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
 
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
-    }
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+}
 
-    textarea {
-      resize: vertical;
-      height: 100px;
-    }
+textarea{
+    resize:vertical;
+    height:100px;
+}
 
-    .button-group {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
+.button-group{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
 
-    button {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: .3s;
-    }
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-    .simpan {
-      background: #7FB77E;
-      color: white;
-    }
+.simpan{
+    background:#7FB77E;
+    color:white;
+}
 
-    .kembali {
-      background: #999;
-      color: white;
-    }
+.kembali{
+    background:#999;
+    color:white;
+}
 
-    button:hover {
-      opacity: .9;
-    }
+button:hover{
+    opacity:.9;
+}
 
-    button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
+</style>
 
-    #preview {
-      display: none;
-      max-width: 220px;
-      margin-top: 15px;
-      border-radius: 10px;
-    }
-  </style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <h2>Tambah Data Kuliner</h2>
+<h2>Tambah Data Kuliner</h2>
 
-  <div class="form-group">
-    <label>Nama</label>
-    <input type="text" id="nama" placeholder="Masukkan nama kuliner">
-  </div>
+<div class="form-group">
+<label>Nama</label>
+<input type="text" id="nama">
+</div>
 
-  <div class="form-group">
-    <label>Harga</label>
-    <input type="text" id="harga" placeholder="Contoh: Rp 15.000">
-  </div>
+<div class="form-group">
+<label>Harga</label>
+<input type="text" id="harga">
+</div>
 
-  <div class="form-group">
-    <label>Kategori</label>
-    <select id="kategori">
-      <option value="">-- Tidak Ada Kategori --</option>
-      <option value="Viral">Viral</option>
-      <option value="Rekomendasi">Rekomendasi</option>
-    </select>
-  </div>
+<div class="form-group">
+<label>Kategori</label>
+<select id="kategori">
+    <option value="">-- Tidak Ada Kategori --</option>
+    <option value="Viral">Viral</option>
+    <option value="Rekomendasi">Rekomendasi</option>
+</select>
+</select>
+</div>
 
-  <div class="form-group">
-    <label>Jenis</label>
-    <select id="jenis">
-      <option value="makanan">Makanan</option>
-      <option value="minuman">Minuman</option>
-      <option value="jajanan">Jajanan</option>
-      <option value="oleh-oleh">Oleh-Oleh</option>
-    </select>
-  </div>
+<div class="form-group">
+<label>Jenis</label>
+<select id="jenis">
+    <option value="makanan">Makanan</option>
+    <option value="minuman">Minuman</option>
+    <option value="jajanan">Jajanan</option>
+    <option value="oleh-oleh">Oleh-Oleh</option>
+</select>
+</div>
 
-  <div class="form-group">
-    <label>Lokasi</label>
-    <input type="text" id="lokasi" placeholder="Masukkan lokasi/alamat">
-  </div>
+<div class="form-group">
+<label>Lokasi</label>
+<input type="text" id="lokasi">
+</div>
 
-  <div class="form-group">
-    <label>Deskripsi</label>
-    <textarea id="deskripsi" placeholder="Masukkan deskripsi kuliner"></textarea>
-  </div>
+<div class="form-group">
+<label>Deskripsi</label>
+<textarea id="deskripsi"></textarea>
+</div>
 
-  <div class="form-group">
-    <label>Upload Gambar</label>
-    <input type="file" id="gambar" accept="image/*">
-    <img id="preview" alt="Preview Gambar">
-  </div>
+<div class="form-group">
+<label>Upload Gambar</label>
+<input
+type="file"
+id="gambar"
+accept="image/*">
+</div>
 
-  <div class="button-group">
-    <button class="simpan" id="btnSimpan" onclick="simpanData()">Simpan</button>
-    <button class="kembali" onclick="location.href='admin.html'">Kembali</button>
-  </div>
+<div class="button-group">
+
+<button
+class="simpan"
+onclick="simpanData()">
+
+Simpan
+
+</button>
+
+<button
+class="kembali"
+onclick="location.href='admin.html'">
+
+Kembali
+
+</button>
 
 </div>
 
-<!-- DEPENDENCIES & SCRIPTS -->
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 
 <script>
-// Cek Login Session
-if (!sessionStorage.getItem("login")) {
-  location.href = "admin-login.html";
+
+if(!sessionStorage.getItem("login")){
+    location.href="admin-login.html";
+}
+    function readFileAsBase64(file){
+
+    return new Promise((resolve,reject)=>{
+
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+
+        reader.onerror = error => reject(error);
+
+        reader.readAsDataURL(file);
+
+    });
+
 }
 
-// Preview Gambar saat Dipilih
-document.getElementById("gambar").addEventListener("change", function () {
-  const file = this.files[0];
-  const preview = document.getElementById("preview");
-  
-  if (file) {
-    preview.src = URL.createObjectURL(file);
-    preview.style.display = "block";
-  } else {
-    preview.style.display = "none";
-  }
-});
+async function simpanData(){
 
-// Helper Function Convert File ke Base64
-function readFileAsBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-    reader.readAsDataURL(file);
-  });
+    const nama = document.getElementById("nama").value.trim();
+    const harga = document.getElementById("harga").value.trim();
+    const kategori = document.getElementById("kategori").value;
+    const jenis = document.getElementById("jenis").value;
+    const lokasi = document.getElementById("lokasi").value.trim();
+    const deskripsi = document.getElementById("deskripsi").value.trim();
+    const file = document.getElementById("gambar").files[0];
+
+if(!file){
+    alert("Silakan pilih gambar.");
+    return;
 }
 
-// Function Simpan Data
-async function simpanData() {
-  const btnSimpan = document.getElementById("btnSimpan");
-  const nama = document.getElementById("nama").value.trim();
-  const harga = document.getElementById("harga").value.trim();
-  const kategori = document.getElementById("kategori").value;
-  const jenis = document.getElementById("jenis").value;
-  const lokasi = document.getElementById("lokasi").value.trim();
-  const deskripsi = document.getElementById("deskripsi").value.trim();
-  const file = document.getElementById("gambar").files[0];
+const gambar = await readFileAsBase64(file);
 
-  // Validasi Input
-  if (!nama || !harga || !lokasi || !deskripsi) {
-    alert("Semua data wajib diisi!");
-    return;
-  }
-
-  if (!file) {
-    alert("Silakan pilih gambar terlebih dahulu.");
-    return;
-  }
-
-  // Set Loading State
-  btnSimpan.disabled = true;
-  btnSimpan.innerText = "Memproses...";
-
-  try {
-    const gambar = await readFileAsBase64(file);
-
-    const { error } = await db
-      .from("kuliner")
-      .insert([
-        {
-          id: crypto.randomUUID(),
-          nama,
-          harga,
-          kategori,
-          jenis,
-          lokasi,
-          deskripsi,
-          gambar
-        }
-      ]);
-
-    if (error) {
-      throw error;
+    if(
+        nama=="" ||
+        harga=="" ||
+        lokasi=="" ||
+        deskripsi==""
+    ){
+        alert("Semua data wajib diisi.");
+        return;
     }
 
-    alert("Data berhasil ditambahkan!");
-    location.href = "admin.html";
+    const { error } = await db
+    .from("kuliner")
+    .insert([
+    {
+        id: crypto.randomUUID(),
+        nama,
+        harga,
+        kategori,
+        jenis,
+        lokasi,
+        deskripsi,
+        gambar
+}
+]);
 
-  } catch (error) {
-    console.error("Error Simpan:", error);
-    alert("Gagal menyimpan data\n\n" + error.message);
-    btnSimpan.disabled = false;
-    btnSimpan.innerText = "Simpan";
-  }
+    if(error){
+        console.log(error);
+        alert("Gagal menyimpan data\n\n"+error.message);
+        return;
+    }
+
+    alert("Data berhasil ditambahkan");
+
+    location.href="admin.html";
+
 }
 
-// Registrasi Service Worker PWA
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then((reg) => console.log('Service Worker berhasil terdaftar:', reg.scope))
-      .catch((err) => console.error('Pendaftaran Service Worker gagal:', err));
-  });
-}
 </script>
 
 </body>
