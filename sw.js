@@ -11,6 +11,7 @@ const urlsToCache = [
     "./detail.html",
     "./admin.html",
     "./edit.html",
+    "./tambah.html",
     "./admin-login.html",
 
     "./style.css",
