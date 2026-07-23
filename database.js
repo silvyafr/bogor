@@ -1,83 +1,74 @@
 console.log("database.js berjalan");
 
-let dbLocal;
+// Helper untuk membuka/mendapatkan koneksi database secara aman
+function getDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("KulinerBogorDB", 1);
 
-const request = indexedDB.open("KulinerBogorDB", 1);
+    request.onupgradeneeded = function (event) {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("kuliner")) {
+        db.createObjectStore("kuliner", { keyPath: "id" });
+      }
+    };
 
-request.onupgradeneeded = function (event) {
+    request.onsuccess = function (event) {
+      resolve(event.target.result);
+    };
 
-    dbLocal = event.target.result;
+    request.onerror = function (event) {
+      console.error("IndexedDB gagal dibuka:", event.target.error);
+      reject(event.target.error);
+    };
+  });
+}
 
-    if (!dbLocal.objectStoreNames.contains("kuliner")) {
-        dbLocal.createObjectStore("kuliner", {
-            keyPath: "id"
-        });
-    }
+// 1. SIMPAN KE INDEXEDDB
+async function simpanKeIndexedDB(data) {
+  if (!data || data.length === 0) return;
 
-};
-
-request.onsuccess = function (event) {
-
-    dbLocal = event.target.result;
-
-    console.log("IndexedDB berhasil dibuat");
-
-};
-
-request.onerror = function () {
-
-    console.log("IndexedDB gagal dibuat");
-
-};
-
-function simpanKeIndexedDB(data){
-
-    if(!data || data.length === 0){
-        return;
-    }
-
-    const tx = dbLocal.transaction("kuliner","readwrite");
+  try {
+    const db = await getDB();
+    const tx = db.transaction("kuliner", "readwrite");
     const store = tx.objectStore("kuliner");
 
-    data.forEach(item=>{
-        store.put(item);
+    data.forEach(item => {
+      store.put(item);
     });
 
     console.log("Data berhasil disimpan ke IndexedDB");
-
+  } catch (err) {
+    console.error("Gagal menyimpan ke IndexedDB:", err);
+  }
 }
 
-window.simpanKeIndexedDB = simpanKeIndexedDB;
-
-function ambilDariIndexedDB(callback) {
-
-    if (!dbLocal) {
-        console.log("Database belum siap");
-        callback([]);
-        return;
-    }
-
-    const transaksi = dbLocal.transaction("kuliner", "readonly");
-    const store = transaksi.objectStore("kuliner");
-
+// 2. AMBIL DARI INDEXEDDB
+async function ambilDariIndexedDB(callback) {
+  try {
+    // Menunggu database siap dulu!
+    const db = await getDB(); 
+    
+    const tx = db.transaction("kuliner", "readonly");
+    const store = tx.objectStore("kuliner");
     const request = store.getAll();
 
     request.onsuccess = function () {
-
-        console.log("Isi IndexedDB:", request.result);
-
+      console.log("Isi IndexedDB berhasil diambil:", request.result);
+      if (typeof callback === "function") {
         callback(request.result || []);
-
+      }
     };
 
     request.onerror = function () {
-
-        console.log("Gagal membaca IndexedDB");
-
-        callback([]);
-
+      console.error("Gagal membaca dari IndexedDB");
+      if (typeof callback === "function") callback([]);
     };
-
+  } catch (err) {
+    console.error("Error pada IndexedDB:", err);
+    if (typeof callback === "function") callback([]);
+  }
 }
 
+// Make functions available globally
+window.simpanKeIndexedDB = simpanKeIndexedDB;
 window.ambilDariIndexedDB = ambilDariIndexedDB;
