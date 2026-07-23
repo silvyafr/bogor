@@ -1,27 +1,27 @@
-// Helper Function: Membuat komponen HTML Card/Item
+// Function untuk membuat komponen Card (Sesuai Tampilan Foto Kedua)
 function buatItem(item) {
     const gambarSrc = item.gambar || 'assets/no-image.png';
-    const kategoriTeks = item.kategori ? item.kategori : '-';
-    
+    const nama = item.nama || 'Tanpa Nama';
+    const deskripsi = item.deskripsi || '';
+    const harga = item.harga || '-';
+    const lokasi = item.lokasi || '-';
+    const kategori = item.kategori || '-';
+
     return `
-    <section class="item">
+    <div class="card">
         <img 
             src="${gambarSrc}" 
-            alt="${item.nama || 'Gambar Kuliner'}" 
-            loading="lazy"
+            alt="${nama}" 
             onerror="this.onerror=null; this.src='assets/no-image.png';"
         >
-
-        <div class="item-info">
-            <h2>${item.nama || 'Tanpa Nama'}</h2>
-            <p>${item.deskripsi || 'Tidak ada deskripsi.'}</p>
-            <p><b>💸 Harga :</b> ${item.harga || '-'}</p>
-            <p><b>📍 Lokasi :</b> ${item.lokasi || '-'}</p>
-            <p><b>🏷️ Kategori :</b> ${kategoriTeks}</p>
-            
-            <a href="detail.html?id=${item.id}" class="btn-detail" style="display:inline-block; margin-top:10px;">Lihat Detail →</a>
+        <div class="card-body">
+            <h2>${nama}</h2>
+            <p>${deskripsi}</p>
+            <p><b>💸 Harga :</b> ${harga}</p>
+            <p><b>📍 Lokasi :</b> ${lokasi}</p>
+            <p><b>🏷️ Kategori :</b> ${kategori}</p>
         </div>
-    </section>
+    </div>
     `;
 }
 
@@ -30,29 +30,36 @@ async function tampilKategori(jenis, id) {
     const container = document.getElementById(id);
     if (!container) return;
 
+    // 1. Ambil Offline dari IndexedDB dulu (atau saat offline)
+    if (!navigator.onLine) {
+        if (typeof ambilDariIndexedDB === "function") {
+            ambilDariIndexedDB((dataLokal) => {
+                const filtered = dataLokal.filter(item => item.jenis === jenis);
+                renderKeContainer(container, filtered);
+            });
+        }
+        return;
+    }
+
+    // 2. Ambil Online dari Supabase
     try {
         const { data, error } = await db
             .from("kuliner")
             .select("*")
             .eq("jenis", jenis);
 
-        if (error) {
-            console.error(`Error mengambil data ${jenis}:`, error);
-            container.innerHTML = `<p style="color:red;">Gagal memuat data. Periksa koneksi internet Anda.</p>`;
-            return;
-        }
+        if (error) throw error;
 
-        if (!data || data.length === 0) {
-            container.innerHTML = `<p style="color:#777;">Belum ada data untuk kategori ini.</p>`;
-            return;
-        }
-
-        // Render sekaligus menggunakan map & join untuk performa DOM yang lebih optimal
-        container.innerHTML = data.map(item => buatItem(item)).join("");
+        renderKeContainer(container, data);
 
     } catch (err) {
-        console.error("Terjadi kesalahan sistem:", err);
-        container.innerHTML = `<p style="color:red;">Terjadi kesalahan saat memuat data.</p>`;
+        console.warn("Gagal fetch online, mencoba IndexedDB...", err);
+        if (typeof ambilDariIndexedDB === "function") {
+            ambilDariIndexedDB((dataLokal) => {
+                const filtered = dataLokal.filter(item => item.jenis === jenis);
+                renderKeContainer(container, filtered);
+            });
+        }
     }
 }
 
@@ -61,6 +68,16 @@ async function tampilMinumanViral() {
     const container = document.getElementById("minumanviralContainer");
     if (!container) return;
 
+    if (!navigator.onLine) {
+        if (typeof ambilDariIndexedDB === "function") {
+            ambilDariIndexedDB((dataLokal) => {
+                const filtered = dataLokal.filter(item => item.jenis === "minuman" && item.kategori === "Viral");
+                renderKeContainer(container, filtered);
+            });
+        }
+        return;
+    }
+
     try {
         const { data, error } = await db
             .from("kuliner")
@@ -68,26 +85,30 @@ async function tampilMinumanViral() {
             .eq("jenis", "minuman")
             .eq("kategori", "Viral");
 
-        if (error) {
-            console.error("Error mengambil Minuman Viral:", error);
-            container.innerHTML = `<p style="color:red;">Gagal memuat minuman viral.</p>`;
-            return;
-        }
+        if (error) throw error;
 
-        if (!data || data.length === 0) {
-            container.innerHTML = `<p style="color:#777;">Belum ada minuman viral saat ini.</p>`;
-            return;
-        }
-
-        container.innerHTML = data.map(item => buatItem(item)).join("");
+        renderKeContainer(container, data);
 
     } catch (err) {
-        console.error("Terjadi kesalahan sistem:", err);
-        container.innerHTML = `<p style="color:red;">Terjadi kesalahan saat memuat data.</p>`;
+        if (typeof ambilDariIndexedDB === "function") {
+            ambilDariIndexedDB((dataLokal) => {
+                const filtered = dataLokal.filter(item => item.jenis === "minuman" && item.kategori === "Viral");
+                renderKeContainer(container, filtered);
+            });
+        }
     }
 }
 
-// Inisialisasi Panggilan Data Setelah DOM Selesai Dimuat
+// Helper Render HTML
+function renderKeContainer(container, data) {
+    if (!data || data.length === 0) {
+        container.innerHTML = `<p style="color: #777;">Belum ada data untuk kategori ini.</p>`;
+        return;
+    }
+    container.innerHTML = data.map(item => buatItem(item)).join("");
+}
+
+// Inisialisasi
 document.addEventListener("DOMContentLoaded", () => {
     tampilKategori("makanan", "makananContainer");
     tampilKategori("minuman", "minumanContainer");
