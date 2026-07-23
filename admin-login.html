@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin</title>
 
-    <!-- Link ke Manifest untuk PWA -->
-    <link rel="manifest" href="./manifest.json">
-
     <style>
         *{
             margin:0;
@@ -123,6 +120,7 @@
 <body>
 
 <div class="login-box">
+
     <h2>🔐 Login Admin</h2>
 
     <div class="info-login">
@@ -132,6 +130,7 @@
     </div>
 
     <form id="formLogin">
+
         <input
             type="text"
             id="usernameInput"
@@ -139,6 +138,7 @@
             required>
 
         <div class="password-box">
+
             <input
                 type="password"
                 id="passwordInput"
@@ -150,60 +150,64 @@
                 onclick="togglePassword()">
                 👁️
             </span>
+        
         </div>
 
         <button type="submit">
             Login
         </button>
+
     </form>
 
     <div class="footer">
         Dashboard Admin Kuliner Bogor
     </div>
+
 </div>
 
 <script>
-  // Fitur Toggle Password
-  function togglePassword(){
-      const input = document.getElementById("passwordInput");
-      const icon = document.querySelector(".toggle-password");
 
-      if(input.type === "password"){
-          input.type = "text";
-          icon.textContent = "🙈";
-      }else{
-          input.type = "password";
-          icon.textContent = "👁️";
-      }
-  }
+function togglePassword(){
+
+    const input = document.getElementById("passwordInput");
+    const icon = document.querySelector(".toggle-password");
+
+    if(input.type === "password"){
+        input.type = "text";
+        icon.textContent = "🙈";
+    }else{
+        input.type = "password";
+        icon.textContent = "👁️";
+    }
+
+}
     
-  // Fitur Login
-  const USERNAME = "admin";
-  const PASSWORD = "admin1357";
+const USERNAME = "admin";
+const PASSWORD = "admin1357";
 
-  document.getElementById("formLogin").addEventListener("submit", function(e){
-      e.preventDefault();
+document.getElementById("formLogin").addEventListener("submit", function(e){
 
-      const username = document.getElementById("usernameInput").value.trim();
-      const password = document.getElementById("passwordInput").value;
+    e.preventDefault();
 
-      if(username === USERNAME && password === PASSWORD){
-          sessionStorage.setItem("login","true");
-          alert("Login berhasil!");
-          window.location.href = "admin.html";
-      }else{
-          alert("Username atau Password salah!");
-      }
-  });
+    const username = document.getElementById("usernameInput").value.trim();
+    const password = document.getElementById("passwordInput").value;
 
-  // Registrasi Service Worker (Menggunakan Relative Path ./sw.js)
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then((reg) => console.log('Service Worker berhasil terdaftar dengan scope:', reg.scope))
-        .catch((err) => console.error('Pendaftaran Service Worker gagal:', err));
-    });
-  }
+    if(username === USERNAME && password === PASSWORD){
+
+        sessionStorage.setItem("login","true");
+
+        alert("Login berhasil!");
+
+        window.location.href = "admin.html";
+
+    }else{
+
+        alert("Username atau Password salah!");
+
+    }
+
+});
+
 </script>
 
 </body>
