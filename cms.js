@@ -1,26 +1,26 @@
 function buatItem(item){
 
-    return `
-    <section class="item">
+    return `
+    <section class="item">
 
-        <img src="${item.gambar}" alt="${item.nama}">
+        <img src="${item.gambar}" alt="${item.nama}">
 
-        <div class="item-info">
+        <div class="item-info">
 
-            <h2>${item.nama}</h2>
+            <h2>${item.nama}</h2>
 
-            <p>${item.deskripsi}</p>
+            <p>${item.deskripsi}</p>
 
-            <p><b>💸 Harga :</b> ${item.harga}</p>
+            <p><b>💸 Harga :</b> ${item.harga}</p>
 
-            <p><b>📍 Lokasi :</b> ${item.lokasi}</p>
+            <p><b>📍 Lokasi :</b> ${item.lokasi}</p>
 
-            <p><b>🏷️ Kategori :</b> ${item.kategori}</p>
+            <p><b>🏷️ Kategori :</b> ${item.kategori}</p>
 
-        </div>
+        </div>
 
-    </section>
-    `;
+    </section>
+    `;
 
 }
 
@@ -28,25 +28,25 @@ function buatItem(item){
 // UNTUK MAKANAN, MINUMAN, JAJANAN, OLEH-OLEH
 async function tampilKategori(jenis,id){
 
-    const container = document.getElementById(id);
+    const container = document.getElementById(id);
 
-    if(!container) return;
+    if(!container) return;
 
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*")
-        .eq("jenis", jenis);
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("jenis", jenis);
 
-    if(error){
-        console.log(error);
-        return;
-    }
+    if(error){
+        console.log(error);
+        return;
+    }
 
-    container.innerHTML="";
+    container.innerHTML="";
 
-    data.forEach(item=>{
-        container.innerHTML += buatItem(item);
-    });
+    data.forEach(item=>{
+        container.innerHTML += buatItem(item);
+    });
 
 }
 
@@ -54,42 +54,42 @@ async function tampilKategori(jenis,id){
 // KHUSUS MINUMAN VIRAL
 async function tampilMinumanViral(){
 
-    const container = document.getElementById("minumanviralContainer");
+    const container = document.getElementById("minumanviralContainer");
 
-    if(!container) return;
+    if(!container) return;
 
-    const { data, error } = await db
-        .from("kuliner")
-        .select("*")
-        .eq("jenis","minuman")
-        .eq("kategori","Viral");
+    const { data, error } = await db
+        .from("kuliner")
+        .select("*")
+        .eq("jenis","minuman")
+        .eq("kategori","Viral");
 
-    if(error){
-        console.log(error);
-        return;
-    }
+    if(error){
+        console.log(error);
+        return;
+    }
 
-    console.table(data);
+    console.table(data);
 
-    container.innerHTML="";
+    container.innerHTML="";
 
-    data.forEach(item=>{
-        container.innerHTML += buatItem(item);
-    });
+    data.forEach(item=>{
+        container.innerHTML += buatItem(item);
+    });
 
 }
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-    tampilKategori("makanan","makananContainer");
+    tampilKategori("makanan","makananContainer");
 
-    tampilKategori("minuman","minumanContainer");
+    tampilKategori("minuman","minumanContainer");
 
-    tampilKategori("jajanan","jajananContainer");
+    tampilKategori("jajanan","jajananContainer");
 
-    tampilKategori("oleh-oleh","oleholehContainer");
+    tampilKategori("oleh-oleh","oleholehContainer");
 
-    tampilMinumanViral();
+    tampilMinumanViral();
 
 });
