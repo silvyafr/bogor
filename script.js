@@ -1,6 +1,6 @@
 let semuaData = [];
 
-// Elemen Container
+// Elemen Container Dashboard
 const viralContainer = document.getElementById("viral-container");
 const rekomendasiContainer = document.getElementById("rekomendasi-container");
 
@@ -13,7 +13,7 @@ async function ambilData() {
         return;
     }
 
-    // Mode Online
+    // Mode Online (Supabase)
     try {
         const { data, error } = await db
             .from("kuliner")
@@ -32,7 +32,7 @@ async function ambilData() {
         pisahkanDanRender(semuaData);
 
     } catch (err) {
-        console.warn("Gagal memuat dari Supabase (mungkin masalah jaringan). Dialihkan ke Offline Mode...", err);
+        console.warn("Gagal memuat dari Supabase (masalah jaringan). Dialihkan ke Offline Mode...", err);
         muatDataOffline();
     }
 }
@@ -59,18 +59,16 @@ function pisahkanDanRender(dataList) {
     renderCard(rekomendasi, rekomendasiContainer);
 }
 
-// 2. Render Card ke HTML
+// 2. Render Card ke HTML (Menggunakan Struktur HTML Asli Kamu)
 function renderCard(data, container) {
     if (!container) return;
 
     container.innerHTML = "";
 
     if (!data || data.length === 0) {
-        container.innerHTML = `<p class="empty-msg" style="color: #777; width: 100%; text-align: center; padding: 20px 0;">Tidak ada data ditemukan.</p>`;
+        container.innerHTML = `<p style="color: #777; width: 100%; text-align: center; padding: 20px 0;">Tidak ada data ditemukan.</p>`;
         return;
     }
-
-    const fragment = document.createDocumentFragment();
 
     data.forEach(item => {
         const card = document.createElement("div");
@@ -78,14 +76,14 @@ function renderCard(data, container) {
 
         const gambarSrc = item.gambar || "assets/no-image.png";
         const nama = item.nama || "Tanpa Nama";
-        const deskripsi = item.deskripsi || "Tidak ada deskripsi.";
-        const kategori = item.kategori || "Umum";
+        const deskripsi = item.deskripsi || "";
+        const kategori = item.kategori || "";
 
+        // Struktur HTML tetap sama persis seperti kodingan awalmu
         card.innerHTML = `
             <img 
                 src="${gambarSrc}" 
                 alt="${nama}" 
-                loading="lazy" 
                 onerror="this.onerror=null; this.src='assets/no-image.png';"
             >
 
@@ -101,10 +99,8 @@ function renderCard(data, container) {
             </div>
         `;
 
-        fragment.appendChild(card);
+        container.appendChild(card);
     });
-
-    container.appendChild(fragment);
 }
 
 // 3. Fitur Cari Kuliner
@@ -132,13 +128,13 @@ function cariKuliner() {
 document.addEventListener("DOMContentLoaded", () => {
     ambilData();
 
-    // Event listener otomatis untuk kolom pencarian
+    // Event listener pencarian otomatis saat mengetik
     const searchInput = document.getElementById("search");
     if (searchInput) {
         searchInput.addEventListener("keyup", cariKuliner);
     }
 });
 
-// Event listener otomatis saat status jaringan browser berubah
+// Otomatis deteksi perubahan jaringan HP/Browser
 window.addEventListener("online", ambilData);
 window.addEventListener("offline", muatDataOffline);
