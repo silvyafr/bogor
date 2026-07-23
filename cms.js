@@ -4,7 +4,7 @@ function buatItem(item){
     <section class="item">
 
         <img src="${item.gambar}" alt="${item.nama}">
-
+        
         <div class="item-info">
 
             <h2>${item.nama}</h2>
