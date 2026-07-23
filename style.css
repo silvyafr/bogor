@@ -547,3 +547,39 @@ margin:6px 0;
     display:block;
   }
 }
+
+/* ===== Layout khusus halaman daftar kuliner ===== */
+.list-container{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.list-container .card{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.list-container .card img{
+    width:260px;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+    flex-shrink:0;
+}
+
+.list-container .card-body{
+    flex:1;
+    padding:0;
+}
+
+.list-container .detailBtn{
+    width:auto;
+    padding:10px 20px;
+}
