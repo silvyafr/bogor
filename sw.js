@@ -4,9 +4,13 @@ const urlsToCache = [
     "./",
     "./index.html",
     "./makanan-khas.html",
+    "./jajanan-tradisional.html",
     "./minuman-khas.html",
+    "./minuman-viral.html",
     "./oleh-oleh.html",
     "./detail.html",
+    "./admin.html",
+    "./edit.html",
     "./admin-login.html",
 
     "./style.css",
